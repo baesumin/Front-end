@@ -5,7 +5,7 @@
 ```
 
 - **프론트 엔드 로드맵**
-![image](https://user-images.githubusercontent.com/52240990/108315489-d5f27280-71fe-11eb-923d-83ee92ead1cd.png)
+<img src="https://user-images.githubusercontent.com/52240990/108315489-d5f27280-71fe-11eb-923d-83ee92ead1cd.png" width="500">
 
 
 - **공부 계획**
