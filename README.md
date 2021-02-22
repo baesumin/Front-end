@@ -14,10 +14,13 @@
 ```
 	1. 인터넷
 	2. HTML, css, JavaScript(Es6포함)
-	3. 
+```
+ #### 웹/앱 개발
+```
+	1. 
 		(1) React
 		(2) TypeScript - Angular
-	4. Ionic, React Native
+	2. Ionic, React Native
 ```
 <br/>
 
