@@ -28,3 +28,10 @@
 기본 : 인프런 강의를 통해 강의 학습
 웹/앱 개발 : 인프런 강의를 통해 강의 학습 및 실습(클론코딩, 미니 프로젝트 등)
 ```
+
+- **참고 강의**
+1. html
+2. javascript
+3. web javascript
+4. react
+5. react(clone coding)
