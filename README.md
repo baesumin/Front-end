@@ -35,3 +35,5 @@
 3. web javascript
 4. react
 5. react(clone coding)
+6. typescript
+7. angular
