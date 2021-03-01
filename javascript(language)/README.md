@@ -1,5 +1,5 @@
-# javascript
-진행 기간 : 2021, 02.22-02.
+# javascript(language)
+진행 기간 : 2021, 02.22-02.28
 
 02.22 : alert(), indexof(), 비교 연산자(== 과 ===), prompt, document.write(), shift(), splice() <br/> 강의진행률(39/102)
 
