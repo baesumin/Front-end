@@ -11,5 +11,7 @@
 
 02.28 : object, prototype, wrapper, 참조     <br/> 강의진행률(102/102)
 
+<img src="https://user-images.githubusercontent.com/52240990/109441903-fc73a180-7a79-11eb-8f53-fe0f2deab1f5.png" width="500">
+
 <참조사이트> <br/>
 https://www.inflearn.com/course/%EC%A7%80%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%96%B8%EC%96%B4-%EA%B8%B0%EB%B3%B8
