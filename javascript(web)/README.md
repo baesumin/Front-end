@@ -7,7 +7,7 @@
 
 03.03 : getAttribute, setAttribute, Node, append, replace, insert, before, viewPort, setInterval, scrollto(x,y)  <br/> 강의진행률(32/47)
 
-03.04 : event, capturing, bubbling, json,  <br/> 강의진행률(47/47)
+03.04 : event, capturing, bubbling, json, querySelectorAll()  <br/> 강의진행률(47/47)
 
 <img src="https://user-images.githubusercontent.com/52240990/109962660-cd398a80-7d2e-11eb-8e7a-8efc32aeb8fe.png" width="500">
 
