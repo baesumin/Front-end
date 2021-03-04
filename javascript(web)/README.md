@@ -1,15 +1,15 @@
-# javascript(language)
-진행 기간 : 2021, 02.22-02.28
+# javascript(web)
+진행 기간 : 2021, 03.01-
 
-02.22 : alert(), indexof(), 비교 연산자(== 과 ===), prompt, document.write(), shift(), splice() <br/> 강의진행률(39/102)
+03.01 : window.load(), alert(), confirm(), prompt(), location, navigator, jquery, chaining <br/> 강의진행률(13/47)
 
-02.23 : object, module,  <br/>강의진행률(50/102)
+03.02 : console.group, jquery, map, getElement*  <br/> 강의진행률(19/47)
 
-02.24 : pattern, regex, capture,  정규표현식 빌더(https://regexr.com/),  scope <br/> 강의진행률(60/102)
+03.03 : getAttribute, setAttribute, Node, append, replace, insert, before, viewPort, setInterval, scrollto(x,y)  <br/> 강의진행률(32/47)
 
-02.25 : 함수와 메소드의 차이, 콜백, 객체,    <br/> 강의진행률(90/102)
+03.04 : event, capturing, bubbling, json,  <br/> 강의진행률(47/47)
 
-02.28 : object, prototype, wrapper, 참조     <br/> 강의진행률(102/102)
+<img src="https://user-images.githubusercontent.com/52240990/109962660-cd398a80-7d2e-11eb-8e7a-8efc32aeb8fe.png" width="500">
 
 <참조사이트> <br/>
-https://www.inflearn.com/course/%EC%A7%80%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%96%B8%EC%96%B4-%EA%B8%B0%EB%B3%B8
+https://www.inflearn.com/course/javascript-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EA%B0%95%EC%A2%8C#curriculum
