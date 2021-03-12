@@ -1,0 +1,13 @@
+img {
+  border: none;
+}
+
+.title {
+  position: absolute;
+  top: 30%;
+  width: 95%;
+  color: blue;
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+}

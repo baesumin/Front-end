@@ -1,0 +1,10 @@
+const url = "../../image/rose.jpg";
+const obj = new Request(url);
+console.log("body: ", obj.body);
+console.log("cache: ", obj.cache);
+console.log("credentials: ", obj.credentials);
+console.log("destination: ", obj.destination);
+console.log("headers: ", obj.headers);
+console.log("integrity: ", obj.integrity);
+console.log("isReloadNavigation: ", obj.isReloadNavigation);
+console.log("isHistoryNavigation: ", obj.isHistoryNavigation);
