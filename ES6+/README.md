@@ -1,5 +1,5 @@
 # ES6+ 기본, 심화
-진행 기간 : 2021, 03.06-
+진행 기간 : 2021, 03.06-03.12
 
 <br/>기본
 03.06 : "use strict", closer, hoisting, arrow func,  iteration, <br/> 강의진행률(18/94)
