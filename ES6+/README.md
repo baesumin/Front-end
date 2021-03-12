@@ -8,7 +8,7 @@
 
 03.09 : template Literal, String.raw, copyWithin, find, fill, flat, primitive, symbol, map,  <br/> 강의진행률(72/94)
 
-03.10 : template Literal, String.raw, copyWithin, find, fill, flat, primitive, symbol, map,  <br/> 강의진행률(72/94) (기본)
+03.10 : template Literal, String.raw, copyWithin, find, fill, flat, primitive, symbol, map,  <br/> 강의진행률(94/94) (기본)
 
 03.10 :  override, super, proxy,  <br/> 강의진행률(40/80) (심화)
 
