@@ -17,18 +17,7 @@ class App extends React.Component {
         );
     }
 
-    componentDidUpdate() {
-        console.log('My component was just updated to the screen');
-    }
-
-    render() {
-        // return (
-        //     <div>
-        //         Latitude: {this.state.lat}
-        //         <br />
-        //         Error: {this.state.errorMessage}
-        //     </div>
-        // );
+    renderContent() {
         if (this.state.errorMessage && !this.state.lat) {
             return <div>Error: {this.state.errorMessage}</div>;
         }
@@ -37,7 +26,11 @@ class App extends React.Component {
             return <SeasonDisplay lat={this.state.lat} />;
         }
 
-        return <Spinner />;
+        return <Spinner message="Please accept location request" />;
+    }
+
+    render() {
+        return <div className="border red">{this.renderContent()}</div>;
     }
 }
 
