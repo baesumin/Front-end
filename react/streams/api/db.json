@@ -1,0 +1,25 @@
+{
+  "streams": [
+    {
+      "title": "hi",
+      "description": "hi2",
+      "id": 1
+    },
+    {
+      "title": "qwe",
+      "description": "qwer",
+      "id": 2
+    },
+    {
+      "title": "asd",
+      "description": "asdasdsa",
+      "id": 3
+    },
+    {
+      "title": "asdasd",
+      "description": "asdasdasd",
+      "userId": "106364915577418043634",
+      "id": 4
+    }
+  ]
+}
