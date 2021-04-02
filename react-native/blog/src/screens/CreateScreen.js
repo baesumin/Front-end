@@ -1,15 +1,19 @@
-import React, { useContext } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
 import { Context } from '../context/BlogContext';
+import BlogPostForm from '../components/BlogPostForm';
 
 const CreateScreen = ({ navigation }) => {
+    const { addBlogPost } = useContext(Context);
+
     return (
-        <View>
-            <Text>Enter Title:</Text>
-            <TextInput />
-            <Text>Enter Content:</Text>
-            <TextInput />
-        </View>
+        <BlogPostForm
+            onSubmit={(title, content) => {
+                addBlogPost(title, content, () => {
+                    navigation.navigate('Index');
+                });
+            }}
+        />
     );
 };
 
