@@ -14,9 +14,6 @@ const SigninScreen = () => {
                 onWillFocus={() => {
                     clearErrorMessage();
                 }}
-                onWillBlur={() => {
-                    clearErrorMessage();
-                }}
             />
             <AuthForm
                 headerText="Sign in to your account"
