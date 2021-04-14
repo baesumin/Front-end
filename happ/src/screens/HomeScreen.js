@@ -1,5 +1,5 @@
 import React from 'react';
-import { TodayHappy } from './ScreenElements';
+import { TodayHappy, Box } from './ScreenElements';
 
 const HomeScreen = () => {
     return (
@@ -10,6 +10,7 @@ const HomeScreen = () => {
                 alt="copy url"
             />
             <TodayHappy />
+            <Box />
         </div>
     );
 };
