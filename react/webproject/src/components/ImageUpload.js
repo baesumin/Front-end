@@ -20,7 +20,7 @@ function ImageUpload({ username }) {
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
         uploadTask.on(
-            'state_chaged',
+            'state_changed',
             (snapshot) => {
                 const progress = Math.round(
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100
