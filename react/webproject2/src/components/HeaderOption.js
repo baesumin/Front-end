@@ -4,19 +4,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeScreen } from '../redux/setting';
 
-function HeaderOption({ title, to, index, curScreen }) {
+function HeaderOption({ title, to, index }) {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(curScreen);
-    return () => {};
-  }, [curScreen]);
 
   return (
     <HeaderOptionContainer to={`${to}`}>
       <HeaderOptionButton
-        index={index}
-        curScreen={curScreen}
+        className="button"
         onClick={(e) => {
           //e.preventDefault();
           dispatch(changeScreen(index));
@@ -44,9 +38,13 @@ const HeaderOptionButton = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
-  color: ${(props) => (props.curscreen === props.index ? 'gray' : 'black')};
 
-  &:hover {
+  :visited {
+    color: blue !important;
+    border-bottom-color: #8480c5;
+  }
+
+  :hover {
     color: gray;
   }
 `;

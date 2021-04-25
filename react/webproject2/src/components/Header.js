@@ -33,10 +33,10 @@ function Header() {
         </Logo>
       </HeaderLeft>
       <HeaderCenter>
-        <HeaderOption title="홈" to="/" index={0} curScreen={curScreen} />
-        <HeaderOption title="행복디자인" to="/design" index={1} curScreen={curScreen} />
-        <HeaderOption title="커뮤니티" to="/community" index={2} curScreen={curScreen} />
-        <HeaderOption title="서베이" to="/survey" index={3} curScreen={curScreen} />
+        <HeaderOption title="홈" to="/" index={0} />
+        <HeaderOption title="행복디자인" to="/design" index={1} />
+        <HeaderOption title="커뮤니티" to="/community" index={2} />
+        <HeaderOption title="서베이" to="/survey" index={3} />
       </HeaderCenter>
       <HeaderRight>
         <HeaderAvatar
