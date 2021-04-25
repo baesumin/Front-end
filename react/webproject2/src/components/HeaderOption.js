@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeScreen } from '../redux/setting';
 
-function HeaderOption({ title, to }) {
+function HeaderOption({ title, to, index, curScreen }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(curScreen);
+    return () => {};
+  }, [curScreen]);
+
   return (
     <HeaderOptionContainer to={`${to}`}>
-      <HeaderOptionTitle>{title}</HeaderOptionTitle>
+      <HeaderOptionButton
+        index={index}
+        curScreen={curScreen}
+        onClick={(e) => {
+          //e.preventDefault();
+          dispatch(changeScreen(index));
+        }}
+      >
+        <h4>{title}</h4>
+      </HeaderOptionButton>
     </HeaderOptionContainer>
   );
 }
@@ -21,7 +39,14 @@ const HeaderOptionContainer = styled(Link)`
   font-size: 18px;
   font-weight: 800;
 `;
-const HeaderOptionTitle = styled.div`
+const HeaderOptionButton = styled.div`
   display: flex;
+  flex: 1;
   align-items: center;
+  justify-content: center;
+  color: ${(props) => (props.curscreen === props.index ? 'gray' : 'black')};
+
+  &:hover {
+    color: gray;
+  }
 `;
