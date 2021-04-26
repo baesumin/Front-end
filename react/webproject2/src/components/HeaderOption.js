@@ -39,11 +39,6 @@ const HeaderOptionButton = styled.div`
   align-items: center;
   justify-content: center;
 
-  :visited {
-    color: blue !important;
-    border-bottom-color: #8480c5;
-  }
-
   :hover {
     color: gray;
   }
