@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import HeaderOption from './HeaderOption';
-import { Avatar, Button } from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -12,7 +12,6 @@ import { auth } from '../firebase';
 
 function Header() {
   const { color } = useSelector((state) => state.setting);
-  const { curScreen } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
   const [user] = useAuthState(auth);
 
@@ -55,9 +54,15 @@ export default Header;
 
 const HeaderContainer = styled.div`
   display: flex;
-  padding: 20px;
+  /* width: 100vw; */
+  /* margin: auto; */
+  padding: 5px;
   border-bottom: 1px solid lightgray;
   background-color: ${(props) => props.color || 'white'};
+
+  @media screen and (max-width: 1080px) {
+    width: 1080px;
+  }
 `;
 const HeaderLeft = styled.div`
   flex: 0.3;
@@ -75,7 +80,6 @@ const Logo = styled(Link)`
 const HeaderCenter = styled.div`
   display: flex;
   flex: 0.4;
-
   justify-content: center;
 `;
 const HeaderAvatar = styled(Avatar)`
@@ -89,11 +93,9 @@ const HeaderAvatar = styled(Avatar)`
 `;
 
 const HeaderRight = styled.div`
-  /* > .MuiSvgIcon-root {
-  } */
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 20px;
   flex: 0.3;
+  margin-right: 20px;
 `;

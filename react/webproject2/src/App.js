@@ -11,12 +11,13 @@ import Community from './screens/Community';
 import Survey from './screens/Survey';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
+import Widget from './components/Widget';
 
 function App() {
   const [user, loading] = useAuthState(auth);
-  console.log(user);
+  console.log(loading);
   return (
-    <div className="app">
+    <AppContainer>
       <Router>
         {!user ? (
           <Login />
@@ -41,7 +42,7 @@ function App() {
                   </Route>
                 </Switch>
               </AppCenter>
-              <AppRight>AppRight</AppRight>
+              <Widget />
             </AppBody>
             <AppFooter>
               <p>Copyright © 2021 xx.co.,Ltd. All rights reserved.</p>
@@ -50,18 +51,36 @@ function App() {
           </>
         )}
       </Router>
-    </div>
+    </AppContainer>
   );
 }
 
 export default App;
 
+const AppContainer = styled.div`
+  background-color: #f4f2f0;
+  border: 1px solid green;
+  @media screen and (max-width: 1080px) {
+    width: 1080px;
+  }
+`;
 const AppBody = styled.div`
   display: flex;
-  justify-content: space-around;
+  width: 1080px;
+  margin: auto;
+  border: 1px solid blue;
 `;
-const AppCenter = styled.div``;
-const AppRight = styled.div``;
+const AppCenter = styled.div`
+  width: 580px;
+  height: 900px;
+  border: 1px solid black;
+  border-radius: 1px;
+`;
+
 const AppFooter = styled.div`
-  border-top: 1px solid lightgray;
+  background-color: #f4f2f0;
+  width: 1080px;
+  border-top: 2px solid lightgray;
+  text-align: center;
+  margin: auto;
 `;

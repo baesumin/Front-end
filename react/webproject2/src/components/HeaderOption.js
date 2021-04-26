@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeScreen } from '../redux/setting';
 
 function HeaderOption({ title, to, index }) {
@@ -10,7 +10,7 @@ function HeaderOption({ title, to, index }) {
   return (
     <HeaderOptionContainer to={`${to}`}>
       <HeaderOptionButton
-        className="button"
+        className="asd"
         onClick={(e) => {
           //e.preventDefault();
           dispatch(changeScreen(index));
