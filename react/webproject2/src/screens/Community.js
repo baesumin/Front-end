@@ -1,11 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CreateIcon from '@material-ui/icons/Create';
 import ImageIcon from '@material-ui/icons/Image';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import InputOption from '../components/InputOption';
+import Post from '../components/Post';
+import { db } from '../firebase';
+import firebase from 'firebase';
 
 function Community() {
+  const [input, setInput] = useState('');
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    db.collection('posts')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) =>
+        setPosts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data()
+          }))
+        )
+      );
+  }, []);
+
+  const sendPost = (e) => {
+    e.preventDefault();
+
+    db.collection('posts').add({
+      name: 'bae sumin',
+      description: 'this is a test2',
+      message: input,
+      photoUrl: '',
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    setInput('');
+  };
+
   return (
     <CommunityContainer>
       {/* 커뮤니티 선택 */}
@@ -14,8 +47,10 @@ function Community() {
         <Feed_Input>
           <CreateIcon />
           <form>
-            <input type="text" />
-            <button type="submit">Send</button>
+            <input value={input} onChange={(e) => setInput(e.target.value)} type="text" />
+            <button onClick={sendPost} type="submit">
+              Send
+            </button>
           </form>
         </Feed_Input>
         <FeedInputOptions>
@@ -23,6 +58,16 @@ function Community() {
           <InputOption Icon={SubscriptionsIcon} title="Video" color="#E7A33E" />
         </FeedInputOptions>
       </FeedInputContainer>
+
+      {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
+        <Post
+          key={id}
+          name={name}
+          description={description}
+          message={message}
+          photoUrl={photoUrl}
+        />
+      ))}
     </CommunityContainer>
   );
 }

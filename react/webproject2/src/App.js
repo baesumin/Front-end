@@ -14,12 +14,12 @@ import Sidebar from './components/Sidebar';
 import Widget from './components/Widget';
 
 function App() {
-  const [user, loading] = useAuthState(auth);
+  const [googleUser, loading] = useAuthState(auth);
   console.log(loading);
   return (
     <AppContainer>
       <Router>
-        {!user ? (
+        {!googleUser ? (
           <Login />
         ) : (
           <>
