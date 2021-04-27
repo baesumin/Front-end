@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -12,14 +12,35 @@ import Survey from './screens/Survey';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
 import Widget from './components/Widget';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout } from './redux/user';
 
 function App() {
+  const user = useSelector((state) => state.user);
   const [googleUser, loading] = useAuthState(auth);
-  console.log(loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+            photoURL: userAuth.profilePic
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, []);
+
   return (
     <AppContainer>
       <Router>
-        {!googleUser ? (
+        {!googleUser || !user ? (
           <Login />
         ) : (
           <>

@@ -9,11 +9,20 @@ import { useSelector } from 'react-redux';
 import { changeScreen } from '../redux/setting';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
+import { logout } from '../redux/user';
 
 function Header() {
   const { color } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
-  const [user] = useAuthState(auth);
+  const [GoogleUser] = useAuthState(auth);
+  const { user } = useSelector((state) => state.user);
+
+  const logoutOfApp = () => {
+    if (user) {
+      dispatch(logout());
+    }
+    auth.signOut();
+  };
 
   return (
     <HeaderContainer color={color}>
@@ -38,13 +47,19 @@ function Header() {
         <HeaderOption title="서베이" to="/survey" index={3} />
       </HeaderCenter>
       <HeaderRight>
-        <HeaderAvatar
-          onClick={(e) => {
-            auth.signOut();
-          }}
-          alt={user?.displayName}
-          src={user?.photoURL}
-        />
+        {GoogleUser ? (
+          <HeaderAvatar
+            onClick={logoutOfApp}
+            alt={GoogleUser?.displayName}
+            src={GoogleUser?.photoURL}
+          />
+        ) : (
+          <HeaderAvatar
+            onClick={logoutOfApp}
+            alt={user?.displayName}
+            src={user?.photoURL}
+          />
+        )}
       </HeaderRight>
     </HeaderContainer>
   );
