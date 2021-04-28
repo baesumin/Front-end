@@ -5,13 +5,15 @@ import ImageIcon from '@material-ui/icons/Image';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import InputOption from '../components/InputOption';
 import Post from '../components/Post';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 import firebase from 'firebase';
 import { useSelector } from 'react-redux';
 import FlipMove from 'react-flip-move';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Community() {
   const { user } = useSelector((state) => state.user);
+  const [googleUser, loading] = useAuthState(auth);
   const [input, setInput] = useState('');
   const [posts, setPosts] = useState([]);
 
@@ -31,14 +33,23 @@ function Community() {
   const sendPost = (e) => {
     e.preventDefault();
 
-    db.collection('posts').add({
-      name: user.displayName,
-      description: user.email,
-      message: input,
-      photoUrl: user.photoUrl || '',
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-
+    {
+      googleUser
+        ? db.collection('posts').add({
+            name: user.displayName,
+            description: user.email,
+            message: input,
+            photoUrl: googleUser.photoURL || '',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          })
+        : db.collection('posts').add({
+            name: user.displayName,
+            description: user.email,
+            message: input,
+            photoUrl: user.photoURL || '',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          });
+    }
     setInput('');
   };
 
