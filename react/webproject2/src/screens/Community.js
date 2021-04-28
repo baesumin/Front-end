@@ -109,6 +109,9 @@ const Feed_Input = styled.div`
     margin-left: 10px;
     outline-width: 0px;
   }
+  > form > button {
+    display: none;
+  }
 `;
 const FeedInputOptions = styled.div`
   display: flex;

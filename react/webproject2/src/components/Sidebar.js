@@ -9,6 +9,9 @@ export default Sidebar;
 
 const SidebarContainer = styled.div`
   width: 200px;
+  position: sticky;
+  top: 80px;
+  text-align: center;
+  height: fit-content;
   border: 1px solid black;
-  border-radius: 1px;
 `;

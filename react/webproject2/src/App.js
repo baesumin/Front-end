@@ -80,8 +80,8 @@ export default App;
 
 const AppContainer = styled.div`
   background-color: #f4f2f0;
-  border: 1px solid green;
-  height: 100%;
+  /* height: 100vh; */
+  /* border: 1px solid green; */
   @media screen and (max-width: 1080px) {
     width: 1080px;
   }
@@ -89,23 +89,18 @@ const AppContainer = styled.div`
 const AppBody = styled.div`
   display: flex;
   width: 1080px;
-
   margin: auto;
   margin-top: 35px;
-  /* margin-left: 20px; */
-  /* margin-right: 20px; */
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 `;
 const AppCenter = styled.div`
   width: 580px;
-  height: 900px;
-  border: 1px solid black;
-  border-radius: 1px;
+  /* border: 1px solid black; */
 `;
 
 const AppFooter = styled.div`
   background-color: #f4f2f0;
-  width: 1080px;
+  width: 100%;
   border-top: 2px solid lightgray;
   text-align: center;
   margin: auto;

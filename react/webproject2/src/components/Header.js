@@ -69,8 +69,9 @@ export default Header;
 
 const HeaderContainer = styled.div`
   display: flex;
-  /* width: 100vw; */
-  /* margin: auto; */
+  position: sticky;
+  top: 0;
+  z-index: 999;
   padding: 5px;
   border-bottom: 1px solid lightgray;
   background-color: ${(props) => props.color || 'white'};
