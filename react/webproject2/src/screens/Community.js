@@ -33,23 +33,13 @@ function Community() {
   const sendPost = (e) => {
     e.preventDefault();
 
-    {
-      googleUser
-        ? db.collection('posts').add({
-            name: user.displayName,
-            description: user.email,
-            message: input,
-            photoUrl: googleUser.photoURL || '',
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-          })
-        : db.collection('posts').add({
-            name: user.displayName,
-            description: user.email,
-            message: input,
-            photoUrl: user.photoURL || '',
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-          });
-    }
+    db.collection('posts').add({
+      name: user.displayName,
+      description: user.email,
+      message: input,
+      photoUrl: googleUser ? googleUser.photoURL || '' : user.photoURL || '',
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
     setInput('');
   };
 

@@ -46,7 +46,7 @@ function App() {
           <>
             <Header />
             <AppBody>
-              <Sidebar>AppLeft</Sidebar>
+              <Sidebar />
               <AppCenter>
                 <Switch>
                   <Route path="/" exact>

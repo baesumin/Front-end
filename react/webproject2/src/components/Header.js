@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import HeaderOption from './HeaderOption';
 import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -10,20 +10,26 @@ import { changeScreen } from '../redux/setting';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { logout } from '../redux/user';
+import { useDetectOutsideClick } from './useDetectOutsideClick';
+import './Header.css';
 
 function Header() {
   const { color } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
   const [GoogleUser] = useAuthState(auth);
   const { user } = useSelector((state) => state.user);
+  const curUser = GoogleUser ? GoogleUser : user;
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
   const logoutOfApp = () => {
     if (user) {
       dispatch(logout());
     }
+    dispatch(changeScreen(0));
     auth.signOut();
   };
-
+  console.log(isActive);
   return (
     <HeaderContainer color={color}>
       <HeaderLeft>
@@ -47,19 +53,28 @@ function Header() {
         <HeaderOption title="서베이" to="/survey" index={3} />
       </HeaderCenter>
       <HeaderRight>
-        {GoogleUser ? (
+        <MenuContainer>
           <HeaderAvatar
-            onClick={logoutOfApp}
-            alt={GoogleUser?.displayName}
-            src={GoogleUser?.photoURL}
+            className="menu-trigger"
+            onClick={() => {
+              setIsActive(!isActive);
+            }}
+            alt={curUser?.displayName}
+            src={curUser?.photoURL}
           />
-        ) : (
-          <HeaderAvatar
-            onClick={logoutOfApp}
-            alt={user?.displayName}
-            src={user?.photoURL}
-          />
-        )}
+          <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
+            <ul>
+              <li>
+                <MenuLink to="/community">링크1</MenuLink>
+              </li>
+              <li>
+                <MenuLink to="/" onClick={logoutOfApp}>
+                  로그아웃
+                </MenuLink>
+              </li>
+            </ul>
+          </nav>
+        </MenuContainer>
       </HeaderRight>
     </HeaderContainer>
   );
@@ -67,6 +82,18 @@ function Header() {
 
 export default Header;
 
+const MenuContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const MenuLink = styled(Link)`
+  text-decoration: none;
+  color: #333333;
+  padding: 15px 20px;
+  display: block;
+`;
 const HeaderContainer = styled.div`
   display: flex;
   position: sticky;
@@ -107,7 +134,6 @@ const HeaderAvatar = styled(Avatar)`
     opacity: 0.8;
   }
 `;
-
 const HeaderRight = styled.div`
   display: flex;
   align-items: center;
