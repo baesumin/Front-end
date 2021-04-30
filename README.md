@@ -34,6 +34,7 @@
 2. javascript
 3. web javascript
 4. react
-5. react(clone coding)
+5. react native
 6. typescript
 7. angular
+8. ionic
