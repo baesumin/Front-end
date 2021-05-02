@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function SidebarOption({ Icon, title, color, backgroundColor }) {
+function SidebarOption({ Icon, title }) {
   return (
     <SidebarOptionContainer>
       {Icon && <Icon fontSize="small" style={{ padding: 10 }} />}
@@ -23,8 +23,9 @@ const SidebarOptionContainer = styled.div`
   align-items: center;
   font-size: 12px;
   color: #b7a5b7;
-  height: 28px;
+  height: 27px;
   padding-left: 3px;
+  margin: 2px;
 
   > .MuiSvgIcon-root {
     font-size: 16px;
@@ -34,9 +35,8 @@ const SidebarOptionContainer = styled.div`
 
   :hover {
     cursor: pointer;
-    color: ${(props) => props.color || '#b7a5b7'};
-    background-color: ${(props) => props.backgroundColor || 'var(--slack-header-color)'};
-    /* background-color: var(--slack-header-color); */
+    color: '#b7a5b7';
+    background-color: var(--slack-header-color);
   }
 `;
 const SidebarOptionChannel = styled.div``;

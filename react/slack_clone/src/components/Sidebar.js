@@ -6,7 +6,6 @@ import SidebarOption from './SidebarOption';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 function Sidebar() {
@@ -21,33 +20,13 @@ function Sidebar() {
       </SidebarHeader>
 
       <hr />
-      <SidebarOption
-        Icon={AlternateEmailIcon}
-        title="멘션 및 반응"
-        color=""
-        backgroundColor=""
-      />
-      <SidebarOption
-        Icon={BookmarkBorderIcon}
-        title="저장된 항목"
-        color=""
-        backgroundColor=""
-      />
-      <SidebarOption
-        Icon={MoreVertIcon}
-        title="더 보기"
-        color="white"
-        backgroundColor="var(--slack-sidebar-color)"
-      />
+      <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" />
+      <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" />
+      <SidebarOption Icon={MoreVertIcon} title="더 보기" />
       <hr />
-      <SidebarOption Icon={PlayArrowIcon} title="채널" color="" backgroundColor="" />
+      <SidebarOption Icon={PlayArrowIcon} title="채널" />
       <hr />
-      <SidebarOption
-        Icon={PlayArrowIcon}
-        title="다이렉트 메시지"
-        color=""
-        backgroundColor=""
-      />
+      <SidebarOption Icon={PlayArrowIcon} title="다이렉트 메시지" />
     </SidebarContainer>
   );
 }
@@ -60,8 +39,9 @@ const SidebarContainer = styled.div`
 
   > hr {
     background-color: var(--slack-sidebar-color);
-    height: 10px;
-    border: 1px solid black;
+    height: 9px;
+    /* border: 1px solid black; */
+    border: none;
   }
 
   @media screen and (max-width: 1080px) {
@@ -87,7 +67,6 @@ const SidebarHeader = styled.div`
   z-index: 1;
 
   :hover {
-    color: white;
     cursor: pointer;
     background-color: var(--slack-header-color);
   }
@@ -112,6 +91,10 @@ const SidebarInfo = styled.div`
 
   > .MuiSvgIcon-root {
     height: 16px;
+  }
+
+  > .MuiSvgIcon-root :hover {
+    opacity: 0.8;
   }
 `;
 const OptionTopContainer = styled.div``;

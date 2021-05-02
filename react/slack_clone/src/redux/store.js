@@ -11,7 +11,7 @@ import {
 } from 'reduxjs-toolkit-persist';
 import storage from 'reduxjs-toolkit-persist/lib/storage';
 import autoMergeLevel1 from 'reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel1';
-// import settingReducer from './setting';
+import settingReducer from './setting';
 // import userReducer from './user';
 
 const persistConfig = {
@@ -21,7 +21,7 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-  //   setting: settingReducer,
+  setting: settingReducer
   //   user: userReducer
 });
 

@@ -1,29 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import { useDispatch, useSelector } from 'react-redux';
 
 import HeaderAvatar from './HeaderAvatar';
+import InputModal from './InputModal';
+import { InputModalOpen } from '../redux/setting';
 
 function Header() {
+  const { isInputModalOpen } = useSelector((state) => state.setting);
+  const dispatch = useDispatch();
+
   return (
-    <HeaderContainer>
-      <HeaderLeft></HeaderLeft>
+    <>
+      {isInputModalOpen ? <InputModal /> : null}
+      <HeaderContainer>
+        <HeaderLeft></HeaderLeft>
 
-      <HeaderCenter>
-        <AccessTimeIcon />
+        <HeaderCenter>
+          <AccessTimeIcon />
 
-        <HeaderSearch>
-          <input className="header_input" value="테스트 검색" />
-        </HeaderSearch>
+          <HeaderSearch>
+            <input
+              onClick={() => {
+                dispatch(InputModalOpen(!isInputModalOpen));
+              }}
+              className="header_input"
+              value="테스트 검색"
+            />
+          </HeaderSearch>
 
-        <HelpOutlineIcon />
-      </HeaderCenter>
+          <HelpOutlineIcon />
+        </HeaderCenter>
 
-      <HeaderRight>
-        <HeaderAvatar />
-      </HeaderRight>
-    </HeaderContainer>
+        <HeaderRight>
+          <HeaderAvatar />
+        </HeaderRight>
+      </HeaderContainer>
+    </>
   );
 }
 
@@ -64,7 +79,7 @@ const HeaderSearch = styled.div`
   display: flex;
   border-radius: 4px;
   border: 1px solid #664966;
-  padding-left: 5px;
+  /* padding-left: 5px; */
 
   > input {
     background-color: transparent;
@@ -76,7 +91,14 @@ const HeaderSearch = styled.div`
     font-size: 13px;
     font-weight: 600;
     letter-spacing: -1px;
+    padding-left: 5px;
+    margin-left: 1px;
   }
+
+  /* > :hover {
+    border: 1px solid lightgray;
+    border-radius: 4px;
+  } */
 
   @media screen and (max-width: 1170px) {
     width: 42vw;
