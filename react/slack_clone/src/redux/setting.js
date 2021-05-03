@@ -3,15 +3,23 @@ import { createSlice } from '@reduxjs/toolkit';
 export const settingSlice = createSlice({
   name: 'setting',
   initialState: {
-    isInputModalOpen: false
+    isAvatarModalOpen: false,
+    isInputModalOpen: false,
+    isSidebarModalOpen: false
   },
   reducers: {
     InputModalOpen: (state, action) => {
       state.isInputModalOpen = action.payload;
+    },
+    SidebarModalOpen: (state, action) => {
+      state.isSidebarModalOpen = action.payload;
+    },
+    AvatarModalOpen: (state, action) => {
+      state.isAvatarModalOpen = action.payload;
     }
   }
 });
 
-export const { InputModalOpen } = settingSlice.actions;
+export const { InputModalOpen, SidebarModalOpen, AvatarModalOpen } = settingSlice.actions;
 
 export default settingSlice.reducer;

@@ -7,27 +7,50 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import { useDispatch, useSelector } from 'react-redux';
+
+import SidebarModal from './SidebarModal';
+import { SidebarModalOpen, InputModalOpen } from '../redux/setting';
 
 function Sidebar() {
-  return (
-    <SidebarContainer>
-      <SidebarHeader>
-        <SidebarInfo>
-          <p>테스트</p>
-          <KeyboardArrowDownIcon />
-        </SidebarInfo>
-        <CreateIcon />
-      </SidebarHeader>
+  const { isSidebarModalOpen } = useSelector((state) => state.setting);
+  const dispatch = useDispatch();
 
-      <hr />
-      <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" />
-      <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" />
-      <SidebarOption Icon={MoreVertIcon} title="더 보기" />
-      <hr />
-      <SidebarOption Icon={PlayArrowIcon} title="채널" />
-      <hr />
-      <SidebarOption Icon={PlayArrowIcon} title="다이렉트 메시지" />
-    </SidebarContainer>
+  return (
+    <>
+      {isSidebarModalOpen ? <SidebarModal /> : null}
+      <SidebarContainer>
+        <SidebarHeader
+          onClick={(e) => {
+            dispatch(SidebarModalOpen(!isSidebarModalOpen));
+          }}
+          style={{ zIndex: 1 }}
+        >
+          <SidebarInfo>
+            <p>테스트</p>
+            <KeyboardArrowDownIcon />
+          </SidebarInfo>
+          <CreateIcon
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(SidebarModalOpen(false));
+              dispatch(InputModalOpen(false));
+              console.log('아이콘');
+            }}
+            style={{ zIndex: 3 }}
+          />
+        </SidebarHeader>
+
+        <hr />
+        <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" />
+        <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" />
+        <SidebarOption Icon={MoreVertIcon} title="더 보기" />
+        <hr />
+        <SidebarOption Icon={PlayArrowIcon} title="채널" />
+        <hr />
+        <SidebarOption Icon={PlayArrowIcon} title="다이렉트 메시지" />
+      </SidebarContainer>
+    </>
   );
 }
 

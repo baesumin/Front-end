@@ -1,10 +1,38 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Divider from '@material-ui/core/Divider';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-import { useDetectOutsideClick } from './useDetectOutsideClick';
+
+import { InputModalOpen } from '../redux/setting';
+import { useDispatch } from 'react-redux';
+
+export const useDetectOutsideClick = (el, initialState) => {
+  const [isActive, setIsActive] = useState(initialState);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const onClick = (e) => {
+      // If the active element exists and is clicked outside of
+      if (el.current !== null && !el.current.contains(e.target)) {
+        setIsActive(!isActive);
+        dispatch(InputModalOpen(false));
+      }
+    };
+
+    // If the item is active (ie open) then listen for clicks outside
+    if (isActive) {
+      window.addEventListener('click', onClick);
+    }
+
+    return () => {
+      window.removeEventListener('click', onClick);
+    };
+  }, [isActive, el]);
+
+  return [isActive, setIsActive];
+};
 
 export default function InputModal() {
   const dropdownRef = useRef(null);
@@ -65,16 +93,12 @@ const Menu = styled.div`
   min-height: auto;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   visibility: visible;
+  z-index: 999;
 `;
 const List = styled.div`
   display: flex;
   flex-direction: column;
-
   flex: 1;
-  > hr {
-    width: 100%;
-    /* border-color: gray; */
-  }
 `;
 const SearchContainer = styled.div`
   height: 44px;
