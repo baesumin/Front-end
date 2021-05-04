@@ -6,10 +6,12 @@ import styled from 'styled-components';
 import { AvatarModalOpen } from '../redux/setting';
 import AvatarModal from './AvatarModal';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
 
-const StyledBadge = withStyles(() => ({
+const StyledBadge = withStyles((props) => ({
   badge: {
-    backgroundColor: '#44b700',
+    backgroundColor: (props) => props.backgroundColor,
     color: '#44b700',
     boxShadow: `0 0 0 3px var(--slack-header-color)`
   }
@@ -32,12 +34,16 @@ export default function BadgeAvatars() {
   const classes = useStyles();
   const { isAvatarModalOpen } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
+  const [GoogleUser] = useAuthState(auth);
+  const { user, isActivate } = useSelector((state) => state.user);
+  const curUser = GoogleUser ? GoogleUser : user;
 
   return (
     <>
       {isAvatarModalOpen ? <AvatarModal /> : null}
       <div className={classes.root}>
         <StyledBadge
+          backgroundColor={isActivate ? '#44b700' : 'white'}
           overlap="circle"
           anchorOrigin={{
             vertical: 'bottom',
@@ -48,12 +54,12 @@ export default function BadgeAvatars() {
             dispatch(AvatarModalOpen(!isAvatarModalOpen));
           }}
         >
-          <Container>
+          <Container isActivate={isActivate}>
             <Avatar
               className={classes.size}
               variant="rounded"
-              alt="Remy Sharp"
-              src="/static/images/avatar/1.jpg"
+              alt={curUser?.displayName}
+              src={curUser?.photoURL}
               style={{ backgroundColor: '#0089D2' }}
             />
           </Container>

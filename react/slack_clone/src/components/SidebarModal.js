@@ -45,6 +45,7 @@ export default function SidebarModal() {
       dispatch(logout());
     }
     auth.signOut();
+    dispatch(SidebarModalOpen(false));
   };
 
   return (

@@ -4,10 +4,11 @@ import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import { logout } from '../redux/user';
+import { logout, Activate } from '../redux/user';
 import { AvatarModalOpen } from '../redux/setting';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const useDetectOutsideClick = (el, initialState) => {
   const [isActive, setIsActive] = useState(initialState);
@@ -38,7 +39,9 @@ const useDetectOutsideClick = (el, initialState) => {
 export default function AvatarModal() {
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const [GoogleUser] = useAuthState(auth);
+  const { user, isActivate } = useSelector((state) => state.user);
+  const curUser = GoogleUser ? GoogleUser : user;
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, true);
 
   const logoutOfApp = () => {
@@ -46,28 +49,22 @@ export default function AvatarModal() {
       dispatch(logout());
     }
     auth.signOut();
+    dispatch(AvatarModalOpen(false));
   };
   return (
     <Menu ref={dropdownRef}>
       <List>
         <Info>
           <Avatar
-            style={{
-              backgroundColor: '#0089D2',
-              height: '36px',
-              width: '36px',
-              marginLeft: '25px',
-              marginTop: '1px'
-            }}
             variant="rounded"
-          >
-            <AvatarName>수민</AvatarName>
-          </Avatar>
+            alt={curUser?.displayName}
+            src={curUser?.photoURL}
+          ></Avatar>
           <div>
-            <InfoHeader>배수민</InfoHeader>
+            <InfoHeader>{curUser?.displayName}</InfoHeader>
             <InfoDetail>
-              <FiberManualRecordIcon />
-              &nbsp;대화 가능
+              <FiberManualRecordIcon isActivate={isActivate} />
+              &nbsp;{isActivate ? '대화 가능' : '자리 비움'}
             </InfoDetail>
           </div>
         </Info>
@@ -76,7 +73,12 @@ export default function AvatarModal() {
         </StatusBar>
         <Container>
           <MenuOption>
-            <Detail>
+            <Detail
+              onClick={() => {
+                Activate();
+                dispatch(AvatarModalOpen(false));
+              }}
+            >
               자신을 &nbsp;<strong>자리 비움</strong>(으)로 설정
             </Detail>
             <Detail>
@@ -154,7 +156,6 @@ const StatusBar = styled.div`
     }
   }
 `;
-
 const Container = styled.div``;
 const MenuOption = styled.div`
   display: flex;
@@ -186,11 +187,6 @@ const Detail = styled.div`
     }
   }
 `;
-const AvatarName = styled.div`
-  display: flex;
-  font-size: 14px;
-  font-weight: 500;
-`;
 const InfoHeader = styled.div`
   font-size: 14px;
   font-weight: 900;
@@ -207,7 +203,10 @@ const InfoDetail = styled.div`
   margin-top: 2px;
 
   > .MuiSvgIcon-root {
-    color: #007a5a;
+    color: ${(props) => {
+      if (props.isActivate) return '#007a5a';
+      else return 'lightgray';
+    }};
     height: 12px;
     width: 12px;
   }
