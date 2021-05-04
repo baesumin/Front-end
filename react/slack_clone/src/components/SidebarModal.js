@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-
+import { logout } from '../redux/user';
 import { SidebarModalOpen } from '../redux/setting';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { auth } from '../firebase';
 
-export const useDetectOutsideClick = (el, initialState) => {
+const useDetectOutsideClick = (el, initialState) => {
   const [isActive, setIsActive] = useState(initialState);
   const dispatch = useDispatch();
 
@@ -35,7 +36,16 @@ export const useDetectOutsideClick = (el, initialState) => {
 
 export default function SidebarModal() {
   const dropdownRef = useRef(null);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, true);
+
+  const logoutOfApp = () => {
+    if (user) {
+      dispatch(logout());
+    }
+    auth.signOut();
+  };
 
   return (
     <Menu ref={dropdownRef}>
@@ -83,7 +93,7 @@ export default function SidebarModal() {
               <ArrowForwardIosIcon />
             </Detail>
             <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
-            <Detail>테스트에서 로그아웃</Detail>
+            <Detail onClick={logoutOfApp}>테스트에서 로그아웃</Detail>
             <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
             <Detail>
               워크스페이스 추가
