@@ -62,8 +62,8 @@ export default function AvatarModal() {
           ></Avatar>
           <div>
             <InfoHeader>{curUser?.displayName}</InfoHeader>
-            <InfoDetail>
-              <FiberManualRecordIcon isActivate={isActivate} />
+            <InfoDetail isActivate={isActivate}>
+              <FiberManualRecordIcon />
               &nbsp;{isActivate ? '대화 가능' : '자리 비움'}
             </InfoDetail>
           </div>
@@ -75,11 +75,11 @@ export default function AvatarModal() {
           <MenuOption>
             <Detail
               onClick={() => {
-                Activate();
+                dispatch(Activate());
                 dispatch(AvatarModalOpen(false));
               }}
             >
-              자신을 &nbsp;<strong>자리 비움</strong>(으)로 설정
+              자신을 &nbsp;<strong>{isActivate ? '자리 비움' : '활성'}</strong>(으)로 설정
             </Detail>
             <Detail>
               알림 일시 중지
@@ -204,7 +204,7 @@ const InfoDetail = styled.div`
 
   > .MuiSvgIcon-root {
     color: ${(props) => {
-      if (props.isActivate) return '#007a5a';
+      if (props.isActivate) return '#44b700';
       else return 'lightgray';
     }};
     height: 12px;

@@ -56,12 +56,8 @@ function App() {
 
 export default App;
 
-const AppContainer = styled.div`
-  /* @media screen and (max-width: 1080px) {
-    width: 1080px;
-  } */
-`;
 const AppBody = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100%;
+  position: fixed;
 `;

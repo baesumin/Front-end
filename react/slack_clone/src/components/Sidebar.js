@@ -74,9 +74,9 @@ const SidebarContainer = styled.div`
   @media screen and (max-width: 860px) {
     width: 200px;
   }
-  @media screen and (max-width: 483px) {
+  /* @media screen and (max-width: 483px) {
     width: 0px;
-  }
+  } */
 `;
 const SidebarHeader = styled.div`
   display: flex;
