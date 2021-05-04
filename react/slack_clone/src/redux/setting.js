@@ -5,7 +5,8 @@ export const settingSlice = createSlice({
   initialState: {
     isAvatarModalOpen: false,
     isInputModalOpen: false,
-    isSidebarModalOpen: false
+    isSidebarModalOpen: false,
+    curTab: 0
   },
   reducers: {
     InputModalOpen: (state, action) => {
@@ -16,10 +17,18 @@ export const settingSlice = createSlice({
     },
     AvatarModalOpen: (state, action) => {
       state.isAvatarModalOpen = action.payload;
+    },
+    SelectTab: (state, action) => {
+      state.curTab = action.payload;
     }
   }
 });
 
-export const { InputModalOpen, SidebarModalOpen, AvatarModalOpen } = settingSlice.actions;
+export const {
+  InputModalOpen,
+  SidebarModalOpen,
+  AvatarModalOpen,
+  SelectTab
+} = settingSlice.actions;
 
 export default settingSlice.reducer;

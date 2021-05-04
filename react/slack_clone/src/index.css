@@ -4,7 +4,7 @@
 body {
   --slack-header-color: #350d36;
   --slack-sidebar-color: #3f0e40;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',

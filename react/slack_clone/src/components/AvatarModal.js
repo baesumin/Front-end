@@ -58,7 +58,7 @@ export default function AvatarModal() {
             <InfoHeader>배수민</InfoHeader>
             <InfoDetail>
               <FiberManualRecordIcon />
-              &nbsp;대화가능
+              &nbsp;대화 가능
             </InfoDetail>
           </div>
         </Info>
@@ -138,6 +138,7 @@ const StatusBar = styled.div`
   }
   :hover {
     border-color: black;
+    cursor: pointer;
 
     > p {
       color: black;

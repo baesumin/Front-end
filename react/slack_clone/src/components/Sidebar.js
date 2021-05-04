@@ -42,9 +42,11 @@ function Sidebar() {
         </SidebarHeader>
 
         <hr />
-        <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" />
-        <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" />
-        <SidebarOption Icon={MoreVertIcon} title="더 보기" />
+        <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" index={0} />
+        <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" index={1} />
+        <More>
+          <MoreVertIcon style={{ padding: 10 }} />더 보기
+        </More>
         <hr />
         <SidebarOption Icon={PlayArrowIcon} title="채널" />
         <hr />
@@ -63,7 +65,6 @@ const SidebarContainer = styled.div`
   > hr {
     background-color: var(--slack-sidebar-color);
     height: 9px;
-    /* border: 1px solid black; */
     border: none;
   }
 
@@ -120,4 +121,23 @@ const SidebarInfo = styled.div`
     opacity: 0.8;
   }
 `;
-const OptionTopContainer = styled.div``;
+const More = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #b7a5b7;
+  height: 27px;
+  padding-left: 3px;
+  margin: 2px;
+
+  > .MuiSvgIcon-root {
+    font-size: 16px;
+    stroke: white;
+    stroke-width: 0.4px;
+  }
+  :hover {
+    cursor: pointer;
+    color: white;
+  }
+`;
