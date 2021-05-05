@@ -206,7 +206,6 @@ const Banner = styled.div`
   font-size: 14px;
   font-weight: 900;
   color: #1d1c1d;
-
   letter-spacing: -0.3px;
   border-bottom: 1px solid #abaaab;
 `;

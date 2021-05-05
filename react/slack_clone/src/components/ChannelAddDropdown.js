@@ -71,7 +71,7 @@ export default function ChannelAddDropdown() {
 }
 
 const ModalContainer = styled.div`
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   z-index: 900;
