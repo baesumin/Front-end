@@ -8,20 +8,37 @@ import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { useDispatch, useSelector } from 'react-redux';
-
+import AddIcon from '@material-ui/icons/Add';
 import SidebarModal from './SidebarModal';
-import { SidebarModalOpen, InputModalOpen } from '../redux/setting';
+import {
+  SidebarModalOpen,
+  InputModalOpen,
+  ChannelAddDropdownOpen,
+  ChannelTabClick,
+  DMTabClick
+} from '../redux/setting';
+import ChannelAddDropdown from './ChannelAddDropdown';
+import ChannelAddModal from './ChannelAddModal';
 
 function Sidebar() {
-  const { isSidebarModalOpen } = useSelector((state) => state.setting);
+  const {
+    isSidebarModalOpen,
+    isInputModalOpen,
+    isChannelAddDropdownOpen,
+    isChannelAddModalOpen,
+    isChannelTabOpen,
+    isDMTabOpen
+  } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
 
   return (
     <>
+      {isChannelAddModalOpen ? <ChannelAddModal /> : null}
+      {isChannelAddDropdownOpen ? <ChannelAddDropdown /> : null}
       {isSidebarModalOpen ? <SidebarModal /> : null}
       <SidebarContainer>
         <SidebarHeader
-          onClick={(e) => {
+          onClick={() => {
             dispatch(SidebarModalOpen(!isSidebarModalOpen));
           }}
           style={{ zIndex: 1 }}
@@ -48,9 +65,37 @@ function Sidebar() {
           <MoreVertIcon style={{ padding: 10 }} />더 보기
         </More>
         <hr />
-        <SidebarOption Icon={PlayArrowIcon} title="채널" />
+        <ChannelContainer
+          onClick={() => {
+            dispatch(ChannelTabClick(!isChannelTabOpen));
+          }}
+          isChannelTabOpen={isChannelTabOpen}
+        >
+          <PlayArrowIcon style={{ padding: 10 }} />
+          채널
+          <span>
+            <AddIcon
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(ChannelAddDropdownOpen(true));
+                console.log('채널+아이콘');
+              }}
+            />
+          </span>
+        </ChannelContainer>
         <hr />
-        <SidebarOption Icon={PlayArrowIcon} title="다이렉트 메시지" />
+        <DMContainer
+          onClick={() => {
+            dispatch(DMTabClick(!isDMTabOpen));
+          }}
+          isDMTabOpen={isDMTabOpen}
+        >
+          <PlayArrowIcon style={{ padding: 10 }} />
+          다이렉트 메시지
+          <span>
+            <AddIcon />
+          </span>
+        </DMContainer>
       </SidebarContainer>
     </>
   );
@@ -139,5 +184,82 @@ const More = styled.div`
   :hover {
     cursor: pointer;
     color: white;
+  }
+`;
+const ChannelContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #b7a5b7;
+  height: 27px;
+  padding-left: 3px;
+  margin: 2px;
+
+  > .MuiSvgIcon-root {
+    font-size: 16px;
+    transform: ${(props) => {
+      if (props.isChannelTabOpen) return 'rotate(90deg)';
+      else return 'rotate(0deg)';
+    }};
+    transition: transform ease 0.1s;
+  }
+  > span {
+    visibility: hidden;
+    margin-left: auto;
+    margin-right: 15px;
+  }
+  :hover {
+    cursor: pointer;
+    > span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: visible;
+      width: 28px;
+      height: 28px;
+      :hover {
+        background-color: #532753;
+        border-radius: 5px;
+      }
+    }
+  }
+`;
+const DMContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #b7a5b7;
+  height: 27px;
+  padding-left: 3px;
+  margin: 2px;
+  > .MuiSvgIcon-root {
+    font-size: 16px;
+    transform: ${(props) => {
+      if (props.isDMTabOpen) return 'rotate(90deg)';
+      else return 'rotate(0deg)';
+    }};
+    transition: transform ease 0.1s;
+  }
+  > span {
+    visibility: hidden;
+    margin-left: auto;
+    margin-right: 15px;
+  }
+  :hover {
+    cursor: pointer;
+    > span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: visible;
+      width: 28px;
+      height: 28px;
+      :hover {
+        background-color: #532753;
+        border-radius: 5px;
+      }
+    }
   }
 `;

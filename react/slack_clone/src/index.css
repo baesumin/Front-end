@@ -6,7 +6,6 @@ body {
   --slack-sidebar-color: #3f0e40;
   /* overflow: hidden; */
 
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, 'Lato';
   -webkit-font-smoothing: antialiased;

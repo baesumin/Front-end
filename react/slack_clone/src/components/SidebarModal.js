@@ -49,69 +49,76 @@ export default function SidebarModal() {
   };
 
   return (
-    <Menu ref={dropdownRef}>
-      <List>
-        <Info>
-          <Avatar
-            style={{
-              backgroundColor: '#616061',
-              height: '36px',
-              width: '36px',
-              marginLeft: '25px'
-            }}
-            variant="rounded"
-          >
-            <AvatarName>테스</AvatarName>
-          </Avatar>
-          <div>
-            <InfoHeader>테스트</InfoHeader>
-            <InfoDetail>w1619832526-czh832082.slack....</InfoDetail>
-          </div>
-        </Info>
-        <Divider />
-        <Plan>
-          <a href="https://app.slack.com/plans/T020J8SURD3?entry_point=team_menu_plan_info">
-            고객님의 워크스페이스에서는 현재 Slack 무료
-            <br />
-            버전을 사용하고 있습니다. <strong>플랜 보기</strong>
-          </a>
-        </Plan>
+    <ModalContainer>
+      <Menu ref={dropdownRef}>
+        <List>
+          <Info>
+            <Avatar
+              style={{
+                backgroundColor: '#616061',
+                height: '36px',
+                width: '36px',
+                marginLeft: '25px'
+              }}
+              variant="rounded"
+            >
+              <AvatarName>테스</AvatarName>
+            </Avatar>
+            <div>
+              <InfoHeader>테스트</InfoHeader>
+              <InfoDetail>w1619832526-czh832082.slack....</InfoDetail>
+            </div>
+          </Info>
+          <Divider />
+          <Plan>
+            <a href="https://app.slack.com/plans/T020J8SURD3?entry_point=team_menu_plan_info">
+              고객님의 워크스페이스에서는 현재 Slack 무료
+              <br />
+              버전을 사용하고 있습니다. <strong>플랜 보기</strong>
+            </a>
+          </Plan>
 
-        <Container>
-          <MenuOption>
-            <Divider style={{ marginBottom: '10px' }} />
-            <Detail>테스트에 사용자 초대</Detail>
-            <Detail>채널 생성</Detail>
-            <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
-            <Detail>환경설정</Detail>
-            <Detail>
-              설정 및 관리
-              <ArrowForwardIosIcon />
-            </Detail>
-            <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
-            <Detail>
-              도구
-              <ArrowForwardIosIcon />
-            </Detail>
-            <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
-            <Detail onClick={logoutOfApp}>테스트에서 로그아웃</Detail>
-            <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
-            <Detail>
-              워크스페이스 추가
-              <ArrowForwardIosIcon />
-            </Detail>
-            <Detail>
-              워크스페이스 전환
-              <ArrowForwardIosIcon />
-            </Detail>
-            <Detail>Slack 앱 열기</Detail>
-          </MenuOption>
-        </Container>
-      </List>
-    </Menu>
+          <Container>
+            <MenuOption>
+              <Divider style={{ marginBottom: '10px' }} />
+              <Detail>테스트에 사용자 초대</Detail>
+              <Detail>채널 생성</Detail>
+              <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
+              <Detail>환경설정</Detail>
+              <Detail>
+                설정 및 관리
+                <ArrowForwardIosIcon />
+              </Detail>
+              <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
+              <Detail>
+                도구
+                <ArrowForwardIosIcon />
+              </Detail>
+              <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
+              <Detail onClick={logoutOfApp}>테스트에서 로그아웃</Detail>
+              <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
+              <Detail>
+                워크스페이스 추가
+                <ArrowForwardIosIcon />
+              </Detail>
+              <Detail>
+                워크스페이스 전환
+                <ArrowForwardIosIcon />
+              </Detail>
+              <Detail>Slack 앱 열기</Detail>
+            </MenuOption>
+          </Container>
+        </List>
+      </Menu>
+    </ModalContainer>
   );
 }
-
+const ModalContainer = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 900;
+`;
 const Menu = styled.div`
   border-radius: 7px;
   background-color: white;

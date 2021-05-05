@@ -52,52 +52,66 @@ export default function AvatarModal() {
     dispatch(AvatarModalOpen(false));
   };
   return (
-    <Menu ref={dropdownRef}>
-      <List>
-        <Info>
-          <Avatar
-            variant="rounded"
-            alt={curUser?.displayName}
-            src={curUser?.photoURL}
-          ></Avatar>
-          <div>
-            <InfoHeader>{curUser?.displayName}</InfoHeader>
-            <InfoDetail isActivate={isActivate}>
-              <FiberManualRecordIcon />
-              &nbsp;{isActivate ? '대화 가능' : '자리 비움'}
-            </InfoDetail>
-          </div>
-        </Info>
-        <StatusBar>
-          <p>😄 &nbsp;&nbsp;&nbsp;상태 업데이트</p>
-        </StatusBar>
-        <Container>
-          <MenuOption>
-            <Detail
-              onClick={() => {
-                dispatch(Activate());
-                dispatch(AvatarModalOpen(false));
+    <ModalContainer>
+      <Menu ref={dropdownRef}>
+        <List>
+          <Info>
+            <Avatar
+              variant="rounded"
+              alt={curUser?.displayName}
+              src={curUser?.photoURL}
+              style={{
+                width: '36px',
+                height: '36px',
+                marginLeft: '25px',
+                marginTop: '2px'
               }}
-            >
-              자신을 &nbsp;<strong>{isActivate ? '자리 비움' : '활성'}</strong>(으)로 설정
-            </Detail>
-            <Detail>
-              알림 일시 중지
-              <ArrowForwardIosIcon />
-            </Detail>
-            <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
-            <Detail>프로필 편집</Detail>
-            <Detail>프로필 보기</Detail>
-            <Detail>환경설정</Detail>
-            <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
-            <Detail onClick={logoutOfApp}>테스트에서 로그아웃</Detail>
-          </MenuOption>
-        </Container>
-      </List>
-    </Menu>
+            ></Avatar>
+            <div>
+              <InfoHeader>{curUser?.displayName}</InfoHeader>
+              <InfoDetail isActivate={isActivate}>
+                <FiberManualRecordIcon />
+                &nbsp;{isActivate ? '대화 가능' : '자리 비움'}
+              </InfoDetail>
+            </div>
+          </Info>
+          <StatusBar>
+            <p>😄 &nbsp;&nbsp;&nbsp;상태 업데이트</p>
+          </StatusBar>
+          <Container>
+            <MenuOption>
+              <Detail
+                onClick={() => {
+                  dispatch(Activate());
+                  dispatch(AvatarModalOpen(false));
+                }}
+              >
+                자신을 &nbsp;<strong>{isActivate ? '자리 비움' : '활성'}</strong>(으)로
+                설정
+              </Detail>
+              <Detail>
+                알림 일시 중지
+                <ArrowForwardIosIcon />
+              </Detail>
+              <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
+              <Detail>프로필 편집</Detail>
+              <Detail>프로필 보기</Detail>
+              <Detail>환경설정</Detail>
+              <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
+              <Detail onClick={logoutOfApp}>테스트에서 로그아웃</Detail>
+            </MenuOption>
+          </Container>
+        </List>
+      </Menu>
+    </ModalContainer>
   );
 }
-
+const ModalContainer = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 900;
+`;
 const Menu = styled.div`
   border-radius: 7px;
   background-color: white;

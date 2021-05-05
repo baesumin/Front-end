@@ -10,14 +10,15 @@ import {
   REGISTER
 } from 'reduxjs-toolkit-persist';
 import storage from 'reduxjs-toolkit-persist/lib/storage';
-import autoMergeLevel1 from 'reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel1';
+import autoMergeLevel2 from 'reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel2';
 import settingReducer from './setting';
 import userReducer from './user';
 
 const persistConfig = {
   key: 'root',
   storage: storage,
-  stateReconciler: autoMergeLevel1
+  blacklist: ['settingReducer']
+  // stateReconciler: autoMergeLevel2
 };
 
 const reducers = combineReducers({
