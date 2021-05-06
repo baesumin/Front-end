@@ -23,7 +23,8 @@ function Header() {
 
           <HeaderSearch>
             <input
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 dispatch(InputModalOpen(!isInputModalOpen));
               }}
               className="header_input"
@@ -45,6 +46,8 @@ function Header() {
 export default Header;
 
 const HeaderContainer = styled.div`
+  position: fixed;
+  width: 100%;
   display: flex;
   padding: 1px;
   background-color: var(--slack-header-color);

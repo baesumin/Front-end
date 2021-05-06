@@ -8,6 +8,7 @@ import { auth } from './firebase';
 import Login from './components/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from './redux/user';
+import Chat from './components/Chat';
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -43,7 +44,7 @@ function App() {
               <Sidebar />
               <Switch>
                 <Route path="/" exact>
-                  {/* chat */}
+                  <Chat />
                 </Route>
               </Switch>
             </AppBody>
@@ -58,6 +59,5 @@ export default App;
 
 const AppBody = styled.div`
   display: flex;
-  height: 100%;
-  position: fixed;
+  height: 100vh;
 `;

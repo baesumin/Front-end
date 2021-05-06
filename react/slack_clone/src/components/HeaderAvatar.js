@@ -50,7 +50,8 @@ export default function BadgeAvatars() {
             horizontal: 'right'
           }}
           variant="dot"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             dispatch(AvatarModalOpen(!isAvatarModalOpen));
           }}
         >

@@ -39,46 +39,53 @@ export default function InputModal() {
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, true);
 
   return (
-    <Menu ref={dropdownRef} isActive>
-      <List>
-        <SearchContainer>
-          <SearchIcon />
-          <input placeholder="자세히 검색" />
-          <CloseIcon />
-        </SearchContainer>
-        <Divider />
-        <TipContainer>
-          <h4>💡 &nbsp; 메시지, 파일 등 검색</h4>
-          <p>
-            특정 메시지, 문서 또는 결정을 찾고 있나요? Slack에서 <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;발생했다면 검색을 사용하여 찾을 수
-            있습니다.
-          </p>
-        </TipContainer>
-        <Divider />
-        <AccessContainer>
-          <h4>고객지원센터에서 제공</h4>
-          <p>
-            <HelpOutlineIcon />
-            &nbsp;&nbsp;&nbsp;
-            <a href="https://slack.com/help/articles/202528808-Search-in-Slack">
-              <strong>Slack에서의 검색 방법</strong> 올바른 정보에 즉시 액세스하기
-            </a>
-          </p>
-          <p>
-            <HelpOutlineIcon />
-            &nbsp;&nbsp;&nbsp;
-            <a href="https://slack.com/intl/ko-kr/help/categories/200111606">
-              <strong>Slack 사용하기</strong> Slack이 어떻게 작동하는지 전체 과정을 자세히
-              알아보세요.
-            </a>
-          </p>
-        </AccessContainer>
-      </List>
-    </Menu>
+    <ModalContainer>
+      <Menu ref={dropdownRef} isActive>
+        <List>
+          <SearchContainer>
+            <SearchIcon />
+            <input placeholder="자세히 검색" />
+            <CloseIcon />
+          </SearchContainer>
+          <Divider />
+          <TipContainer>
+            <h4>💡 &nbsp; 메시지, 파일 등 검색</h4>
+            <p>
+              특정 메시지, 문서 또는 결정을 찾고 있나요? Slack에서 <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;발생했다면 검색을 사용하여 찾을 수
+              있습니다.
+            </p>
+          </TipContainer>
+          <Divider />
+          <AccessContainer>
+            <h4>고객지원센터에서 제공</h4>
+            <p>
+              <HelpOutlineIcon />
+              &nbsp;&nbsp;&nbsp;
+              <a href="https://slack.com/help/articles/202528808-Search-in-Slack">
+                <strong>Slack에서의 검색 방법</strong> 올바른 정보에 즉시 액세스하기
+              </a>
+            </p>
+            <p>
+              <HelpOutlineIcon />
+              &nbsp;&nbsp;&nbsp;
+              <a href="https://slack.com/intl/ko-kr/help/categories/200111606">
+                <strong>Slack 사용하기</strong> Slack이 어떻게 작동하는지 전체 과정을
+                자세히 알아보세요.
+              </a>
+            </p>
+          </AccessContainer>
+        </List>
+      </Menu>
+    </ModalContainer>
   );
 }
-
+const ModalContainer = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 900;
+`;
 const Menu = styled.div`
   border-radius: 8px;
   background-color: white;

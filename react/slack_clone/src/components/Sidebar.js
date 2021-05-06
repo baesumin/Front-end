@@ -38,7 +38,8 @@ function Sidebar() {
       {isSidebarModalOpen ? <SidebarModal /> : null}
       <SidebarContainer>
         <SidebarHeader
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             dispatch(SidebarModalOpen(!isSidebarModalOpen));
           }}
           style={{ zIndex: 1 }}
@@ -105,6 +106,7 @@ export default Sidebar;
 
 const SidebarContainer = styled.div`
   background-color: var(--slack-sidebar-color);
+  margin-top: 36px;
   width: 260px;
 
   > hr {

@@ -1,46 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChannelAddModalOpen, ChannelAddDropdownOpen } from '../redux/setting';
 import styled from 'styled-components';
-
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
-  }
-}));
+import Switch from '@material-ui/core/Switch';
+import { withStyles } from '@material-ui/core/styles';
+import { teal, grey } from '@material-ui/core/colors';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 export default function ChannelAddModal() {
-  const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
+  const [inputName, setInputName] = useState('');
+  const [inputExplanation, setInputExplanation] = useState('');
+
   const dispatch = useDispatch();
   const { isChannelAddModalOpen } = useSelector((state) => state.setting);
-
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
-    </div>
-  );
 
   return (
     <div>
@@ -50,6 +24,7 @@ export default function ChannelAddModal() {
           dispatch(ChannelAddModalOpen(false));
         }}
         disableEnforceFocus={true}
+        disableAutoFocus={true}
       >
         <ModalContainer>
           <InnerContainer>
@@ -60,13 +35,41 @@ export default function ChannelAddModal() {
             </SubTitle>
             <ChannelName>
               이름
-              <input placeholder="# 예: 플랜 예산" />
+              <input
+                value={inputName}
+                onChange={(e) => setInputName(e.target.value)}
+                placeholder="#  예: 플랜 예산"
+              />
             </ChannelName>
             <ChannelName>
               설명
-              <input />
+              <input
+                value={inputExplanation}
+                onChange={(e) => setInputName(e.target.value)}
+              />
             </ChannelName>
             <ChannelSummary>무엇에 대한 채널인가요?</ChannelSummary>
+            <PrivateContainer>
+              <PrivateText>
+                <PrivateTitle>비공개로 만들기</PrivateTitle>
+                <PrivateSub>
+                  채널이 비공개로 설정된 경우 초대를 통해서만 조회 또는 참여할 수
+                  있습니다.
+                </PrivateSub>
+              </PrivateText>
+              <PrivateSwitchButton>
+                <PurpleSwitch
+                  label="Normal"
+                  color="default"
+                  style={{ margin: '0 auto' }}
+                />
+              </PrivateSwitchButton>
+            </PrivateContainer>
+            <MakeContainer>
+              <ErrorOutlineIcon />
+              &nbsp;&nbsp;&nbsp;자세히 알아보기
+              <MakeButton inputName={inputName}>생성</MakeButton>
+            </MakeContainer>
           </InnerContainer>
         </ModalContainer>
       </Modal>
@@ -89,7 +92,6 @@ const ModalContainer = styled.div`
   align-items: center;
 `;
 const InnerContainer = styled.div`
-  border: 1px solid black;
   width: 465px;
   height: 470px;
 `;
@@ -111,7 +113,7 @@ const SubTitle = styled.div`
 const ChannelName = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 19px;
+  margin-top: 20px;
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -1px;
@@ -121,7 +123,7 @@ const ChannelName = styled.div`
     height: 40px;
     border-radius: 5px;
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 600;
     border: 1px solid gray;
     text-indent: 12px;
     color: #5c5b5c;
@@ -139,12 +141,75 @@ const ChannelSummary = styled.div`
   font-size: 13px;
   color: gray;
   margin-top: 5px;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.8px;
 `;
-const PrivateContainer = styled.div``;
+const PrivateContainer = styled.div`
+  margin-top: 23px;
+  display: flex;
+  align-items: center;
+`;
 const PrivateText = styled.div``;
-const PrivateTitle = styled.div``;
-const PrivateSub = styled.div``;
-const PrivateRadioButton = styled.div``;
-const MakeContainer = styled.div``;
-const MakeButton = styled.div``;
+const PrivateTitle = styled.div`
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -1.1px;
+`;
+const PrivateSub = styled.div`
+  margin-top: 1px;
+  width: 305px;
+  letter-spacing: -0.1px;
+  line-height: 1.4rem;
+  font-size: 14px;
+  color: gray;
+`;
+const PrivateSwitchButton = styled.div`
+  margin-left: 90px;
+`;
+const PurpleSwitch = withStyles({
+  switchBase: {
+    color: grey[700],
+    '&$checked': {
+      color: grey[50]
+    },
+    '&$checked + $track': {
+      backgroundColor: teal[900]
+    }
+  },
+  checked: {},
+  track: {}
+})(Switch);
+const MakeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  color: gray;
+  margin-top: 40px;
+  font-size: 14px;
+
+  > .MuiSvgIcon-root {
+    font-size: 16px;
+  }
+`;
+const MakeButton = styled.div`
+  background-color: lightgray;
+  margin-left: auto;
+  width: 80px;
+  height: 36px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  background-color: ${(props) => {
+    if (props.inputName.length > 0) return '#007A5A';
+    else return '#DDDDDD';
+  }};
+  color: ${(props) => {
+    if (props.inputName.length > 0) return 'white';
+    else return '#4d4c4d';
+  }};
+
+  ${(props) => {
+    if (props.inputName.length > 0) return ':hover{opacity:0.9;cursor:pointer;}';
+    else return ':hover{cursor:default}';
+  }}
+`;
