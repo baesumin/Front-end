@@ -19,6 +19,8 @@ import {
 } from '../redux/setting';
 import ChannelAddDropdown from './ChannelAddDropdown';
 import ChannelAddModal from './ChannelAddModal';
+import { db } from '../firebase';
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 function Sidebar() {
   const {
@@ -30,6 +32,9 @@ function Sidebar() {
     isDMTabOpen
   } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
+  const [channels, loading, error] = useCollection(
+    db.collection('rooms').orderBy('name', 'asc')
+  );
 
   return (
     <>
@@ -60,8 +65,8 @@ function Sidebar() {
         </SidebarHeader>
 
         <hr />
-        <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" index={0} />
-        <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" index={1} />
+        <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" id={'0'} />
+        <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" id={'1'} />
         <More>
           <MoreVertIcon style={{ padding: 10 }} />더 보기
         </More>
@@ -84,6 +89,15 @@ function Sidebar() {
             />
           </span>
         </ChannelContainer>
+
+        <ChannelDetail>
+          {isChannelTabOpen
+            ? channels?.docs.map((doc) => (
+                <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
+              ))
+            : null}
+        </ChannelDetail>
+
         <hr />
         <DMContainer
           onClick={() => {
@@ -265,3 +279,4 @@ const DMContainer = styled.div`
     }
   }
 `;
+const ChannelDetail = styled.div``;

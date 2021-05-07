@@ -11,9 +11,14 @@ import { login, logout } from './redux/user';
 import Chat from './components/Chat';
 
 function App() {
-  const user = useSelector((state) => state.user);
+  const { user, title } = useSelector((state) => state.user);
   const [googleUser, loading] = useAuthState(auth);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const htmlTitle = document.querySelector('title');
+    htmlTitle.innerHTML = `Slack | ${title} | 테스트`;
+  }, [title]);
 
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {

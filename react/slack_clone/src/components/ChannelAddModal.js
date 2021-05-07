@@ -2,19 +2,54 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { ChannelAddModalOpen, ChannelAddDropdownOpen } from '../redux/setting';
+import { ChannelAddModalOpen, ChannelAddDropdownOpen, SelectTab } from '../redux/setting';
 import styled from 'styled-components';
 import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core/styles';
 import { teal, grey } from '@material-ui/core/colors';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import { auth, db } from '../firebase';
+import firebase from 'firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function ChannelAddModal() {
   const [inputName, setInputName] = useState('');
   const [inputExplanation, setInputExplanation] = useState('');
-
   const dispatch = useDispatch();
   const { isChannelAddModalOpen } = useSelector((state) => state.setting);
+  const [GoogleUser] = useAuthState(auth);
+  const { user } = useSelector((state) => state.user);
+  const curUser = GoogleUser ? GoogleUser : user;
+
+  const addChannel = () => {
+    if (inputName) {
+      db.collection('rooms')
+        .add({
+          name: inputName,
+          explanation: inputExplanation || '주제 추가'
+        })
+        .then((docRef) => {
+          dispatch(SelectTab(docRef.id));
+          dispatch(ChannelAddModalOpen(false));
+
+          db.collection('rooms').doc(docRef.id).collection('users').add({
+            user: curUser.displayName,
+            userImage: curUser.photoURL,
+            uid: curUser.uid
+          });
+
+          db.collection('rooms')
+            .doc(docRef.id)
+            .collection('messages')
+            .add({
+              message: `#${inputName}에 참여했습니다.`,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              user: curUser.displayName,
+              userImage: curUser.photoURL
+            });
+        });
+    }
+  };
 
   return (
     <div>
@@ -45,7 +80,7 @@ export default function ChannelAddModal() {
               설명
               <input
                 value={inputExplanation}
-                onChange={(e) => setInputName(e.target.value)}
+                onChange={(e) => setInputExplanation(e.target.value)}
               />
             </ChannelName>
             <ChannelSummary>무엇에 대한 채널인가요?</ChannelSummary>
@@ -68,7 +103,14 @@ export default function ChannelAddModal() {
             <MakeContainer>
               <ErrorOutlineIcon />
               &nbsp;&nbsp;&nbsp;자세히 알아보기
-              <MakeButton inputName={inputName}>생성</MakeButton>
+              <MakeButton
+                onClick={() => {
+                  addChannel();
+                }}
+                inputName={inputName}
+              >
+                생성
+              </MakeButton>
             </MakeContainer>
           </InnerContainer>
         </ModalContainer>

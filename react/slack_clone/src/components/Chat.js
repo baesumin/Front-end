@@ -1,62 +1,96 @@
 import { Divider } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Avatar from '@material-ui/core/Avatar';
 import { AvatarGroup } from '@material-ui/lab';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import ChatInput from './ChatInput';
+import { useSelector } from 'react-redux';
+import { db } from '../firebase';
+import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
+import Message from './Message';
+// import { Message } from '@material-ui/icons';
 
 function Chat() {
+  const chatRef = useRef(null);
+  const { curTab } = useSelector((state) => state.setting);
+  const [curTitle, setCurTitle] = useState('');
+  const [curSubTitle, setCurSubTitle] = useState('');
+  const [roomDetails] = useDocument(curTab && db.collection('rooms').doc(curTab));
+  const [roomUsers] = useCollection(
+    curTab && db.collection('rooms').doc(curTab).collection('users')
+  );
+  const [roomMessages, loading] = useCollection(
+    curTab &&
+      db
+        .collection('rooms')
+        .doc(curTab)
+        .collection('messages')
+        .orderBy('timestamp', 'asc')
+  );
+
+  useEffect(() => {
+    chatRef?.current?.scrollIntoView(true);
+  }, [curTab, loading]);
+
   return (
     <ChatContainer>
-      <Header>
-        <HeaderLeft>
-          <Title>#테스트</Title>
-          <SubTitle>주제 추가</SubTitle>
-        </HeaderLeft>
-        <HeaderRight>
-          <AvatarGroup
-            max={3}
-            style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}
-          >
-            <Avatar
-              style={{ width: '25px', height: '25px' }}
-              variant="rounded"
-              alt="Remy Sharp"
-              src="/static/images/avatar/1.jpg"
-            />
-            <Avatar
-              style={{ width: '25px', height: '25px' }}
-              variant="rounded"
-              alt="Remy Sharp"
-              alt="Travis Howard"
-              src="/static/images/avatar/2.jpg"
-            />
-            <Avatar
-              style={{ width: '25px', height: '25px' }}
-              variant="rounded"
-              alt="Remy Sharp"
-              alt="Cindy Baker"
-              src="/static/images/avatar/3.jpg"
-            />
-            <Avatar
-              style={{ width: '25px', height: '25px' }}
-              variant="rounded"
-              alt="Remy Sharp"
-              alt="Agnes Walker"
-              src="/static/images/avatar/4.jpg"
-            />
-          </AvatarGroup>
-          <PersonAddIcon style={{ color: 'gray', marginRight: '20px' }} />
-          <ErrorOutlineIcon style={{ color: 'gray' }} />
-        </HeaderRight>
-      </Header>
-      <Divider />
+      {!(curTab === '0' || curTab === '1') && roomDetails && roomMessages && (
+        <>
+          <Header>
+            <HeaderLeft>
+              <Title>#{roomDetails?.data().name}</Title>
+              <SubTitle>{roomDetails?.data().explanation}</SubTitle>
+            </HeaderLeft>
+            <HeaderRight>
+              <AvatarGroup
+                max={3}
+                style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}
+              >
+                {roomUsers?.docs.map((doc) => {
+                  const { user, userImage } = doc.data();
 
-      <ChatMessages></ChatMessages>
+                  return (
+                    <Avatar
+                      style={{ width: '25px', height: '25px' }}
+                      variant="rounded"
+                      alt={user}
+                      src={userImage}
+                    />
+                  );
+                })}
+              </AvatarGroup>
+              <PersonAddIcon style={{ color: 'gray', marginRight: '20px' }} />
+              <ErrorOutlineIcon style={{ color: 'gray' }} />
+            </HeaderRight>
+          </Header>
+          <Divider />
 
-      <ChatInput></ChatInput>
+          <ChatMessages>
+            {roomMessages?.docs.map((doc) => {
+              const { message, timestamp, user, userImage } = doc.data();
+
+              return (
+                <Message
+                  key={doc.id}
+                  message={message}
+                  timestamp={timestamp}
+                  user={user}
+                  userImage={userImage}
+                />
+              );
+            })}
+            <ChatBottom ref={chatRef} />
+          </ChatMessages>
+
+          <ChatInput
+            chatRef={chatRef}
+            channelName={roomDetails?.data().name}
+            channelId={curTab}
+          ></ChatInput>
+        </>
+      )}
     </ChatContainer>
   );
 }
@@ -93,5 +127,14 @@ const SubTitle = styled.div`
   color: #808080;
 `;
 const ChatMessages = styled.div`
-  /* height: 760px; */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 64px;
+  bottom: 109px;
+  overflow-x: hidden;
+  overflow-y: auto;
+`;
+const ChatBottom = styled.div`
+  padding-bottom: 0px;
 `;

@@ -8,7 +8,7 @@ export const settingSlice = createSlice({
     isSidebarModalOpen: false,
     isChannelAddModalOpen: false,
     isChannelAddDropdownOpen: false,
-    curTab: 0,
+    curTab: '0',
     isChannelTabOpen: false,
     isDMTabOpen: false
   },
