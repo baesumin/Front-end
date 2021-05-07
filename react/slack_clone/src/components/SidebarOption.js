@@ -17,18 +17,20 @@ function SidebarOption({ Icon, title, id }) {
   const [roomUsers] = useCollection(
     curTab && db.collection('rooms').doc(curTab).collection('users')
   );
-  const [isFirst, setIsFirst] = useState(true);
+  const [isFirst, setIsFirst] = useState(false);
 
   useEffect(() => {
-    roomUsers?.docs.map((doc) => {
-      const { uid } = doc.data();
-
-      if (curUser.uid === uid) {
-        setIsFirst(false);
-      }
-      console.log(isFirst);
+    setIsFirst(true, () => {
+      roomUsers?.docs.find((doc) => {
+        const { uid } = doc.data();
+        console.log(`${uid}  ${curUser.uid}`);
+        if (curUser.uid === uid) {
+          setIsFirst(false);
+        }
+      });
     });
-  }, [curTab]);
+    console.log(isFirst);
+  }, [roomUsers]);
 
   const targetUser = () => {
     if (isFirst) {
@@ -49,7 +51,6 @@ function SidebarOption({ Icon, title, id }) {
           userImage: curUser.photoURL
         });
     }
-    setIsFirst(true);
   };
 
   return (
