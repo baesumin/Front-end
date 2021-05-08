@@ -17,8 +17,8 @@ import userReducer from './user';
 const persistConfig = {
   key: 'root',
   storage: storage,
-  blacklist: ['settingReducer'],
-  whitelist: ['userReducer']
+  blacklist: ['settingReducer', 'userReducer'],
+  whitelist: []
   // stateReconciler: autoMergeLevel2
 };
 

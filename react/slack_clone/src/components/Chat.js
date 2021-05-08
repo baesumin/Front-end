@@ -36,13 +36,9 @@ function Chat() {
   useEffect(() => {
     const unsubscribe = () => {
       chatRef?.current?.scrollIntoView(true);
-
-      if (saveTime !== 'NaN') {
-        dispatch(setCurTime(saveTime));
-      }
     };
     return unsubscribe();
-  }, [curTab, loading, roomMessages]);
+  }, [curTab, loading]);
 
   const getMessages = () => {};
 
@@ -82,13 +78,9 @@ function Chat() {
           <ChatMessages>
             {roomMessages?.docs.map((doc) => {
               const { message, timestamp, user, userImage } = doc.data();
-
-              if (saveTime === 'NaN') {
-                saveTime = curTime;
-              }
-              if (saveTime != new Date(timestamp?.toDate()).getMinutes().toString()) {
-                saveTime = new Date(timestamp?.toDate()).getMinutes().toString();
-
+              if (isNaN(new Date(timestamp?.toDate()).getUTCMinutes())) return;
+              if (saveTime != new Date(timestamp?.toDate()).getUTCMinutes()) {
+                saveTime = new Date(timestamp?.toDate()).getUTCMinutes();
                 return (
                   <Message
                     key={doc.id}
@@ -167,5 +159,9 @@ const ChatMessages = styled.div`
   overflow-y: auto;
 `;
 const ChatBottom = styled.div`
-  padding-bottom: 0px;
+  position: relative;
+  border: 1px solid green;
+  bottom: 0px;
+
+  padding-bottom: 36px;
 `;
