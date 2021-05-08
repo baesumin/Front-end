@@ -1,17 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  isAvatarModalOpen: false,
+  isInputModalOpen: false,
+  isSidebarModalOpen: false,
+  isChannelAddModalOpen: false,
+  isChannelAddDropdownOpen: false,
+  curTab: '0',
+  isChannelTabOpen: false,
+  isDMTabOpen: false,
+  curTime: '0'
+};
+
 export const settingSlice = createSlice({
   name: 'setting',
-  initialState: {
-    isAvatarModalOpen: false,
-    isInputModalOpen: false,
-    isSidebarModalOpen: false,
-    isChannelAddModalOpen: false,
-    isChannelAddDropdownOpen: false,
-    curTab: '0',
-    isChannelTabOpen: false,
-    isDMTabOpen: false
-  },
+  initialState: initialState,
   reducers: {
     InputModalOpen: (state, action) => {
       state.isInputModalOpen = action.payload;
@@ -36,6 +39,12 @@ export const settingSlice = createSlice({
     },
     DMTabClick: (state) => {
       state.isDMTabOpen = !state.isDMTabOpen;
+    },
+    SetReset: (state) => {
+      Object.assign(state, initialState);
+    },
+    setCurTime: (state, action) => {
+      state.curTime = action.payload;
     }
   }
 });
@@ -48,7 +57,9 @@ export const {
   ChannelAddDropdownOpen,
   SelectTab,
   ChannelTabClick,
-  DMTabClick
+  DMTabClick,
+  SetReset,
+  setCurTime
 } = settingSlice.actions;
 
 export default settingSlice.reducer;

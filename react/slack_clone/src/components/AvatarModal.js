@@ -5,7 +5,7 @@ import Avatar from '@material-ui/core/Avatar';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { logout, Activate } from '../redux/user';
-import { AvatarModalOpen } from '../redux/setting';
+import { AvatarModalOpen, SetReset } from '../redux/setting';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -50,6 +50,7 @@ export default function AvatarModal() {
     }
     auth.signOut();
     dispatch(AvatarModalOpen(false));
+    dispatch(SetReset());
   };
   return (
     <ModalContainer>

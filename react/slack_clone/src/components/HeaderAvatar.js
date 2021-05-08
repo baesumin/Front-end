@@ -61,7 +61,7 @@ export default function BadgeAvatars() {
               variant="rounded"
               alt={curUser?.displayName}
               src={curUser?.photoURL}
-              style={{ backgroundColor: '#0089D2' }}
+              // style={{ backgroundColor: '#0089D2' }}
             />
           </Container>
         </StyledBadge>

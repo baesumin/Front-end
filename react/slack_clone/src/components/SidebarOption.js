@@ -10,31 +10,33 @@ import firebase from 'firebase';
 
 function SidebarOption({ Icon, title, id }) {
   const dispatch = useDispatch();
-  const { curTab } = useSelector((state) => state.setting);
+  const { curTab, isChannelTabOpen } = useSelector((state) => state.setting);
   const [GoogleUser] = useAuthState(auth);
   const { user } = useSelector((state) => state.user);
   const curUser = GoogleUser ? GoogleUser : user;
   const [roomUsers] = useCollection(
-    curTab && db.collection('rooms').doc(curTab).collection('users')
+    id && db.collection('rooms').doc(id).collection('users')
   );
-  const [isFirst, setIsFirst] = useState(false);
+  //const [isFirst, setIsFirst] = useState(false);
+  let isFirst = false;
 
-  useEffect(() => {
-    setIsFirst(true, () => {
-      roomUsers?.docs.find((doc) => {
-        const { uid } = doc.data();
-        console.log(`${uid}  ${curUser.uid}`);
-        if (curUser.uid === uid) {
-          setIsFirst(false);
-        }
-      });
+  const promise = async () => {
+    isFirst = true;
+
+    await roomUsers?.docs.map((doc) => {
+      const { uid } = doc.data();
+      if (curUser.uid === uid) {
+        isFirst = false;
+      }
     });
-    console.log(isFirst);
-  }, [roomUsers]);
+  };
+  const targetUser = async () => {
+    if (id == '0' || id == '1') {
+      return;
+    }
+    await promise();
 
-  const targetUser = () => {
     if (isFirst) {
-      console.log(isFirst);
       db.collection('rooms').doc(id).collection('users').add({
         user: curUser.displayName,
         userImage: curUser.photoURL,
@@ -51,14 +53,15 @@ function SidebarOption({ Icon, title, id }) {
           userImage: curUser.photoURL
         });
     }
+    isFirst = false;
   };
 
   return (
     <SidebarOptionContainer
+      isChannelTabOpen={isChannelTabOpen}
       onClick={() => {
         dispatch(SelectTab(id));
         dispatch(setTitle(title));
-
         targetUser();
       }}
       curTab={curTab}
@@ -82,6 +85,15 @@ const SidebarOptionContainer = styled.div`
   display: flex;
   align-items: center;
   font-size: 12px;
+
+  display: ${(props) => {
+    if (props.id == '0' || props.id == '1') {
+      return '';
+    }
+    if (!props.isChannelTabOpen && props.curTab != props.id) {
+      return 'none';
+    }
+  }};
   color: ${(props) => {
     if (props.id === props.curTab) return 'white';
     else return '#b7a5b7';

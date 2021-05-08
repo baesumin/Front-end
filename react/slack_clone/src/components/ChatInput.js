@@ -2,15 +2,17 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { auth, db } from '../firebase';
 import firebase from 'firebase';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { setCurTime, curTime } from '../redux/setting';
 
 function ChatInput({ channelName, channelId, chatRef }) {
   const [GoogleUser] = useAuthState(auth);
   const { user, isActivate } = useSelector((state) => state.user);
   const curUser = GoogleUser ? GoogleUser : user;
   const [input, setInput] = useState('');
-  const { curTab } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { curTab, curTime } = useSelector((state) => state.user);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -28,7 +30,9 @@ function ChatInput({ channelName, channelId, chatRef }) {
         user: curUser.displayName,
         userImage: curUser.photoURL
       })
-      .then(() => chatRef.current.scrollIntoView(true));
+      .then(() => {
+        chatRef.current.scrollIntoView(true);
+      });
 
     setInput('');
   };

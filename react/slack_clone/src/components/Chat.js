@@ -6,15 +6,17 @@ import { AvatarGroup } from '@material-ui/lab';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import ChatInput from './ChatInput';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../firebase';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import Message from './Message';
+import { setCurTime } from '../redux/setting';
 // import { Message } from '@material-ui/icons';
 
 function Chat() {
+  const dispatch = useDispatch();
   const chatRef = useRef(null);
-  const { curTab } = useSelector((state) => state.setting);
+  const { curTime, curTab } = useSelector((state) => state.setting);
   const [curTitle, setCurTitle] = useState('');
   const [curSubTitle, setCurSubTitle] = useState('');
   const [roomDetails] = useDocument(curTab && db.collection('rooms').doc(curTab));
@@ -29,10 +31,20 @@ function Chat() {
         .collection('messages')
         .orderBy('timestamp', 'asc')
   );
+  let saveTime = '';
 
   useEffect(() => {
-    chatRef?.current?.scrollIntoView(true);
-  }, [curTab, loading]);
+    const unsubscribe = () => {
+      chatRef?.current?.scrollIntoView(true);
+
+      if (saveTime !== 'NaN') {
+        dispatch(setCurTime(saveTime));
+      }
+    };
+    return unsubscribe();
+  }, [curTab, loading, roomMessages]);
+
+  const getMessages = () => {};
 
   return (
     <ChatContainer>
@@ -71,15 +83,34 @@ function Chat() {
             {roomMessages?.docs.map((doc) => {
               const { message, timestamp, user, userImage } = doc.data();
 
-              return (
-                <Message
-                  key={doc.id}
-                  message={message}
-                  timestamp={timestamp}
-                  user={user}
-                  userImage={userImage}
-                />
-              );
+              if (saveTime === 'NaN') {
+                saveTime = curTime;
+              }
+              if (saveTime != new Date(timestamp?.toDate()).getMinutes().toString()) {
+                saveTime = new Date(timestamp?.toDate()).getMinutes().toString();
+
+                return (
+                  <Message
+                    key={doc.id}
+                    message={message}
+                    timestamp={timestamp}
+                    user={user}
+                    userImage={userImage}
+                    change={true}
+                  />
+                );
+              } else {
+                return (
+                  <Message
+                    key={doc.id}
+                    message={message}
+                    timestamp={timestamp}
+                    user={user}
+                    userImage={userImage}
+                    change={false}
+                  />
+                );
+              }
             })}
             <ChatBottom ref={chatRef} />
           </ChatMessages>

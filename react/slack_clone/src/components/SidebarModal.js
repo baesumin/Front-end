@@ -4,13 +4,21 @@ import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { logout } from '../redux/user';
-import { SidebarModalOpen } from '../redux/setting';
+import {
+  SidebarModalOpen,
+  SetReset,
+  ChannelAddDropdownOpen,
+  ChannelAddModalOpen
+} from '../redux/setting';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../firebase';
 
 const useDetectOutsideClick = (el, initialState) => {
   const [isActive, setIsActive] = useState(initialState);
   const dispatch = useDispatch();
+  const { isChannelAddDropdownOpen, isChannelAddModalOpen } = useSelector(
+    (state) => state.setting
+  );
 
   useEffect(() => {
     const onClick = (e) => {
@@ -46,6 +54,7 @@ export default function SidebarModal() {
     }
     auth.signOut();
     dispatch(SidebarModalOpen(false));
+    dispatch(SetReset());
   };
 
   return (
@@ -82,7 +91,15 @@ export default function SidebarModal() {
             <MenuOption>
               <Divider style={{ marginBottom: '10px' }} />
               <Detail>테스트에 사용자 초대</Detail>
-              <Detail>채널 생성</Detail>
+              <Detail
+                onClick={(e) => {
+                  dispatch(ChannelAddModalOpen(true));
+                  dispatch(ChannelAddDropdownOpen(false));
+                  dispatch(SidebarModalOpen(false));
+                }}
+              >
+                채널 생성
+              </Detail>
               <Divider style={{ marginBottom: '10px', marginTop: '6px' }} />
               <Detail>환경설정</Detail>
               <Detail>

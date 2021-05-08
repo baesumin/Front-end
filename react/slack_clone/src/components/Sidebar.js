@@ -91,11 +91,9 @@ function Sidebar() {
         </ChannelContainer>
 
         <ChannelDetail>
-          {isChannelTabOpen
-            ? channels?.docs.map((doc) => (
-                <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
-              ))
-            : null}
+          {channels?.docs.map((doc) => (
+            <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
+          ))}
         </ChannelDetail>
 
         <hr />
