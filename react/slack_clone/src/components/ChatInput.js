@@ -59,21 +59,22 @@ const ChatInputContainer = styled.div`
   position: absolute;
   left: 20px;
   right: 20px;
-  bottom: 25px;
+  bottom: 24px;
   border: 1px solid gray;
   display: flex;
   border-radius: 5px;
-  height: 81px;
+  height: 79px;
+  overflow: hidden;
 
   > input {
     position: absolute;
     top: 1%;
     left: 0.09%;
-    width: 99.35%;
+    width: 99.34%;
     height: 34px;
     text-indent: 5px;
     font-size: 14px;
-    /* border: none; */
+    border: none;
     outline: none;
   }
 `;
@@ -81,8 +82,9 @@ const InputOption = styled.div`
   position: absolute;
   bottom: 1%;
   left: 0.05%;
-  width: 99.7%;
+  width: 99.8%;
   height: 38px;
-  border: 1px solid red;
-  border-radius: 5px;
+  border-top: 1px solid #dddddd;
+
+  background-color: #f8f8f8;
 `;

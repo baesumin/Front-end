@@ -41,6 +41,19 @@ function Chat() {
   return (
     <ChatContainer>
       <>
+        {curTab === '2' && (
+          <>
+            <Header>
+              <HeaderLeft>
+                <Title>{title}</Title>
+              </HeaderLeft>
+            </Header>
+            <Divider />
+            <Calendar>
+              <CalendarHeader>일정</CalendarHeader>
+            </Calendar>
+          </>
+        )}
         {(curTab === '0' || curTab === '1') && (
           <>
             <Header>
@@ -71,80 +84,82 @@ function Chat() {
             )}
           </>
         )}
-        {!(curTab === '0' || curTab === '1') && roomDetails && roomMessages && (
-          <>
-            <Header>
-              <HeaderLeft>
-                <Title>#{roomDetails?.data().name}</Title>
-                <SubTitle>{roomDetails?.data().explanation}</SubTitle>
-              </HeaderLeft>
-              <HeaderRight>
-                <AvatarGroup
-                  max={3}
-                  style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}
-                >
-                  {roomUsers?.docs.map((doc) => {
-                    const { user, userImage } = doc.data();
+        {!(curTab === '0' || curTab === '1' || curTab === '2') &&
+          roomDetails &&
+          roomMessages && (
+            <>
+              <Header>
+                <HeaderLeft>
+                  <Title>#{roomDetails?.data().name}</Title>
+                  <SubTitle>{roomDetails?.data().explanation}</SubTitle>
+                </HeaderLeft>
+                <HeaderRight>
+                  <AvatarGroup
+                    max={3}
+                    style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}
+                  >
+                    {roomUsers?.docs.map((doc) => {
+                      const { user, userImage } = doc.data();
 
+                      return (
+                        <Avatar
+                          style={{ width: '25px', height: '25px' }}
+                          variant="rounded"
+                          alt={user}
+                          src={userImage}
+                        />
+                      );
+                    })}
+                  </AvatarGroup>
+                  <PersonAddIcon style={{ color: 'gray', marginRight: '20px' }} />
+                  <ErrorOutlineIcon style={{ color: 'gray' }} />
+                </HeaderRight>
+              </Header>
+              <Divider />
+
+              <ChatMessages>
+                {roomMessages?.docs.map((doc) => {
+                  const { message, timestamp, user, userImage, uid } = doc.data();
+                  if (isNaN(new Date(timestamp?.toDate()).getUTCMinutes())) return;
+                  if (
+                    saveTime != new Date(timestamp?.toDate()).getUTCMinutes() ||
+                    uid != saveUser
+                  ) {
+                    saveUser = uid;
+                    saveTime = new Date(timestamp?.toDate()).getUTCMinutes();
                     return (
-                      <Avatar
-                        style={{ width: '25px', height: '25px' }}
-                        variant="rounded"
-                        alt={user}
-                        src={userImage}
+                      <Message
+                        key={doc.id}
+                        message={message}
+                        timestamp={timestamp}
+                        user={user}
+                        userImage={userImage}
+                        change={true}
                       />
                     );
-                  })}
-                </AvatarGroup>
-                <PersonAddIcon style={{ color: 'gray', marginRight: '20px' }} />
-                <ErrorOutlineIcon style={{ color: 'gray' }} />
-              </HeaderRight>
-            </Header>
-            <Divider />
+                  } else {
+                    return (
+                      <Message
+                        key={doc.id}
+                        message={message}
+                        timestamp={timestamp}
+                        user={user}
+                        userImage={userImage}
+                        change={false}
+                      />
+                    );
+                  }
+                })}
+                <ChatBottom ref={chatRef} />
+              </ChatMessages>
 
-            <ChatMessages>
-              {roomMessages?.docs.map((doc) => {
-                const { message, timestamp, user, userImage, uid } = doc.data();
-                if (isNaN(new Date(timestamp?.toDate()).getUTCMinutes())) return;
-                if (
-                  saveTime != new Date(timestamp?.toDate()).getUTCMinutes() ||
-                  uid != saveUser
-                ) {
-                  saveUser = uid;
-                  saveTime = new Date(timestamp?.toDate()).getUTCMinutes();
-                  return (
-                    <Message
-                      key={doc.id}
-                      message={message}
-                      timestamp={timestamp}
-                      user={user}
-                      userImage={userImage}
-                      change={true}
-                    />
-                  );
-                } else {
-                  return (
-                    <Message
-                      key={doc.id}
-                      message={message}
-                      timestamp={timestamp}
-                      user={user}
-                      userImage={userImage}
-                      change={false}
-                    />
-                  );
-                }
-              })}
-              <ChatBottom ref={chatRef} />
-            </ChatMessages>
-
-            <ChatInput
-              chatRef={chatRef}
-              channelName={roomDetails?.data().name}
-              channelId={curTab}
-            ></ChatInput>
-          </>
-        )}
+              <ChatInput
+                chatRef={chatRef}
+                channelName={roomDetails?.data().name}
+                channelId={curTab}
+              ></ChatInput>
+            </>
+          )}
       </>
     </ChatContainer>
   );
@@ -186,7 +201,7 @@ const ChatMessages = styled.div`
   left: 0;
   right: 0;
   top: 64px;
-  bottom: 109px;
+  bottom: 106px;
   overflow-x: hidden;
   overflow-y: auto;
 `;
@@ -258,4 +273,22 @@ const SavedItem = styled.div`
     letter-spacing: -1px;
     font-weight: 500;
   }
+`;
+const Calendar = styled.div`
+  position: absolute;
+  display: flex;
+  right: 0;
+  left: 0;
+  top: 64px;
+  bottom: 0;
+  margin-left: 40px;
+  margin-top: 40px;
+  border: 1px solid red;
+`;
+const CalendarHeader = styled.div`
+  position: absolute;
+
+  font-size: 48px;
+
+  border: 1px solid black;
 `;

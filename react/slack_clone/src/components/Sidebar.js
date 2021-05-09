@@ -21,6 +21,7 @@ import ChannelAddDropdown from './ChannelAddDropdown';
 import ChannelAddModal from './ChannelAddModal';
 import { db } from '../firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
 function Sidebar() {
   const {
@@ -67,6 +68,7 @@ function Sidebar() {
         <hr />
         <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" id={'0'} />
         <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" id={'1'} />
+        <SidebarOption Icon={CalendarTodayIcon} title="일정" id={'2'} />
         <More>
           <MoreVertIcon style={{ padding: 10 }} />더 보기
         </More>

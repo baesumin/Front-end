@@ -80,7 +80,7 @@ const Menu = styled.div`
   border-radius: 7px;
   background-color: white;
   position: fixed;
-  top: 240px;
+  top: 265px;
   left: 215px;
   right: 0;
   width: 200px;
