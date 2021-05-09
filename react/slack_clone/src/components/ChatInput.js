@@ -1,18 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { auth, db } from '../firebase';
 import firebase from 'firebase';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { setCurTime, curTime } from '../redux/setting';
 
 function ChatInput({ channelName, channelId, chatRef }) {
   const [GoogleUser] = useAuthState(auth);
-  const { user, isActivate } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const curUser = GoogleUser ? GoogleUser : user;
   const [input, setInput] = useState('');
-  const dispatch = useDispatch();
-  const { curTab, curTime } = useSelector((state) => state.user);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -28,7 +25,8 @@ function ChatInput({ channelName, channelId, chatRef }) {
         message: input,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         user: curUser.displayName,
-        userImage: curUser.photoURL
+        userImage: curUser.photoURL,
+        uid: curUser.uid
       })
       .then(() => {
         chatRef.current.scrollIntoView(true);
@@ -48,8 +46,9 @@ function ChatInput({ channelName, channelId, chatRef }) {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyPress={handleKeyPress}
-        placeholder={`#${channelName} 메시지 보내기`}
+        placeholder={`#${channelName}에게 메시지 보내기`}
       />
+      <InputOption></InputOption>
     </ChatInputContainer>
   );
 }
@@ -68,12 +67,22 @@ const ChatInputContainer = styled.div`
 
   > input {
     position: absolute;
-    border: 1px solid green;
     top: 1%;
-    left: 0.1%;
-    width: 99%;
-    height: 38px;
+    left: 0.09%;
+    width: 99.35%;
+    height: 34px;
+    text-indent: 5px;
+    font-size: 14px;
     /* border: none; */
     outline: none;
   }
+`;
+const InputOption = styled.div`
+  position: absolute;
+  bottom: 1%;
+  left: 0.05%;
+  width: 99.7%;
+  height: 38px;
+  border: 1px solid red;
+  border-radius: 5px;
 `;

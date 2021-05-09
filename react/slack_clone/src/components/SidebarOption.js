@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ function SidebarOption({ Icon, title, id }) {
   const [roomUsers] = useCollection(
     id && db.collection('rooms').doc(id).collection('users')
   );
-  //const [isFirst, setIsFirst] = useState(false);
+
   let isFirst = false;
 
   const promise = async () => {

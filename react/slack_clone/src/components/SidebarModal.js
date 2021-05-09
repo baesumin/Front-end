@@ -16,9 +16,6 @@ import { auth } from '../firebase';
 const useDetectOutsideClick = (el, initialState) => {
   const [isActive, setIsActive] = useState(initialState);
   const dispatch = useDispatch();
-  const { isChannelAddDropdownOpen, isChannelAddModalOpen } = useSelector(
-    (state) => state.setting
-  );
 
   useEffect(() => {
     const onClick = (e) => {

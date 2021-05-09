@@ -1,12 +1,9 @@
 import { Avatar } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { curTime, setCurTime } from '../redux/setting';
 
 function Message({ message, timestamp, user, userImage, change }) {
-  const { curTime } = useSelector((state) => state.setting);
-  const dispatch = useDispatch();
   const setTime = (date) => {
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -44,7 +41,6 @@ function Message({ message, timestamp, user, userImage, change }) {
     );
   };
 
-  // console.log(`${curTime} / ${new Date().toString}`);
   return <MessageContainer>{change ? b() : a()}</MessageContainer>;
 }
 
@@ -60,6 +56,9 @@ const MessageContainer = styled.div`
   > img {
     height: 36px;
     border-radius: 5px;
+  }
+  :hover {
+    background-color: #f8f8f8;
   }
 `;
 const MessageInfo = styled.div`
