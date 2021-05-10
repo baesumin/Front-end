@@ -11,6 +11,7 @@ import { db } from '../firebase';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import Message from './Message';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
 function Chat() {
   const chatRef = useRef(null);
@@ -50,7 +51,26 @@ function Chat() {
             </Header>
             <Divider />
             <Calendar>
-              <CalendarHeader>일정</CalendarHeader>
+              <CalendarHeader>
+                <CalendarTitle>
+                  <CalendarTodayIcon />
+                  &nbsp;일정
+                </CalendarTitle>
+                <CalendarSubTitle>
+                  <p>작업 목록 템플릿을 사용하면 개인 작업을 기록할 수 있습니다.</p>
+                  <p>이 보드에 새 작업을 직접 생성하려면 + 새 작업을 클릭하세요.</p>
+                  <p>
+                    기존 작업을 클릭하면 추가 컨텍스트 또는 하위 작업을 추가할 수
+                    있습니다.
+                  </p>
+                </CalendarSubTitle>
+              </CalendarHeader>
+              <CalendarMain>
+                &nbsp;
+                <BodyContainer>
+                  <Divider />
+                </BodyContainer>
+              </CalendarMain>
             </Calendar>
           </>
         )}
@@ -288,7 +308,35 @@ const Calendar = styled.div`
 const CalendarHeader = styled.div`
   position: absolute;
 
-  font-size: 48px;
-
   border: 1px solid black;
+`;
+const CalendarTitle = styled.div`
+  font-size: 40px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  > .MuiSvgIcon-root {
+    font-size: 40px;
+  }
+`;
+const CalendarSubTitle = styled.div`
+  font-size: 15px;
+  margin-left: 5px;
+  letter-spacing: -0.5px;
+`;
+const CalendarMain = styled.div`
+  border: 1px solid green;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 114px;
+  bottom: 0;
+`;
+const BodyContainer = styled.div`
+  border: 1px solid blue;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
