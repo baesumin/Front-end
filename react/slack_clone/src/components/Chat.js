@@ -36,7 +36,9 @@ function Chat() {
   let saveTime = '';
   let saveUser = '';
 
-  const onDragEnd = (result) => {};
+  const onDragEnd = (result) => {
+    console.log('drag end');
+  };
 
   useEffect(() => {
     const unsubscribe = () => {
