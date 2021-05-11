@@ -12,6 +12,9 @@ import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import Message from './Message';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import { DragDropContext } from 'react-beautiful-dnd';
+import initialData from './initial-data';
+import Column from './Column';
 
 function Chat() {
   const chatRef = useRef(null);
@@ -29,8 +32,11 @@ function Chat() {
         .collection('messages')
         .orderBy('timestamp', 'asc')
   );
+  const _initialstate = initialData;
   let saveTime = '';
   let saveUser = '';
+
+  const onDragEnd = (result) => {};
 
   useEffect(() => {
     const unsubscribe = () => {
@@ -65,16 +71,24 @@ function Chat() {
                   </p>
                 </CalendarSubTitle>
               </CalendarHeader>
-              <CalendarMain>
-                &nbsp;
-                <BodyContainer>
-                  <A>
-                    <Divider style={{ marginBottom: '10px' }} />할 일
-                  </A>
-                  <B />
-                  <B />
-                </BodyContainer>
-              </CalendarMain>
+              <DragDropContext onDragEnd={onDragEnd}>
+                <CalendarMain>
+                  <BodyContainer>
+                    {/* <Divider style={{ marginBottom: '10px' }} /> */}
+                    {/* <A>할 일</A>
+                    <B />
+                    <B /> */}
+                    {_initialstate.columnOrder.map((columnId) => {
+                      const column = _initialstate.columns[columnId];
+                      const tasks = column.taskIds.map(
+                        (taskId) => _initialstate.tasks[taskId]
+                      );
+
+                      return <Column key={column.id} column={column} tasks={tasks} />;
+                    })}
+                  </BodyContainer>
+                </CalendarMain>
+              </DragDropContext>
             </Calendar>
           </>
         )}
