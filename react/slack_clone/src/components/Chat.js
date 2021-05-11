@@ -68,7 +68,11 @@ function Chat() {
               <CalendarMain>
                 &nbsp;
                 <BodyContainer>
-                  <Divider />
+                  <A>
+                    <Divider style={{ marginBottom: '10px' }} />할 일
+                  </A>
+                  <B />
+                  <B />
                 </BodyContainer>
               </CalendarMain>
             </Calendar>
@@ -332,11 +336,19 @@ const CalendarMain = styled.div`
   top: 114px;
   bottom: 0;
 `;
-const BodyContainer = styled.div`
-  border: 1px solid blue;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+const BodyContainer = styled.div``;
+const A = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 5px;
+  width: 260px;
+  height: 80px;
+`;
+const B = styled.div`
+  width: 260px;
+  height: 80px;
+  margin-top: 10px;
+  border: 1px solid green;
 `;
