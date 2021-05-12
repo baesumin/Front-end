@@ -12,9 +12,23 @@ import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import Message from './Message';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import { DragDropContext } from 'react-beautiful-dnd';
-import initialData from './initial-data';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Column from './Column';
+import initialData from './initial-data';
+const todos = [
+  { id: '1', title: '공부' },
+  { id: '2', title: '헬스' },
+  { id: '3', title: '독서' },
+  { id: '4', title: '산책' },
+  { id: '5', title: '요리' }
+];
+const todos2 = [
+  { id: '1', title: '공부2' },
+  { id: '2', title: '헬스2' },
+  { id: '3', title: '독서2' },
+  { id: '4', title: '산책2' },
+  { id: '5', title: '요리2' }
+];
 
 function Chat() {
   const chatRef = useRef(null);
@@ -32,12 +46,22 @@ function Chat() {
         .collection('messages')
         .orderBy('timestamp', 'asc')
   );
+  const [_todos, setTodos] = useState(initialData);
+  const [_todos2, setTodos2] = useState(todos2);
   const _initialstate = initialData;
+
   let saveTime = '';
   let saveUser = '';
 
   const onDragEnd = (result) => {
-    console.log('drag end');
+    console.log('onDragEnd');
+    // if (!result.destination) return;
+    // console.log(result);
+    // const items = [..._todos];
+    // const [reorderedItem] = items.splice(result.source.index, 1);
+    // items.splice(result.destination.index, 0, reorderedItem);
+
+    // setTodos(items);
   };
 
   useEffect(() => {
@@ -73,13 +97,10 @@ function Chat() {
                   </p>
                 </CalendarSubTitle>
               </CalendarHeader>
+
               <DragDropContext onDragEnd={onDragEnd}>
                 <CalendarMain>
-                  <BodyContainer>
-                    {/* <Divider style={{ marginBottom: '10px' }} /> */}
-                    {/* <A>할 일</A>
-                    <B />
-                    <B /> */}
+                  <BoxContainer>
                     {_initialstate.columnOrder.map((columnId) => {
                       const column = _initialstate.columns[columnId];
                       const tasks = column.taskIds.map(
@@ -88,7 +109,40 @@ function Chat() {
 
                       return <Column key={column.id} column={column} tasks={tasks} />;
                     })}
-                  </BodyContainer>
+                    {/* <Droppable droppableId="todos">
+                      {(provided) => (
+                        <BodyContainer
+                          className="todos"
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                        >
+                          <Divider
+                            style={{ marginBottom: '10px', backgroundColor: 'blue' }}
+                          />
+                          <A>할 일</A>
+
+                          {_todos.map(({ id, title }, index) => (
+                            <Draggable key={id} draggableId={id} index={index}>
+                              {(provided) => (
+                                <B
+                                  className="todos"
+                                  ref={provided.innerRef}
+                                  {...provided.dragHandleProps}
+                                  {...provided.draggableProps}
+                                >
+                                  <ul>
+                                    <li key={id}>{title}</li>
+                                  </ul>
+                                </B>
+                              )}
+                            </Draggable>
+                          ))}
+
+                          {provided.placeholder}
+                        </BodyContainer>
+                      )}
+                    </Droppable> */}
+                  </BoxContainer>
                 </CalendarMain>
               </DragDropContext>
             </Calendar>
@@ -323,7 +377,6 @@ const Calendar = styled.div`
   bottom: 0;
   margin-left: 40px;
   margin-top: 40px;
-  border: 1px solid red;
 `;
 const CalendarHeader = styled.div`
   position: absolute;
@@ -345,7 +398,7 @@ const CalendarSubTitle = styled.div`
   letter-spacing: -0.5px;
 `;
 const CalendarMain = styled.div`
-  border: 1px solid green;
+  border: 1px solid red;
   position: absolute;
   left: 0;
   right: 0;
@@ -367,4 +420,7 @@ const B = styled.div`
   height: 80px;
   margin-top: 10px;
   border: 1px solid green;
+`;
+const BoxContainer = styled.div`
+  display: flex;
 `;
