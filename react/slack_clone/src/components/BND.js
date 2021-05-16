@@ -1,6 +1,8 @@
 import { Divider } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
+import { db } from '../firebase';
 import Column from './Column';
 
 const initialData = {
@@ -32,6 +34,17 @@ const initialData = {
 };
 
 function BND() {
+  const [FColumns] = useCollection(
+    db
+      .collection('calendar')
+      .doc('calendarData')
+      .collection('columns')
+      .orderBy('index', 'asc')
+  );
+  const [FColumnOrder] = useDocument(db.collection('calendar').doc('calendarData'));
+  const [FTasks] = useCollection(
+    db.collection('calendar').doc('calendarData').collection('tasks')
+  );
   const [_initialstate, setInitialstate] = useState(initialData);
 
   const onDragEnd = (result) => {
@@ -48,6 +61,12 @@ function BND() {
     ) {
       return;
     }
+
+    // const start = source.droppableId;
+    // const finish = destination.droppableId;
+    // if (start === finish) {
+
+    // }
 
     const start = _initialstate.columns[source.droppableId];
     const finish = _initialstate.columns[destination.droppableId];
@@ -70,6 +89,7 @@ function BND() {
         }
       };
       setInitialstate(newState);
+      console.log(newState);
       return;
     }
     // Moving from one list to another
@@ -100,11 +120,28 @@ function BND() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {_initialstate.columnOrder.map((columnId) => {
+      {/* {_initialstate.columnOrder.map((columnId) => {
         const column = _initialstate.columns[columnId];
         const tasks = column.taskIds.map((taskId) => _initialstate.tasks[taskId]);
-
+        console.log(tasks);
         return <Column key={column.id} column={column} tasks={tasks} />;
+      })} */}
+      {FColumnOrder?.data().columnOrder.map((columnId) => {
+        const tasks = [];
+        let column = null;
+        FColumns?.docs.map((doc) => {
+          if (doc.data().id === columnId) {
+            doc.data().taskIds.map((taskId) => {
+              FTasks?.docs.map((task) => {
+                if (task.data().id === taskId) {
+                  tasks.push({ id: task.data().id, content: task.data().content });
+                }
+              });
+            });
+            column = doc;
+          }
+        });
+        return <Column key={column.id} column={column.data()} tasks={tasks} />;
       })}
     </DragDropContext>
   );
