@@ -4,7 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 
 function Task({ task, index, column, TaskClick }) {
   return (
-    <Draggable draggableId={task?.id} index={index}>
+    <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => (
         <Container
           onClick={() => {
@@ -15,7 +15,7 @@ function Task({ task, index, column, TaskClick }) {
           ref={provided.innerRef}
           isDragging={snapshot.isDragging}
         >
-          {task?.content}
+          {task.content}
         </Container>
       )}
     </Draggable>

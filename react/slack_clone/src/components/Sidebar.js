@@ -26,16 +26,14 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 function Sidebar() {
   const {
     isSidebarModalOpen,
-    isInputModalOpen,
+    // isInputModalOpen,
     isChannelAddDropdownOpen,
     isChannelAddModalOpen,
     isChannelTabOpen,
     isDMTabOpen
   } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
-  const [channels, loading, error] = useCollection(
-    db.collection('rooms').orderBy('name', 'asc')
-  );
+  const [channels] = useCollection(db.collection('rooms').orderBy('name', 'asc'));
 
   return (
     <>

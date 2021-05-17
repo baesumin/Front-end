@@ -31,7 +31,7 @@ function SidebarOption({ Icon, title, id }) {
     });
   };
   const targetUser = async () => {
-    if (id == '0' || id == '1' || id == '2') {
+    if (id === '0' || id === '1' || id === '2') {
       return;
     }
     await promise();
@@ -87,10 +87,10 @@ const SidebarOptionContainer = styled.div`
   font-size: 12px;
 
   display: ${(props) => {
-    if (props.id == '0' || props.id == '1' || props.id == '2') {
+    if (props.id === '0' || props.id === '1' || props.id === '2') {
       return '';
     }
-    if (!props.isChannelTabOpen && props.curTab != props.id) {
+    if (!props.isChannelTabOpen && props.curTab !== props.id) {
       return 'none';
     }
   }};

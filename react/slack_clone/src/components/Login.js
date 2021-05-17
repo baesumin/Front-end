@@ -18,24 +18,24 @@ function Login() {
   const [profilePic, setProfilePic] = useState('');
   const dispatch = useDispatch();
 
-  const Login = (e) => {
-    e.preventDefault();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userAuth) => {
-        dispatch(
-          login({
-            email: userAuth.user.email,
-            uid: userAuth.user.uid,
-            displayName: userAuth.user.displayName,
-            photoURL: userAuth.user.photoURL
-          })
-        );
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  };
+  // const Login = (e) => {
+  //   e.preventDefault();
+  //   auth
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then((userAuth) => {
+  //       dispatch(
+  //         login({
+  //           email: userAuth.user.email,
+  //           uid: userAuth.user.uid,
+  //           displayName: userAuth.user.displayName,
+  //           photoURL: userAuth.user.photoURL
+  //         })
+  //       );
+  //     })
+  //     .catch((error) => {
+  //       alert(error.message);
+  //     });
+  // };
   const register = () => {
     if (!name) {
       return alert('이름을 입력해주세요.');
@@ -80,11 +80,11 @@ function Login() {
         <LoginTitle>테스트에 로그인</LoginTitle>
         <LoginSubTitle>w1619832526-czh832082.slack.com</LoginSubTitle>
         <GoogleLogin onClick={googleLogin}>
-          <img src="/googleSVG.svg" style={{ width: '20px' }} />
+          <img alt="" src="/googleSVG.svg" style={{ width: '20px' }} />
           &nbsp;&nbsp;&nbsp;Google을(를) 사용하여 로그인
         </GoogleLogin>
         <AppleLogin>
-          <img src="/appleSVG.svg" style={{ width: '35px' }} />
+          <img alt="" src="/appleSVG.svg" style={{ width: '35px' }} />
           &nbsp;Apple을(를) 사용하여 로그인&nbsp;&nbsp;
         </AppleLogin>
         <Divider />

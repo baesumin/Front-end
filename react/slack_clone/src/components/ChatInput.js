@@ -36,7 +36,7 @@ function ChatInput({ channelName, channelId, chatRef }) {
   };
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      sendMessage(e);
+      if (input) sendMessage(e);
     }
   };
 

@@ -38,6 +38,7 @@ function Chat() {
     const unsubscribe = () => {
       chatRef?.current?.scrollIntoView(true);
     };
+
     return unsubscribe();
   }, [curTab, loading, roomMessages]);
 
@@ -112,8 +113,8 @@ function Chat() {
             <>
               <Header>
                 <HeaderLeft>
-                  <Title>#{roomDetails?.data().name}</Title>
-                  <SubTitle>{roomDetails?.data().explanation}</SubTitle>
+                  <Title>#{roomDetails?.data()?.name}</Title>
+                  <SubTitle>{roomDetails?.data()?.explanation}</SubTitle>
                 </HeaderLeft>
                 <HeaderRight>
                   <AvatarGroup
@@ -177,7 +178,7 @@ function Chat() {
 
               <ChatInput
                 chatRef={chatRef}
-                channelName={roomDetails?.data().name}
+                channelName={roomDetails?.data()?.name}
                 channelId={curTab}
               ></ChatInput>
             </>
@@ -240,7 +241,6 @@ const Mention = styled.div`
   right: 0;
   top: 64px;
   bottom: 0;
-
   > div {
     margin-top: 25px;
     font-size: 17px;
@@ -259,7 +259,6 @@ const Mention = styled.div`
     color: #0b4c8c;
     font-weight: 500;
     text-decoration: none;
-
     :hover {
       text-decoration: underline;
     }
@@ -276,12 +275,10 @@ const SavedItem = styled.div`
   top: 64px;
   bottom: 0;
   margin-bottom: 9px;
-
   > .MuiSvgIcon-root {
     color: #de4e32;
     font-size: 29px;
   }
-
   > div {
     margin-top: 7px;
     margin-bottom: 10px;
@@ -308,7 +305,6 @@ const Calendar = styled.div`
 `;
 const CalendarHeader = styled.div`
   position: absolute;
-
   border: 1px solid black;
 `;
 const CalendarTitle = styled.div`
@@ -332,6 +328,7 @@ const CalendarMain = styled.div`
   right: 0;
   top: 114px;
   bottom: 0;
+  overflow-x: auto;
 `;
 const BoxContainer = styled.div`
   display: flex;

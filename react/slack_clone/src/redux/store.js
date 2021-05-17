@@ -1,7 +1,7 @@
 import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
 import {
   persistReducer,
-  persistStore,
+  // persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -10,7 +10,7 @@ import {
   REGISTER
 } from 'reduxjs-toolkit-persist';
 import storage from 'reduxjs-toolkit-persist/lib/storage';
-import autoMergeLevel2 from 'reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel2';
+// import autoMergeLevel2 from 'reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel2';
 import settingReducer from './setting';
 import userReducer from './user';
 

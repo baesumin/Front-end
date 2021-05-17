@@ -25,7 +25,7 @@ function Column({ column, tasks, index, AddTask, TaskClick }) {
               >
                 {tasks.map((task, index) => (
                   <Task
-                    key={task?.id}
+                    key={task.id}
                     task={task}
                     index={index}
                     column={column}

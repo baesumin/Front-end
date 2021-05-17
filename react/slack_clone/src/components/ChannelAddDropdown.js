@@ -1,13 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { logout } from '../redux/user';
 import { ChannelAddDropdownOpen, ChannelAddModalOpen } from '../redux/setting';
 import { useDispatch, useSelector } from 'react-redux';
-import { auth } from '../firebase';
-import ChannelAddModal from './ChannelAddModal';
 
 const useDetectOutsideClick = (el, initialState) => {
   const [isActive, setIsActive] = useState(initialState);
@@ -38,10 +33,6 @@ const useDetectOutsideClick = (el, initialState) => {
 export default function ChannelAddDropdown() {
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
-  const { isChannelAddDropdownOpen, isChannelAddModalOpen } = useSelector(
-    (state) => state.setting
-  );
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, true);
 
   return (

@@ -45,7 +45,7 @@ function BND() {
   const [FTasks] = useCollection(
     db.collection('calendar').doc('calendarData').collection('tasks')
   );
-  const [_initialstate, setInitialstate] = useState();
+  const [_initialstate, setInitialstate] = useState(null);
   const [addClick, setAddClick] = useState(false);
   const [input, setInput] = useState('');
   const [FInitialData] = useDocument(db.collection('calendar').doc('one'));
@@ -60,7 +60,6 @@ function BND() {
   useEffect(() => {
     const setData = () => {
       if (_initialstate) db.collection('calendar').doc('one').set(_initialstate);
-      console.log(_initialstate);
     };
     return setData();
   }, [_initialstate]);
@@ -68,28 +67,17 @@ function BND() {
   const sendMessage = (e) => {
     e.preventDefault();
 
-    if (
-      !(
-        Object.keys(_initialstate).length === 0 &&
-        JSON.stringify(_initialstate) === JSON.stringify({})
-      )
-    ) {
-      const addCol = _initialstate?.columnOrder?.length;
+    const addCol = _initialstate.columnOrder.length;
 
-      const newState = {
-        ..._initialstate,
-        columns: {
-          ..._initialstate.columns,
-          [`column-${addCol + 1}`]: {
-            id: `column-${addCol + 1}`,
-            title: e.target.value,
-            taskIds: []
-          }
-        },
-        columnOrder: [..._initialstate.columnOrder, `column-${addCol + 1}`]
-      };
-      setInitialstate(newState);
-    }
+    const newState = {
+      ..._initialstate,
+      columns: {
+        ..._initialstate.columns,
+        [addCol]: { id: `${addCol}`, title: e.target.value, taskIds: [] }
+      },
+      columnOrder: [..._initialstate.columnOrder, `${addCol}`]
+    };
+    setInitialstate(newState);
 
     setInput('');
   };
@@ -112,13 +100,13 @@ function BND() {
       ..._initialstate,
       tasks: {
         ..._initialstate.tasks,
-        [`task-${addTask + 1}`]: { id: `task-${addTask + 1}`, content: '제목없음' }
+        [addTask]: { id: `${addTask}`, content: '제목없음' }
       },
       columns: {
         ..._initialstate.columns,
         [columnID]: {
           ..._initialstate.columns[columnID],
-          taskIds: [..._initialstate.columns[columnID].taskIds, `task-${addTask + 1}`]
+          taskIds: [..._initialstate.columns[columnID].taskIds, `${addTask}`]
         }
       }
     };
@@ -219,7 +207,7 @@ function BND() {
         <Droppable droppableId="all-columns" direction="horizontal" type="column">
           {(provided) => (
             <Container {...provided.droppableProps} ref={provided.innerRef}>
-              {_initialstate?.columnOrder?.map((columnId, index) => {
+              {_initialstate?.columnOrder.map((columnId, index) => {
                 const column = _initialstate?.columns[columnId];
                 const tasks = column?.taskIds?.map(
                   (taskId) => _initialstate.tasks[taskId]

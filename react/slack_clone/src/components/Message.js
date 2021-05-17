@@ -1,6 +1,5 @@
 import { Avatar } from '@material-ui/core';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 function Message({ message, timestamp, user, userImage, change }) {

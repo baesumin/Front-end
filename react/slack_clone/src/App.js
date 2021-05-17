@@ -12,7 +12,7 @@ import Chat from './components/Chat';
 
 function App() {
   const { user, title } = useSelector((state) => state.user);
-  const [googleUser, loading] = useAuthState(auth);
+  const [googleUser] = useAuthState(auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
