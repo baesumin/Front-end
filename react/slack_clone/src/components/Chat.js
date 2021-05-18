@@ -61,7 +61,10 @@ function Chat() {
                 </CalendarTitle>
                 <CalendarSubTitle>
                   <p>작업 목록 템플릿을 사용하면 개인 작업을 기록할 수 있습니다.</p>
-                  <p>이 보드에 새 작업을 직접 생성하려면 + 새 작업을 클릭하세요.</p>
+                  <p>
+                    이 보드에 새 작업을 직접 생성하려면 <strong>+ 그룹 추가</strong>를
+                    클릭하세요.
+                  </p>
                   <p>
                     기존 작업을 클릭하면 추가 컨텍스트 또는 하위 작업을 추가할 수
                     있습니다.
@@ -305,7 +308,7 @@ const Calendar = styled.div`
 `;
 const CalendarHeader = styled.div`
   position: absolute;
-  border: 1px solid black;
+  margin-left: 10px;
 `;
 const CalendarTitle = styled.div`
   font-size: 40px;
@@ -320,9 +323,14 @@ const CalendarSubTitle = styled.div`
   font-size: 15px;
   margin-left: 5px;
   letter-spacing: -0.5px;
+
+  > p > strong {
+    background-color: #ededeb;
+    color: #eb5757;
+    font-size: 14px;
+  }
 `;
 const CalendarMain = styled.div`
-  border: 1px solid red;
   position: absolute;
   left: 0;
   right: 0;

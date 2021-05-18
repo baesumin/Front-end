@@ -2,15 +2,41 @@ import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import styled from 'styled-components';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 import Column from './Column';
+import { v4 as uuidv4 } from 'uuid';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useSelector } from 'react-redux';
+import firebase from 'firebase';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 const initialData = {
   tasks: {
-    'task-1': { id: 'task-1', content: 'Take out the garbage' },
-    'task-2': { id: 'task-2', content: 'Watch my favorite show' },
-    'task-3': { id: 'task-3', content: 'Charge my phone' },
-    'task-4': { id: 'task-4', content: 'Cook dinner' }
+    'task-1': {
+      id: 'task-1',
+      content: '분리수거 하기',
+      name: '배수민',
+      timestamp: '2021년 05월 18일 오후 1:52'
+    },
+    'task-2': {
+      id: 'task-2',
+      content: '영화 감상',
+      name: '배수민',
+      timestamp: '2021년 05월 18일 오후 1:52'
+    },
+    'task-3': {
+      id: 'task-3',
+      content: '핸드폰 충전하기',
+      name: '배수민',
+      timestamp: '2021년 05월 18일 오후 1:52'
+    },
+    'task-4': {
+      id: 'task-4',
+      content: '저녁 차리기',
+      name: '배수민',
+      timestamp: '2021년 05월 18일 오후 1:52'
+    }
   },
   columns: {
     'column-1': {
@@ -34,21 +60,13 @@ const initialData = {
 };
 
 function BND() {
-  const [FColumns] = useCollection(
-    db
-      .collection('calendar')
-      .doc('calendarData')
-      .collection('columns')
-      .orderBy('index', 'asc')
-  );
-  const [FColumnOrder] = useDocument(db.collection('calendar').doc('calendarData'));
-  const [FTasks] = useCollection(
-    db.collection('calendar').doc('calendarData').collection('tasks')
-  );
   const [_initialstate, setInitialstate] = useState();
   const [addClick, setAddClick] = useState(false);
   const [input, setInput] = useState('');
   const [FInitialData] = useDocument(db.collection('calendar').doc('one'));
+  const [GoogleUser] = useAuthState(auth);
+  const { user } = useSelector((state) => state.user);
+  const curUser = GoogleUser ? GoogleUser : user;
 
   useEffect(() => {
     const fetchData = () => {
@@ -67,6 +85,24 @@ function BND() {
 
   const sendMessage = (e) => {
     e.preventDefault();
+    console.log(typeof _initialstate);
+    if (typeof _initialstate === 'undefined') {
+      const uuid = uuidv4();
+
+      const newState = {
+        columns: {
+          [uuid]: {
+            id: uuid,
+            title: e.target.value,
+            taskIds: []
+          }
+        },
+        columnOrder: [uuid]
+      };
+      setInitialstate(newState);
+
+      return;
+    }
 
     if (
       !(
@@ -74,19 +110,19 @@ function BND() {
         JSON.stringify(_initialstate) === JSON.stringify({})
       )
     ) {
-      const addCol = _initialstate?.columnOrder?.length;
+      const uuid = uuidv4();
 
       const newState = {
         ..._initialstate,
         columns: {
           ..._initialstate.columns,
-          [`column-${addCol + 1}`]: {
-            id: `column-${addCol + 1}`,
+          [uuid]: {
+            id: uuid,
             title: e.target.value,
             taskIds: []
           }
         },
-        columnOrder: [..._initialstate.columnOrder, `column-${addCol + 1}`]
+        columnOrder: [..._initialstate.columnOrder, uuid]
       };
       setInitialstate(newState);
     }
@@ -107,18 +143,24 @@ function BND() {
   const AddTask = (column) => {
     const columnID = column.id;
     console.log(_initialstate.columns[columnID].taskIds);
-    const addTask = Object.keys(_initialstate.tasks).length;
+
+    const uuid = uuidv4();
     const newState = {
       ..._initialstate,
       tasks: {
         ..._initialstate.tasks,
-        [`task-${addTask + 1}`]: { id: `task-${addTask + 1}`, content: '제목없음' }
+        [uuid]: {
+          id: uuid,
+          content: '제목없음',
+          name: curUser.displayName,
+          timestamp: moment().format('LLL')
+        }
       },
       columns: {
         ..._initialstate.columns,
         [columnID]: {
           ..._initialstate.columns[columnID],
-          taskIds: [..._initialstate.columns[columnID].taskIds, `task-${addTask + 1}`]
+          taskIds: [..._initialstate.columns[columnID].taskIds, uuid]
         }
       }
     };
@@ -158,12 +200,6 @@ function BND() {
     }
 
     // Moving from one list to same list
-
-    // const start = source.droppableId;
-    // const finish = destination.droppableId;
-    // if (start === finish) {
-    // }
-
     const start = _initialstate.columns[source.droppableId];
     const finish = _initialstate.columns[destination.droppableId];
 
@@ -254,24 +290,6 @@ function BND() {
           )}
         </AddGroup>
       </CalendarContainer>
-
-      {/* {FColumnOrder?.data().columnOrder.map((columnId) => {
-        const tasks = [];
-        let column = null;
-        FColumns?.docs.map((doc) => {
-          if (doc.data().id === columnId) {
-            doc.data().taskIds.map((taskId) => {
-              FTasks?.docs.map((task) => {
-                if (task.data().id === taskId) {
-                  tasks.push({ id: task.data().id, content: task.data().content });
-                }
-              });
-            });
-            column = doc;
-          }
-        });
-        return <Column key={column.id} column={column.data()} tasks={tasks} />;
-      })} */}
     </DragDropContext>
   );
 }
@@ -280,7 +298,6 @@ export default BND;
 
 const Container = styled.div`
   display: flex;
-  border: 1px solid red;
 `;
 const CalendarContainer = styled.div`
   display: flex;
@@ -306,6 +323,7 @@ const AddGroup = styled.div`
   }
 
   > p {
+    color: #aaa9a7;
     :hover {
       background-color: #efefef;
       border-radius: 5px;

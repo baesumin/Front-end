@@ -15,7 +15,10 @@ function Task({ task, index, column, TaskClick }) {
           ref={provided.innerRef}
           isDragging={snapshot.isDragging}
         >
-          {task?.content}
+          <TaskContent>{task?.content}</TaskContent>
+
+          <TaskInfo>{task?.timestamp}</TaskInfo>
+          <TaskName>{task?.name}</TaskName>
         </Container>
       )}
     </Draggable>
@@ -36,4 +39,20 @@ const Container = styled.div`
     cursor: pointer;
     background-color: #f4f4f3;
   }
+`;
+const TaskContent = styled.div`
+  border: 1px solid black;
+  display: inline-block;
+`;
+const TaskInfo = styled.div`
+  margin-top: 15px;
+  font-size: 12px;
+`;
+const TaskName = styled.div`
+  display: inline-block;
+  font-size: 12px;
+  background-color: pink;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 3px;
 `;

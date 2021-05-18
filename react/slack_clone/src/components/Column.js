@@ -48,9 +48,8 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   background-color: white;
-  border-radius: 2px;
+  border-radius: 5px;
   width: 220px;
-
   display: flex;
   flex-direction: column;
 `;
@@ -63,15 +62,25 @@ const TitleAddButton = styled.div`
   margin-right: 10px;
 
   > .MuiSvgIcon-root {
+    color: #aaa9a7;
     :hover {
       cursor: pointer;
+      background-color: #efefef;
+      border-radius: 5px;
     }
   }
 `;
-const TitleText = styled.h3`
+const TitleText = styled.div`
   padding: 8px;
+  font-size: 18px;
   overflow: hidden;
   max-width: 170px;
+
+  :hover {
+    cursor: pointer;
+    background-color: #efefef;
+    border-radius: 5px;
+  }
 `;
 const TaskList = styled.div`
   padding: 8px;
@@ -79,4 +88,5 @@ const TaskList = styled.div`
   background-color: ${(props) => (props.isDraggingOver ? 'skyblue' : 'inherit')};
   flex-grow: 1;
   min-height: 100px;
+  display: inline-block;
 `;
