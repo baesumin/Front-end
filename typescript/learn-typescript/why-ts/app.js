@@ -9,9 +9,31 @@ var address = document.querySelector('#address');
 // user data
 var user = {};
 
+/**
+ * @typedef {object} Adress
+ * @property {string} street
+ * @property {string} city
+ */
+
+/**
+ *
+ * @typedef {object} User
+ * @property {string} name
+ * @property {string} email
+ * @property {Adress} address
+ */
+
+/**
+ * @returns {Promise<User>}
+ */
+function fetchUser() {
+  return axios.get(url);
+}
+
 function startApp() {
-  axios
-    .get(url)
+  // axios
+  //   .get(url)
+  fetchUser()
     .then(function (response) {
       console.log(response);
       user = response.data;

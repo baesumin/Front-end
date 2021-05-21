@@ -3,11 +3,11 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    jest: true,
+    jest: true
   },
   extends: [
     'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
   plugins: ['prettier', '@typescript-eslint'],
   rules: {
@@ -20,13 +20,13 @@ module.exports = {
         tabWidth: 2,
         printWidth: 80,
         bracketSpacing: true,
-        arrowParens: 'avoid',
-      },
+        arrowParens: 'avoid'
+      }
     ],
     '@typescript-eslint/no-explicit-any': 'off',
-    'prefer-const': 'off',
+    'prefer-const': 'off'
   },
   parserOptions: {
-    parser: '@typescript-eslint/parser',
-  },
+    parser: '@typescript-eslint/parser'
+  }
 };
