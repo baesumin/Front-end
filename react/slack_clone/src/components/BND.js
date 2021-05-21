@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import firebase from 'firebase';
 import moment from 'moment';
 import 'moment/locale/ko';
+import randomColor from 'randomcolor';
 
 const initialData = {
   tasks: {
@@ -17,25 +18,29 @@ const initialData = {
       id: 'task-1',
       content: '분리수거 하기',
       name: '배수민',
-      timestamp: '2021년 05월 18일 오후 1:52'
+      timestamp: '2021년 05월 18일 오후 1:52',
+      color: 'pink'
     },
     'task-2': {
       id: 'task-2',
       content: '영화 감상',
       name: '배수민',
-      timestamp: '2021년 05월 18일 오후 1:52'
+      timestamp: '2021년 05월 18일 오후 1:52',
+      color: 'pink'
     },
     'task-3': {
       id: 'task-3',
       content: '핸드폰 충전하기',
       name: '배수민',
-      timestamp: '2021년 05월 18일 오후 1:52'
+      timestamp: '2021년 05월 18일 오후 1:52',
+      color: 'pink'
     },
     'task-4': {
       id: 'task-4',
       content: '저녁 차리기',
       name: '배수민',
-      timestamp: '2021년 05월 18일 오후 1:52'
+      timestamp: '2021년 05월 18일 오후 1:52',
+      color: 'pink'
     }
   },
   columns: {
@@ -58,6 +63,14 @@ const initialData = {
   // Facilitate reordering of the columns
   columnOrder: ['column-1', 'column-2', 'column-3']
 };
+const Todo = [
+  '공부 하기',
+  '밥 먹기',
+  '산책 하기',
+  '물 마시기',
+  '계단 오르기',
+  '영화 보기'
+];
 
 function BND() {
   const [_initialstate, setInitialstate] = useState();
@@ -77,8 +90,12 @@ function BND() {
 
   useEffect(() => {
     const setData = () => {
+      // db.runTransaction((transaction) => {
+      //   if (_initialstate)
+      //     //transaction.set(db.collection('calendar').doc('one'), _initialstate);
+      //     db.collection('calendar').doc('one').set(_initialstate);
+      // }).then(() => console.log(_initialstate));
       if (_initialstate) db.collection('calendar').doc('one').set(_initialstate);
-      console.log(_initialstate);
     };
     return setData();
   }, [_initialstate]);
@@ -151,9 +168,10 @@ function BND() {
         ..._initialstate.tasks,
         [uuid]: {
           id: uuid,
-          content: '제목없음',
+          content: Todo[Math.floor(Math.random() * 5)],
           name: curUser.displayName,
-          timestamp: moment().format('LLL')
+          timestamp: moment().format('LLL'),
+          color: randomColor({ luminosity: 'light' })
         }
       },
       columns: {

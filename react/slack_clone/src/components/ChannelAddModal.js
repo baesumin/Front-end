@@ -45,7 +45,8 @@ export default function ChannelAddModal() {
               message: `#${inputName}에 참여했습니다.`,
               timestamp: firebase.firestore.FieldValue.serverTimestamp(),
               user: curUser.displayName,
-              userImage: curUser.photoURL
+              userImage: curUser.photoURL,
+              uid: curUser.uid
             });
         });
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import CreateIcon from '@material-ui/icons/Create';
@@ -22,6 +22,13 @@ import ChannelAddModal from './ChannelAddModal';
 import { db } from '../firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+const initialState = {
+  mouseX: null,
+  mouseY: null
+};
 
 function Sidebar() {
   const {
@@ -34,13 +41,33 @@ function Sidebar() {
   } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
   const [channels] = useCollection(db.collection('rooms').orderBy('name', 'asc'));
+  const [state, setState] = useState(initialState);
+
+  const handleRightClick = (e) => {
+    e.preventDefault();
+    // e.stopPropagation();
+    setState(
+      {
+        mouseX: e.clientX - 2,
+        mouseY: e.clientY - 4
+      },
+      console.log(state)
+    );
+  };
+  const handleClose = () => {
+    setState(initialState);
+  };
+  const itemClick = (e) => {
+    console.log('itemClicked');
+    setState(initialState);
+  };
 
   return (
     <>
       {isChannelAddModalOpen ? <ChannelAddModal /> : null}
       {isChannelAddDropdownOpen ? <ChannelAddDropdown /> : null}
       {isSidebarModalOpen ? <SidebarModal /> : null}
-      <SidebarContainer>
+      <SidebarContainer onContextMenu={(e) => e.preventDefault()}>
         <SidebarHeader
           onClick={(e) => {
             e.stopPropagation();
@@ -64,58 +91,70 @@ function Sidebar() {
         </SidebarHeader>
 
         <hr />
-        <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" id={'0'} />
-        <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" id={'1'} />
-        <SidebarOption Icon={CalendarTodayIcon} title="일정" id={'2'} />
-        <More>
-          <MoreVertIcon style={{ padding: 10 }} />더 보기
-        </More>
-        <hr />
-        <ChannelContainer
-          onClick={() => {
-            dispatch(ChannelTabClick(!isChannelTabOpen));
-          }}
-          isChannelTabOpen={isChannelTabOpen}
-        >
-          <PlayArrowIcon style={{ padding: 10 }} />
-          채널
-          <span>
-            <AddIcon
-              onClick={(e) => {
-                e.stopPropagation();
-                dispatch(ChannelAddDropdownOpen(true));
-                console.log('채널+아이콘');
-              }}
-            />
-          </span>
-        </ChannelContainer>
 
-        <ChannelDetail>
-          {channels?.docs.map((doc) => (
-            <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
-          ))}
-        </ChannelDetail>
+        <>
+          <SidebarOption Icon={AlternateEmailIcon} title="멘션 및 반응" id={'0'} />
+          <SidebarOption Icon={BookmarkBorderIcon} title="저장된 항목" id={'1'} />
+          <SidebarOption Icon={CalendarTodayIcon} title="일정" id={'2'} />
+          <More>
+            <MoreVertIcon style={{ padding: 10 }} />더 보기
+          </More>
+          <hr />
+          <ChannelContainer
+            onClick={() => {
+              dispatch(ChannelTabClick(!isChannelTabOpen));
+            }}
+            isChannelTabOpen={isChannelTabOpen}
+          >
+            <PlayArrowIcon style={{ padding: 10 }} />
+            채널
+            <span>
+              <AddIcon
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch(ChannelAddDropdownOpen(true));
+                  console.log('채널+아이콘');
+                }}
+              />
+            </span>
+          </ChannelContainer>
 
-        <hr />
-        <DMContainer
-          onClick={() => {
-            dispatch(DMTabClick(!isDMTabOpen));
-          }}
-          isDMTabOpen={isDMTabOpen}
-        >
-          <PlayArrowIcon style={{ padding: 10 }} />
-          다이렉트 메시지
-          <span>
-            <AddIcon />
-          </span>
-        </DMContainer>
+          <ChannelDetail>
+            {channels?.docs.map((doc) => (
+              <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
+            ))}
+          </ChannelDetail>
+
+          <hr />
+          <DMContainer
+            onClick={() => {
+              dispatch(DMTabClick(!isDMTabOpen));
+            }}
+            isDMTabOpen={isDMTabOpen}
+          >
+            <PlayArrowIcon style={{ padding: 10 }} />
+            다이렉트 메시지
+            <span>
+              <AddIcon />
+            </span>
+          </DMContainer>
+        </>
       </SidebarContainer>
     </>
   );
 }
 
 export default Sidebar;
+const _Menu = styled(Menu)``;
+const _MenuItem = styled(MenuItem)`
+  border: 10px solid green;
+  color: #e01e5a;
 
+  :hover {
+    /* background-color: #e01e5a; */
+    color: #e01e5a;
+  }
+`;
 const SidebarContainer = styled.div`
   background-color: var(--slack-sidebar-color);
   margin-top: 36px;

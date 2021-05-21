@@ -18,7 +18,7 @@ function Task({ task, index, column, TaskClick }) {
           <TaskContent>{task?.content}</TaskContent>
 
           <TaskInfo>{task?.timestamp}</TaskInfo>
-          <TaskName>{task?.name}</TaskName>
+          <TaskName color={task?.color}>{task?.name}</TaskName>
         </Container>
       )}
     </Draggable>
@@ -41,7 +41,6 @@ const Container = styled.div`
   }
 `;
 const TaskContent = styled.div`
-  border: 1px solid black;
   display: inline-block;
 `;
 const TaskInfo = styled.div`
@@ -51,7 +50,7 @@ const TaskInfo = styled.div`
 const TaskName = styled.div`
   display: inline-block;
   font-size: 12px;
-  background-color: pink;
+  background-color: ${(props) => props.color};
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 3px;
