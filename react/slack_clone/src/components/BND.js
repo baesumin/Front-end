@@ -88,17 +88,17 @@ function BND() {
     return fetchData();
   }, [FInitialData]);
 
-  useEffect(() => {
-    const setData = () => {
-      // db.runTransaction((transaction) => {
-      //   if (_initialstate)
-      //     //transaction.set(db.collection('calendar').doc('one'), _initialstate);
-      //     db.collection('calendar').doc('one').set(_initialstate);
-      // }).then(() => console.log(_initialstate));
-      // if (_initialstate) db.collection('calendar').doc('one').set(_initialstate);
-    };
-    return setData();
-  }, [_initialstate]);
+  // useEffect(() => {
+  //   const setData = () => {
+  //     // db.runTransaction((transaction) => {
+  //     //   if (_initialstate)
+  //     //     //transaction.set(db.collection('calendar').doc('one'), _initialstate);
+  //     //     db.collection('calendar').doc('one').set(_initialstate);
+  //     // }).then(() => console.log(_initialstate));
+  //     // if (_initialstate) db.collection('calendar').doc('one').set(_initialstate);
+  //   };
+  //   return setData();
+  // }, [_initialstate]);
 
   const sendMessage = (e) => {
     e.preventDefault();

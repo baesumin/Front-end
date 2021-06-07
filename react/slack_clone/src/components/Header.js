@@ -28,7 +28,7 @@ function Header() {
                 dispatch(InputModalOpen(!isInputModalOpen));
               }}
               className="header_input"
-              value="테스트 검색"
+              value="테스트 검색!"
             />
           </HeaderSearch>
 
