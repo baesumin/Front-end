@@ -95,7 +95,7 @@ function BND() {
       //     //transaction.set(db.collection('calendar').doc('one'), _initialstate);
       //     db.collection('calendar').doc('one').set(_initialstate);
       // }).then(() => console.log(_initialstate));
-      if (_initialstate) db.collection('calendar').doc('one').set(_initialstate);
+      // if (_initialstate) db.collection('calendar').doc('one').set(_initialstate);
     };
     return setData();
   }, [_initialstate]);
@@ -116,7 +116,8 @@ function BND() {
         },
         columnOrder: [uuid]
       };
-      setInitialstate(newState);
+      if (newState) db.collection('calendar').doc('one').set(newState);
+      //setInitialstate(newState);
 
       return;
     }
@@ -141,7 +142,8 @@ function BND() {
         },
         columnOrder: [..._initialstate.columnOrder, uuid]
       };
-      setInitialstate(newState);
+      if (newState) db.collection('calendar').doc('one').set(newState);
+      //setInitialstate(newState);
     }
 
     setInput('');
@@ -182,7 +184,8 @@ function BND() {
         }
       }
     };
-    setInitialstate(newState);
+    if (newState) db.collection('calendar').doc('one').set(newState);
+    //setInitialstate(newState);
   };
   const TaskClick = (task, column) => {
     console.log(task);
@@ -213,7 +216,8 @@ function BND() {
         ..._initialstate,
         columnOrder: newColumnOrder
       };
-      setInitialstate(newState);
+      if (newState) db.collection('calendar').doc('one').set(newState);
+      //setInitialstate(newState);
       return;
     }
 
@@ -238,7 +242,8 @@ function BND() {
           [newColumn.id]: newColumn
         }
       };
-      setInitialstate(newState);
+      if (newState) db.collection('calendar').doc('one').set(newState);
+      //setInitialstate(newState);
       return;
     }
     // Moving from one list to another
@@ -264,7 +269,8 @@ function BND() {
         [newFinish.id]: newFinish
       }
     };
-    setInitialstate(newState);
+    if (newState) db.collection('calendar').doc('one').set(newState);
+    //setInitialstate(newState);
   };
 
   return (
