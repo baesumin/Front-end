@@ -88,17 +88,17 @@ function BND() {
     return fetchData();
   }, [FInitialData]);
 
-  // useEffect(() => {
-  //   const setData = () => {
-  //     // db.runTransaction((transaction) => {
-  //     //   if (_initialstate)
-  //     //     //transaction.set(db.collection('calendar').doc('one'), _initialstate);
-  //     //     db.collection('calendar').doc('one').set(_initialstate);
-  //     // }).then(() => console.log(_initialstate));
-  //     // if (_initialstate) db.collection('calendar').doc('one').set(_initialstate);
-  //   };
-  //   return setData();
-  // }, [_initialstate]);
+  useEffect(() => {
+    const setData = () => {
+      // db.runTransaction((transaction) => {
+      //   if (_initialstate)
+      //     //transaction.set(db.collection('calendar').doc('one'), _initialstate);
+      //     db.collection('calendar').doc('one').set(_initialstate);
+      // }).then(() => console.log(_initialstate));
+      if (_initialstate) db.collection('calendar').doc('one').set(_initialstate);
+    };
+    return setData();
+  }, [_initialstate]);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -116,8 +116,8 @@ function BND() {
         },
         columnOrder: [uuid]
       };
-      if (newState) db.collection('calendar').doc('one').set(newState);
-      //setInitialstate(newState);
+      // if (newState) db.collection('calendar').doc('one').set(newState);
+      setInitialstate(newState);
 
       return;
     }
@@ -142,8 +142,8 @@ function BND() {
         },
         columnOrder: [..._initialstate.columnOrder, uuid]
       };
-      if (newState) db.collection('calendar').doc('one').set(newState);
-      //setInitialstate(newState);
+      // if (newState) db.collection('calendar').doc('one').set(newState);
+      setInitialstate(newState);
     }
 
     setInput('');
@@ -184,8 +184,8 @@ function BND() {
         }
       }
     };
-    if (newState) db.collection('calendar').doc('one').set(newState);
-    //setInitialstate(newState);
+    // if (newState) db.collection('calendar').doc('one').set(newState);
+    setInitialstate(newState);
   };
   const TaskClick = (task, column) => {
     console.log(task);
@@ -216,8 +216,8 @@ function BND() {
         ..._initialstate,
         columnOrder: newColumnOrder
       };
-      if (newState) db.collection('calendar').doc('one').set(newState);
-      //setInitialstate(newState);
+      // if (newState) db.collection('calendar').doc('one').set(newState);
+      setInitialstate(newState);
       return;
     }
 
@@ -242,8 +242,8 @@ function BND() {
           [newColumn.id]: newColumn
         }
       };
-      if (newState) db.collection('calendar').doc('one').set(newState);
-      //setInitialstate(newState);
+      // if (newState) db.collection('calendar').doc('one').set(newState);
+      setInitialstate(newState);
       return;
     }
     // Moving from one list to another
@@ -269,8 +269,8 @@ function BND() {
         [newFinish.id]: newFinish
       }
     };
-    if (newState) db.collection('calendar').doc('one').set(newState);
-    //setInitialstate(newState);
+    // if (newState) db.collection('calendar').doc('one').set(newState);
+    setInitialstate(newState);
   };
 
   return (
