@@ -73,7 +73,7 @@ const Todo = [
 ];
 
 function BND() {
-  const [_initialstate, setInitialstate] = useState();
+  const [_initialstate, setInitialstate] = useState(initialData);
   const [addClick, setAddClick] = useState(false);
   const [input, setInput] = useState('');
   const [FInitialData] = useDocument(db.collection('calendar').doc('one'));
