@@ -5,5 +5,37 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" sizeSm="8" offsetSm="2" class="ion-text-center">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{loadedPlaces[0].title}}</ion-card-title>
+            <ion-card-subtitle
+              >{{loadedPlaces[0].price | currency}} / Night</ion-card-subtitle
+            >
+          </ion-card-header>
+          <ion-img [src]="loadedPlaces[0].imageUrl"></ion-img>
+          <ion-card-content>
+            <p>{{loadedPlaces[0].description}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" sizeSm="8" offsetSm="2" class="ion-text-center">
+        <ion-list>
+          <ion-item *ngFor="let place of loadedPlaces.slice(1)">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="place.imageUrl"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              <h2>{{place.title}}</h2>
+              <p>{{place.description}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
