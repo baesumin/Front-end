@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlacesService } from '../places.service';
 import { Place } from '../place.model';
 import { IonItemSliding } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-offers',
@@ -12,10 +12,16 @@ import { Router } from '@angular/router';
 export class OffersPage implements OnInit {
   offers: Place[];
 
-  constructor(private placesService: PlacesService, private router: Router) {}
+  constructor(
+    private placesService: PlacesService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.offers = this.placesService.places;
+    this.route.paramMap.subscribe(() => {
+      this.offers = this.placesService.places;
+    });
   }
 
   onEdit(offerId: string, slidingItem: IonItemSliding) {

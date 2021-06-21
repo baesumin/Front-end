@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PlacesService } from '../../places.service';
 
 @Component({
   selector: 'app-new-offer',
@@ -9,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class NewOfferPage implements OnInit {
   form: FormGroup;
 
-  constructor() {}
+  constructor(private placeService: PlacesService, private router: Router) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -40,6 +42,15 @@ export class NewOfferPage implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    console.log(this.form);
+    this.placeService.addPlace(
+      this.form.value.title,
+      this.form.value.descrpition,
+      +this.form.value.price,
+      new Date(this.form.value.dateFrom),
+      new Date(this.form.value.dateTo)
+    );
+    this.form.reset();
+    this.router.navigate(['/places/tabs/offers']);
+    console.log(this.placeService.places);
   }
 }

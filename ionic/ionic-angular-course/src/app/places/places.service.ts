@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 import { Injectable } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 import { Place } from './place.model';
 
 @Injectable({
@@ -15,7 +16,8 @@ export class PlacesService {
       'https://imgs.6sqft.com/wp-content/uploads/2014/06/21042533/Carnegie-Mansion-nyc.jpg',
       149.99,
       new Date('2019-01-01'),
-      new Date('2019-12-31')
+      new Date('2019-12-31'),
+      'abc'
     ),
     new Place(
       'p2',
@@ -24,7 +26,8 @@ export class PlacesService {
       'https://leadingestates.com/wp-content/uploads/2015/11/184-10-manhattan-01.jpg',
       189.99,
       new Date('2019-01-01'),
-      new Date('2019-12-31')
+      new Date('2019-12-31'),
+      'abc'
     ),
     new Place(
       'p3',
@@ -33,7 +36,8 @@ export class PlacesService {
       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/854fifthavenue-uppereastsidenewyork-tristan-harper-douglaselliman-photography-50524160-high-res-1493310151.jpg',
       189.99,
       new Date('2019-01-01'),
-      new Date('2019-12-31')
+      new Date('2019-12-31'),
+      'abc'
     ),
   ];
 
@@ -41,9 +45,29 @@ export class PlacesService {
     return [...this._places];
   }
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   getPlace(id: string) {
     return { ...this._places.find((p) => p.id === id) };
+  }
+
+  addPlace(
+    title: string,
+    description: string,
+    price: number,
+    dateFrom: Date,
+    dateTo: Date
+  ) {
+    const newPlace = new Place(
+      Math.random().toString(),
+      title,
+      description,
+      'https://leadingestates.com/wp-content/uploads/2015/11/184-10-manhattan-01.jpg',
+      price,
+      dateFrom,
+      dateTo,
+      this.authService.userId
+    );
+    this._places.push(newPlace);
   }
 }
