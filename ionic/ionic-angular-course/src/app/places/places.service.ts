@@ -51,6 +51,14 @@ export class PlacesService {
 
   constructor(private authService: AuthService, private http: HttpClient) {}
 
+  fetchPlaces() {
+    return this.http
+      .get(
+        'https://ionic-angular-course-75f24-default-rtdb.asia-southeast1.firebasedatabase.app/offered-places.json'
+      )
+      .pipe(map());
+  }
+
   getPlace(id: string) {
     return this.places.pipe(
       take(1),
