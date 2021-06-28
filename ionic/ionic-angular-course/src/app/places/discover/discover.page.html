@@ -15,14 +15,23 @@
     <ion-segment-button value="all">All Places</ion-segment-button>
     <ion-segment-button value="bookable"> Bookable Places</ion-segment-button>
   </ion-segment>
-  <ion-grid *ngIf="!relevantPlaces || relevantPlaces.length <=0">
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col size="12" sizeSm="8" offsetSm="2" class="ion-text-center">
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid
+    *ngIf="!isLoading && (!relevantPlaces || relevantPlaces.length <=0)"
+  >
     <ion-row>
       <ion-col size="12" sizeSm="8" offsetSm="2" class="ion-text-center">
         <p>There are no bookable places right now, please come back later!</p>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid *ngIf="relevantPlaces.length > 0">
+  <ion-grid *ngIf="!isLoading && relevantPlaces.length > 0">
     <ion-row>
       <ion-col size="12" sizeSm="8" offsetSm="2" class="ion-text-center">
         <ion-card>
