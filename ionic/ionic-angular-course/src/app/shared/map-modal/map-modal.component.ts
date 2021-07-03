@@ -13,7 +13,9 @@ export class MapModalComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.getGoogleMaps()
-      .then()
+      .then(googleMaps=>{
+        
+      })
       .catch((err) => {
         console.log(err);
       });
