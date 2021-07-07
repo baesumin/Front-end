@@ -11,34 +11,26 @@ import history from './history';
 import { ScreenConfig, Screen } from '../src/screens/ScreenElements';
 
 const App = () => {
-    return (
+  return (
+    <div>
+      <Router history={history}>
         <div>
-            <Router history={history}>
-                <div>
-                    <Header />
-                    <ScreenConfig>
-                        <Screen>
-                            <Switch>
-                                <Route path="/" exact component={HomeScreen} />
-                                <Route
-                                    path="/happydesign"
-                                    exact
-                                    component={HappyDesignScreen}
-                                />
-                                <Route
-                                    path="/community"
-                                    exact
-                                    component={CommunityScreen}
-                                />
-                                <Route path="/survey" exact component={SurveyScreen} />
-                                <Route path="/more" exact component={MoreScreen} />
-                            </Switch>
-                        </Screen>
-                    </ScreenConfig>
-                </div>
-            </Router>
+          <Header />
+          <ScreenConfig>
+            <Screen>
+              <Switch>
+                <Route path="/" exact component={HomeScreen} />
+                <Route path="/happydesign" exact component={HappyDesignScreen} />
+                <Route path="/community" exact component={CommunityScreen} />
+                <Route path="/survey" exact component={SurveyScreen} />
+                <Route path="/more" exact component={MoreScreen} />
+              </Switch>
+            </Screen>
+          </ScreenConfig>
         </div>
-    );
+      </Router>
+    </div>
+  );
 };
 
 export default App;

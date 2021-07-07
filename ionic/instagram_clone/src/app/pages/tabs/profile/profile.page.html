@@ -1,0 +1,127 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title color="dark" mode="md">
+      baesumin
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="dark">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="dark">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3" class="thumbnail">
+        <ion-fab vertical="bottom" horizontal="right">
+          <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <ion-thumbnail>
+          <img src="assets/imgs/1.jpg" />
+        </ion-thumbnail>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-label>
+          <strong>81</strong>
+          <p>
+            <ion-text color="medium">Posts</ion-text>
+          </p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-label>
+          <strong>23.6K</strong>
+          <p>
+            <ion-text color="medium">Followers</ion-text>
+          </p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-label>
+          <strong>81</strong>
+          <p>
+            <ion-text color="medium">Following</ion-text>
+          </p>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="marginTop">
+      <ion-col>
+        <ion-label>
+          baesumin
+          <ion-text color="medium" class="ion-margin-start info"
+            >YouTube Creator</ion-text
+          >
+          <ion-row>
+            <ion-text color="medium" class="ion-text-justify description">
+              Like to Code for mobile App and Web App Development - Experienced
+              Full Stack Developer.
+              <a href="https://github.com/baesumin">@baesumin</a>
+            </ion-text>
+          </ion-row>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="marginTop">
+      <ion-col size="4">
+        <ion-button
+          mode="ios"
+          expand="block"
+          size="small"
+          fill="outline"
+          color="medium"
+        >
+          <ion-text color="dark">Edit Profile</ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button
+          mode="ios"
+          expand="block"
+          size="small"
+          fill="outline"
+          color="medium"
+        >
+          <ion-text color="dark">Statistics</ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button
+          mode="ios"
+          expand="block"
+          size="small"
+          fill="outline"
+          color="medium"
+        >
+          <ion-text color="dark">Contact</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-slides [options]="slideOpts">
+        <ion-slide *ngFor="let item of stories; let i = index">
+          <ion-col>
+            <ion-thumbnail>
+              <ion-icon *ngIf="i === 0" name="add" color="dark"></ion-icon>
+              <img *ngIf="i > 0" [src]="item?.src" />
+            </ion-thumbnail>
+            <p>
+              <ion-text color="dark">{{item?.name}}</ion-text>
+            </p>
+          </ion-col>
+        </ion-slide>
+      </ion-slides>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -40,18 +40,24 @@ export class BookingService {
     dateTo: Date
   ) {
     let generatedId: string;
-    const newBooking = new Booking(
-      Math.random().toString(),
-      placeId,
-      this.authService.userId,
-      placeTitle,
-      placeImage,
-      firstName,
-      lastName,
-      guestNumber,
-      dateFrom,
-      dateTo
-    );
+    this.authService.userId.pipe(take(1)).subscribe((userId) => {
+      if (!userId) {
+        return;
+      }
+      const newBooking = new Booking(
+        Math.random().toString(),
+        placeId,
+        userId,
+        placeTitle,
+        placeImage,
+        firstName,
+        lastName,
+        guestNumber,
+        dateFrom,
+        dateTo
+      );
+    }); //15:265
+
     return this.http
       .post<{ name: string }>(
         'https://ionic-angular-course-75f24-default-rtdb.asia-southeast1.firebasedatabase.app/bookings.json',
