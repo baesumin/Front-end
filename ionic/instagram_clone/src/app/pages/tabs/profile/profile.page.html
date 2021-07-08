@@ -123,5 +123,70 @@
         </ion-slide>
       </ion-slides>
     </ion-row>
+
+    <ion-row class="images" (ionChange)="buttonsChanged($event)">
+      <ion-segment mode="md" [value]="buttonValue">
+        <ion-segment-button
+          [value]="item?.value"
+          *ngFor="let item of buttonItems"
+        >
+          <ion-icon
+            [name]="buttonValue === item?.value ? item?.icon : item?.icon + '-outline'"
+          ></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
   </ion-grid>
+
+  <div [ngSwitch]="buttonValue">
+    <ion-list lines="none" *ngSwitchCase="'grid'" class="photo-grid">
+      <div *ngFor="let item of posts;let i = index">
+        <ion-grid *ngIf="i%3 === 0" class="noPadding">
+          <ion-row *ngIf="i%9 === 0">
+            <ion-col size="8">
+              <div
+                class="image-container image-container1"
+                [style.background-image]="'url(' + item?.url +')'"
+              ></div>
+            </ion-col>
+            <ion-col size="4">
+              <div
+                *ngIf="posts[i + 1]"
+                class="image-container ct1"
+                [style.background-image]="'url(' + posts[i + 1]?.url +')'"
+              ></div>
+              <div
+                *ngIf="posts[i + 2]"
+                class="image-container ct2"
+                [style.background-image]="'url(' + posts[i + 2]?.url +')'"
+              ></div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="i%9 > 2">
+            <ion-col size="4">
+              <div
+                class="image-container"
+                [style.background-image]="'url(' + item?.url +')'"
+              ></div>
+            </ion-col>
+            <ion-col size="4">
+              <div
+                *ngIf="posts[i + 1]"
+                class="image-container"
+                [style.background-image]="'url(' + posts[i + 1]?.url +')'"
+              ></div>
+            </ion-col>
+            <ion-col size="4">
+              <div
+                *ngIf="posts[i + 2]"
+                class="image-container"
+                [style.background-image]="'url(' + posts[i + 2]?.url +')'"
+              ></div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-list>
+  </div>
 </ion-content>

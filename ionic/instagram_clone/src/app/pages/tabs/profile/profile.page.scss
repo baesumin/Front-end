@@ -120,4 +120,32 @@ ion-content {
       margin: 5px;
     }
   }
+
+  .photo-grid {
+    margin: 9px 5px 10vh 5px;
+    padding: 0;
+    border-radius: 20px;
+    ion-col {
+      padding: 2px;
+    }
+    .image-container {
+      background-size: cover;
+      min-height: 100px;
+    }
+    .image-container1 {
+      min-height: 200px;
+    }
+    .ct1 {
+      min-height: 98.5px;
+      margin-bottom: 2.5px;
+    }
+    .ct2 {
+      min-height: 99px;
+      margin-bottom: 2.5px;
+    }
+  }
+
+  .noPadding {
+    padding: 0;
+  }
 }

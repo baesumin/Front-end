@@ -1,7 +1,12 @@
 ion-tabs {
   ion-tab-bar {
-    border-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.925);
+    border-radius: 20px 20px 0 0;
     ion-tab-button {
+      --background: transparent;
       --color: var(--ion-color-medium);
       --color-selected: var(--ion-color-dark);
       ion-icon {

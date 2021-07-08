@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class ProfilePage implements OnInit {
   slideOpts = {};
   stories: any[] = [];
+  buttonValue = 'grid';
+  buttonItems: any[] = [];
+  posts: any[] = [];
 
   constructor() {}
 
@@ -25,6 +28,22 @@ export class ProfilePage implements OnInit {
       slidesPerView: this.checkScreen(),
       slideShadows: true,
     };
+    this.buttonItems = [
+      { value: 'grid', icon: 'grid' },
+      { value: 'reels', icon: 'film' },
+      { value: 'photos', icon: 'images' },
+    ];
+    this.posts = [
+      { id: 1, url: 'assets/imgs/posts/1.jpg' },
+      { id: 2, url: 'assets/imgs/posts/2.jpg' },
+      { id: 3, url: 'assets/imgs/posts/3.jpg' },
+      { id: 4, url: 'assets/imgs/posts/4.jpg' },
+      { id: 5, url: 'assets/imgs/posts/5.jpg' },
+      { id: 6, url: 'assets/imgs/posts/6.jpg' },
+      { id: 7, url: 'assets/imgs/posts/1.jpg' },
+      { id: 8, url: 'assets/imgs/posts/2.jpg' },
+      { id: 9, url: 'assets/imgs/posts/3.jpg' },
+    ];
   }
 
   checkScreen() {
@@ -46,5 +65,10 @@ export class ProfilePage implements OnInit {
   checkLength(val) {
     const length = this.stories.length;
     return val < length ? val : length;
+  }
+
+  buttonsChanged(event) {
+    console.log(event.detail.value);
+    this.buttonValue = event.detail.value;
   }
 }
