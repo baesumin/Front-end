@@ -1,11 +1,9 @@
-import React, { ReactElement, useState, useEffect, useRef } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 
 import { GradientBackground } from '@components';
 import styles from './single-player-game.styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Audio } from 'expo-av';
-import * as Haptics from 'expo-haptics';
 
 import { Board } from '@components';
 import {
@@ -15,7 +13,9 @@ import {
   getAvailableMoves,
   BoardState,
   isTerminal,
-  getBestMove
+  getBestMove,
+  Cell,
+  useSounds
 } from '@utils';
 
 export default function Game(): ReactElement {
@@ -29,8 +29,7 @@ export default function Game(): ReactElement {
     Math.random() < 0.5 ? 'HUMAN' : 'BOT'
   );
   const [isHumanMaximizing, setIsHumanMaximizing] = useState<boolean>(true);
-  const popSoundRef = useRef<Audio.Sound | null>(null);
-  const pop2SoundRef = useRef<Audio.Sound | null>(null);
+  const placySound = useSounds();
 
   const gameResult = isTerminal(state);
   // console.log('getBestMove', getBestMove(state, true));
@@ -41,10 +40,7 @@ export default function Game(): ReactElement {
     stateCopy[cell] = symbol;
     setState(stateCopy);
     try {
-      symbol === 'x'
-        ? popSoundRef.current?.replayAsync()
-        : pop2SoundRef.current?.replayAsync();
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      symbol === 'x' ? placySound('pop1') : placySound('pop2');
     } catch (error) {
       console.log(error);
     }
@@ -56,10 +52,32 @@ export default function Game(): ReactElement {
     setTurn('BOT');
   };
 
+  const getWinner = (winnerSymbol: Cell): 'HUMAN' | 'BOT' | 'DRAW' => {
+    if (winnerSymbol === 'x') {
+      return isHumanMaximizing ? 'HUMAN' : 'BOT';
+    }
+    if (winnerSymbol === 'o') {
+      return isHumanMaximizing ? 'BOT' : 'HUMAN';
+    }
+    return 'DRAW';
+  };
+
   useEffect(() => {
     if (gameResult) {
       // handle game finished
-      alert('Game Over');
+      const winner = getWinner(gameResult.winner);
+      if (winner === 'HUMAN') {
+        placySound('win');
+        alert('You Won');
+      }
+      if (winner === 'BOT') {
+        placySound('loss');
+        alert('You Lost');
+      }
+      if (winner === 'DRAW') {
+        placySound('draw');
+        alert('Draw');
+      }
     } else {
       if (turn === 'BOT') {
         if (isEmpty(state)) {
@@ -78,26 +96,6 @@ export default function Game(): ReactElement {
     }
   }, [state, turn]);
 
-  useEffect(() => {
-    //load sounds
-    const popSoundObject = new Audio.Sound();
-    const pop2SoundObject = new Audio.Sound();
-
-    const loadSounds = async () => {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      await popSoundObject.loadAsync(require('@assets/assets_pop_1.wav'));
-      popSoundRef.current = popSoundObject;
-      await pop2SoundObject.loadAsync(require('@assets/assets_pop_2.wav'));
-      pop2SoundRef.current = pop2SoundObject;
-    };
-    loadSounds();
-    return () => {
-      //unload sounds
-      popSoundObject && popSoundObject.unloadAsync();
-      pop2SoundObject && pop2SoundObject.unloadAsync();
-    };
-  }, []);
-
   return (
     <GradientBackground>
       <SafeAreaView style={styles.container}>
@@ -107,6 +105,7 @@ export default function Game(): ReactElement {
             handleOnCellPressed(index);
           }}
           state={state}
+          gameResult={gameResult}
           size={300}
         />
       </SafeAreaView>
