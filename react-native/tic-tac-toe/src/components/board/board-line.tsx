@@ -16,7 +16,6 @@ const style = StyleSheet.create({
   },
   dLine: {
     width: 2,
-
     top: 0,
     left: '50%'
   }

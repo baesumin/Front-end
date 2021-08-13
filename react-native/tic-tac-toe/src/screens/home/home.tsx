@@ -27,7 +27,7 @@ export default function Home({ navigation }: HomeProps): ReactElement {
             onPress={() => alert(true)}
             title="Login Player"
           />
-          <Button onPress={() => alert(true)} title="Settings" />
+          <Button onPress={() => navigation.navigate('Settings')} title="Settings" />
         </View>
       </ScrollView>
     </GradientBackground>

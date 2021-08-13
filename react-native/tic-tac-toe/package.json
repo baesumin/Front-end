@@ -24,7 +24,8 @@
     "react-native-web": "~0.13.12",
     "expo-linear-gradient": "~9.2.0",
     "expo-av": "~9.2.3",
-    "expo-haptics": "~10.1.0"
+    "expo-haptics": "~10.1.0",
+    "@react-native-async-storage/async-storage": "~1.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

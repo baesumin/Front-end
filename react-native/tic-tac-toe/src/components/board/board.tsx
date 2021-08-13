@@ -4,6 +4,7 @@ import { View, TouchableOpacity } from 'react-native';
 import Text from '../text/text';
 import { BoardState, BoardResult } from '@utils';
 import BoardLine from './board-line';
+import styles from './board.styles';
 
 type BoardProps = {
   state: BoardState;
@@ -22,29 +23,23 @@ export default function Board({
 }: BoardProps): ReactElement {
   return (
     <View
-      style={{
-        width: size,
-        height: size,
-        flexDirection: 'row',
-        flexWrap: 'wrap'
-      }}
+      style={[
+        styles.board,
+        {
+          width: size,
+          height: size
+        }
+      ]}
     >
       {state.map((cell, index) => {
         return (
           <TouchableOpacity
             disabled={cell !== null || disabled}
             onPress={() => onCellPressed && onCellPressed(index)}
-            style={{
-              width: '33.33333%',
-              height: '33.33333%',
-              backgroundColor: '#fff',
-              borderWidth: 1,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
+            style={[styles.cell, styles[`cell${index}` as 'cell']]}
             key={index}
           >
-            <Text style={{ fontSize: size / 8 }}>{cell}</Text>
+            <Text style={[styles.cellText, { fontSize: size / 7 }]}>{cell}</Text>
           </TouchableOpacity>
         );
       })}
