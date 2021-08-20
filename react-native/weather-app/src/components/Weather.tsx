@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { MaterialIcons as MaterialIconsT } from 'expo__vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export type WeatherProps = {

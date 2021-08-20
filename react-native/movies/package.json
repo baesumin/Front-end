@@ -8,11 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@types/expo__vector-icons": "^9.0.1",
-    "axios": "^0.21.1",
     "expo": "~42.0.1",
-    "expo-linear-gradient": "~9.2.0",
-    "expo-location": "~12.1.2",
     "expo-status-bar": "~1.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
