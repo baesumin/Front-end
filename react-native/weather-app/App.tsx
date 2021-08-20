@@ -5,7 +5,7 @@ import * as Location from 'expo-location';
 import axios from 'axios';
 import { Weather, WeatherProps } from './src/components/Weather';
 
-const API_KEY = 'b71a127e3290a87e85e0a0a49d91453d';
+const API_KEY = 'OPEN_WEATHER_TOKEN';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
