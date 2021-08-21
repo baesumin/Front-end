@@ -11,17 +11,15 @@ type MoviesProps = {
 };
 
 const Home = () => {
-  const [nowPlaying, setNowPlaying] = useState({
-    movies: [],
-    error: null
-  });
   const getData = async () => {
-    const data = await movieApi.nowPlaying();
-    console.log(data);
+    const [nowPlaying, error] = await movieApi.nowPlaying();
+    const [popular, popularError] = await movieApi.popular();
   };
+
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
       <Text>Movies</Text>
