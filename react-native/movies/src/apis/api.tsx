@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const TMDB_KEY = '1c4686fb63dc7e0e6d4c59ec8c5233dd';
 
-const makeRequest = (path, params) => {
+const makeRequest = (path: string, params = {}) => {
   axios.get(`https://api.themoviedb.org/3${path}`, {
     params: {
       ...params,
@@ -12,11 +12,11 @@ const makeRequest = (path, params) => {
 };
 
 export const movieApi = {
-  noPlaying: () => makeRequest('/movie/now_playing'),
+  nowPlaying: () => makeRequest('/movie/now_playing'),
   popular: () => makeRequest('/movie/popular'),
   upcoming: () => makeRequest('/movie/upcoming', { region: 'kr' }),
-  search: (query) => makeRequest('/search/movie', { query }),
-  movie: (id) => makeRequest(`/movie/${id}`),
+  search: (query: string) => makeRequest('/search/movie', { query }),
+  movie: (id: number) => makeRequest(`/movie/${id}`),
   discover: () => makeRequest('/discover/movie')
 };
 
@@ -25,6 +25,6 @@ export const tvApi = {
   thisWeek: () => makeRequest('tv/on_the_air'),
   topRated: () => makeRequest('tv/top_rated'),
   popular: () => makeRequest('tv/popular'),
-  search: (query) => makeRequest('search/tv', { query }),
-  show: (id) => makeRequest(`/tv/${id}`)
+  search: (query: string) => makeRequest('search/tv', { query }),
+  show: (id: number) => makeRequest(`/tv/${id}`)
 };
