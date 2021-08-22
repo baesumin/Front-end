@@ -3,15 +3,17 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
-import { movieApi } from '../apis/api';
-import { StackNavigatorParams } from '../navigation/Stack';
+import { movieApi } from '../../apis/api';
+import { StackNavigatorParams } from '../../navigation/Stack';
+import MoviesPresenter from './MoviesPresenter';
 
-type MoviesProps = {
-  navigation: StackNavigationProp<StackNavigatorParams, 'Movies'>;
-};
+// type MoviesProps = {
+//   navigation: StackNavigationProp<StackNavigatorParams, 'Movies'>;
+// };
 
 const Home = () => {
   const [movies, setMovies] = useState({
+    loading: true,
     nowPlaying: [],
     nowPlayingError: null,
     popular: [],
@@ -24,6 +26,7 @@ const Home = () => {
     const [popular, popularError] = await movieApi.popular();
     const [upcoming, upcomingError] = await movieApi.upcoming();
     setMovies({
+      loading: false,
       nowPlaying,
       nowPlayingError,
       popular,
@@ -37,11 +40,7 @@ const Home = () => {
     getData();
   }, []);
 
-  return (
-    <View style={{ flex: 1, backgroundColor: 'black' }}>
-      <Text style={{ color: 'white' }}>{movies.nowPlaying?.length}</Text>
-    </View>
-  );
+  return <MoviesPresenter {...movies} />;
 };
 
 export default Home;
