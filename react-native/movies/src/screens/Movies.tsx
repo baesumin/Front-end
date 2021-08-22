@@ -11,9 +11,26 @@ type MoviesProps = {
 };
 
 const Home = () => {
+  const [movies, setMovies] = useState({
+    nowPlaying: [],
+    nowPlayingError: null,
+    popular: [],
+    popularError: null,
+    upcoming: [],
+    upcomingError: null
+  });
   const getData = async () => {
-    const [nowPlaying, error] = await movieApi.nowPlaying();
+    const [nowPlaying, nowPlayingError] = await movieApi.nowPlaying();
     const [popular, popularError] = await movieApi.popular();
+    const [upcoming, upcomingError] = await movieApi.upcoming();
+    setMovies({
+      nowPlaying,
+      nowPlayingError,
+      popular,
+      popularError,
+      upcoming,
+      upcomingError
+    });
   };
 
   useEffect(() => {
@@ -22,7 +39,7 @@ const Home = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
-      <Text>Movies</Text>
+      <Text style={{ color: 'white' }}>{movies.nowPlaying?.length}</Text>
     </View>
   );
 };

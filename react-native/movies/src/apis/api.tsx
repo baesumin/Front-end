@@ -14,9 +14,10 @@ const makeRequest = (path: string, params = {}) => {
 const getAnything = async (path: string, params = {}) => {
   try {
     const {
-      data: { results }
+      data: { results },
+      data
     } = await makeRequest(path, params);
-    return [results, null];
+    return [results || data, null];
   } catch (error) {
     return [null, error];
   }
@@ -32,10 +33,10 @@ export const movieApi = {
 };
 
 export const tvApi = {
-  today: () => getAnything('tv/airing_today'),
-  thisWeek: () => getAnything('tv/on_the_air'),
-  topRated: () => getAnything('tv/top_rated'),
-  popular: () => getAnything('tv/popular'),
-  search: (query: string) => getAnything('search/tv', { query }),
+  today: () => getAnything('/tv/airing_today'),
+  thisWeek: () => getAnything('/tv/on_the_air'),
+  topRated: () => getAnything('/tv/top_rated'),
+  popular: () => getAnything('/tv/popular'),
+  search: (query: string) => getAnything('/search/tv', { query }),
   show: (id: number) => getAnything(`/tv/${id}`)
 };
