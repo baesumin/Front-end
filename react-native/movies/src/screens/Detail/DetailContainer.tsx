@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useLayoutEffect } from 'react';
+import * as WebBrowser from 'expo-web-browser';
 import { movieApi, tvApi } from '../../apis/api';
 import DetailPresenter from './DetailPresenter';
 
@@ -11,7 +12,6 @@ export default ({
     params: { isTv, id, title, backgroundImage, poster, votes, overview }
   }
 }) => {
-  const [loading, setLoading] = useState(true);
   const [detail, setDetail] = useState({
     loading: true,
     result: {
@@ -19,7 +19,10 @@ export default ({
       backgroundImage,
       poster,
       overview,
-      votes
+      votes,
+      videos: {
+        results: []
+      }
     }
   });
   const getData = async () => {
@@ -37,7 +40,6 @@ export default ({
         votes: getDetail.vote_average
       }
     });
-    setLoading(false);
   };
   useEffect(() => {
     getData();
@@ -45,5 +47,10 @@ export default ({
   useLayoutEffect(() => {
     navigation.setOptions({ title });
   });
-  return <DetailPresenter {...detail} />;
+
+  const openBrowser = async (url: string) => {
+    await WebBrowser.openBrowserAsync(url);
+  };
+
+  return <DetailPresenter openBrowser={openBrowser} {...detail} />;
 };

@@ -44,6 +44,7 @@ export default ({ movies, shows, keyword, onChange, onSubmit }: SearchPresenterP
           {movies.map((movie) => {
             return (
               <Vertical
+                isTv={false}
                 key={movie.id}
                 id={movie.id}
                 title={movie.title}
@@ -59,6 +60,7 @@ export default ({ movies, shows, keyword, onChange, onSubmit }: SearchPresenterP
           {shows.map((show) => {
             return (
               <Vertical
+                isTv={true}
                 key={show.id}
                 id={show.id}
                 title={show.name}
