@@ -1,4 +1,4 @@
-export const trimText = (text: string, limit: number) => {
+export const trimText = (text = '', limit: number) => {
   return text.length > limit ? `${text.slice(0, limit)}...` : text;
 };
 

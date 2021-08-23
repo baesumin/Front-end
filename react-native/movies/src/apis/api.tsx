@@ -28,7 +28,7 @@ export const movieApi = {
   popular: () => getAnything('/movie/popular'),
   upcoming: () => getAnything('/movie/upcoming', { region: 'kr' }),
   search: (query: string) => getAnything('/search/movie', { query }),
-  movie: (id: number) => getAnything(`/movie/${id}`),
+  movie: (id: number) => getAnything(`/movie/${id}`, { append_to_response: 'video' }),
   discover: () => getAnything('/discover/movie')
 };
 
@@ -38,9 +38,12 @@ export const tvApi = {
   topRated: () => getAnything('/tv/top_rated'),
   popular: () => getAnything('/tv/popular'),
   search: (query: string) => getAnything('/search/tv', { query }),
-  show: (id: number) => getAnything(`/tv/${id}`)
+  show: (id: number) => getAnything(`/tv/${id}`, { append_to_response: 'video' })
 };
 
-export const apiImage = (path: string) => {
-  return `https://image.tmdb.org/t/p/w500/${path}`;
+export const apiImage = (
+  path: string,
+  defaultPoster = 'https://images.unsplash.com/photo-1571847140471-1d7766e825ea?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=673&q=80'
+) => {
+  return path ? `https://image.tmdb.org/t/p/w500/${path}` : defaultPoster;
 };

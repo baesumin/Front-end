@@ -54,9 +54,8 @@ export default ({ navigation, route }: TabsProps) => {
         }
       })}
     >
-      <Tabs.Screen name="Tv" component={Tv} />
       <Tabs.Screen name="Movies" component={Movies} />
-
+      <Tabs.Screen name="Tv" component={Tv} />
       <Tabs.Screen name="Search" component={Search} />
       <Tabs.Screen name="Discovery" component={Favs} />
     </Tabs.Navigator>

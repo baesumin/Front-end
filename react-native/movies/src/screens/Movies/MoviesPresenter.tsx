@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Swiper from 'react-native-web-swiper';
-import { Dimensions, ScrollView } from 'react-native';
+import { Dimensions } from 'react-native';
 import Slide from '../../components/Movies/Slide';
-import Title from '../../components/Title';
 import Vertical from '../../components/Vertical';
 import Horizontal from '../../components/Horizontal';
 import ScrollContainer from '../../components/ScrollContainer';
@@ -26,6 +25,7 @@ type MoviesPresenterProps = {
   nowPlaying: movieProps[];
   popular: movieProps[];
   upcoming: movieProps[];
+  refreshFn: () => void;
 };
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
@@ -38,9 +38,19 @@ const SliderContainer = styled.View`
 
 const Container = styled.View``;
 
-export default ({ loading, nowPlaying, popular, upcoming }: MoviesPresenterProps) => {
+export default ({
+  refreshFn,
+  loading,
+  nowPlaying,
+  popular,
+  upcoming
+}: MoviesPresenterProps) => {
   return (
-    <ScrollContainer loading={loading}>
+    <ScrollContainer
+      refreshFn={refreshFn}
+      loading={loading}
+      contentContainerStyle={{ paddingTop: 10 }}
+    >
       <>
         <SliderContainer>
           <Swiper controlsEnabled={false} loop timeout={3}>

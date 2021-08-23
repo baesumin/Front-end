@@ -12,26 +12,34 @@ type showProps = {
   poster_path: string;
   name: string;
   vote_average: number;
+  overview: string;
 };
 
 type TvPresenterProps = {
   loading: boolean;
   popular: showProps[];
   topRated: showProps[];
+  today: showProps[];
+  refreshFn: () => void;
 };
 
 const Container = styled.View`
   margin-top: 30px;
 `;
 
-export default ({ loading, popular, topRated, today }: TvPresenterProps) => {
+export default ({ refreshFn, loading, popular, topRated, today }: TvPresenterProps) => {
   return (
-    <ScrollContainer loading={loading}>
+    <ScrollContainer
+      refreshFn={refreshFn}
+      loading={loading}
+      contentContainerStyle={{ paddingTop: 10 }}
+    >
       <Container>
         <HorizontalSlider title="Popular Shows">
           {popular.map((show) => {
             return (
               <Vertical
+                isTv={true}
                 id={show.id}
                 key={show.id}
                 poster={show.poster_path}
@@ -45,6 +53,7 @@ export default ({ loading, popular, topRated, today }: TvPresenterProps) => {
           {topRated.map((show) => {
             return (
               <Vertical
+                isTv={true}
                 id={show.id}
                 key={show.id}
                 poster={show.poster_path}
@@ -58,6 +67,7 @@ export default ({ loading, popular, topRated, today }: TvPresenterProps) => {
           {today.map((show) => {
             return (
               <Horizontal
+                isTv={true}
                 key={show.id}
                 id={show.id}
                 title={show.name}

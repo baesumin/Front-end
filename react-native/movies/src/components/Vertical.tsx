@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
@@ -11,6 +12,7 @@ type VerticalProps = {
   poster: string;
   title: string;
   votes: number;
+  isTv: boolean;
 };
 
 const Container = styled.View`
@@ -24,13 +26,23 @@ const Title = styled.Text`
   margin: 10px 0px 5px 0px;
 `;
 
-export default ({ id, poster, title, votes }: VerticalProps) => {
+export default ({ isTv = false, id, poster, title, votes }: VerticalProps) => {
+  const navigation = useNavigation();
+  const goToDetail = () => {
+    navigation.navigate('Detail', {
+      isTv,
+      id,
+      title,
+      votes,
+      poster
+    });
+  };
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={goToDetail}>
       <Container>
         <Poster url={poster} />
         <Title>{trimText(title, 10)}</Title>
-        <Votes votes={votes} />
+        {votes > 0 && <Votes votes={votes} />}
       </Container>
     </TouchableOpacity>
   );

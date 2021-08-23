@@ -10,7 +10,7 @@ type HorizontalSliderProps = {
 
 export default ({ title, children }: HorizontalSliderProps) => {
   return (
-    <>
+    <View>
       <Title title={title} />
       <ScrollView
         style={{ marginTop: 20, marginBottom: 40 }}
@@ -20,6 +20,6 @@ export default ({ title, children }: HorizontalSliderProps) => {
       >
         {children}
       </ScrollView>
-    </>
+    </View>
   );
 };
