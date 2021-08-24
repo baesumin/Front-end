@@ -29,21 +29,42 @@ const Poster = styled.Image`
 
 export default ({ results }) => {
   const [topIndex, setTopIndex] = useState(0);
+  const nextCard = () => {
+    setTopIndex((currentValue) => currentValue + 1);
+  };
   const position = useRef(new Animated.ValueXY()).current;
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderMove: (evt, { dx, dy }) => {
       position.setValue({ x: dx, y: dy });
     },
-    onPanResponderRelease: () => {
-      Animated.spring(position, {
-        toValue: {
-          x: 0,
-          y: 0
-        },
-        useNativeDriver: true,
-        bounciness: 20
-      }).start();
+    onPanResponderRelease: (evt, { dx, dy }) => {
+      if (dx >= 250) {
+        Animated.spring(position, {
+          toValue: {
+            x: WIDTH + 100,
+            y: dy
+          },
+          useNativeDriver: true
+        }).start(nextCard);
+      } else if (dx <= -250) {
+        Animated.spring(position, {
+          toValue: {
+            x: -WIDTH - 100,
+            y: dy
+          },
+          useNativeDriver: true
+        }).start(nextCard);
+      } else {
+        Animated.spring(position, {
+          toValue: {
+            x: 0,
+            y: 0
+          },
+          useNativeDriver: true,
+          bounciness: 20
+        }).start();
+      }
     }
   });
   const rotationValues = position.x.interpolate({
@@ -64,7 +85,9 @@ export default ({ results }) => {
   return (
     <Container>
       {results.map((result, index) => {
-        if (index === topIndex) {
+        if (index < topIndex) {
+          return null;
+        } else if (index === topIndex) {
           return (
             <Card
               style={{
