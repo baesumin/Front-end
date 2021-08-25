@@ -6,7 +6,7 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import Stack from './src/navigation/Stack';
+import Stack from '@navigation/Stack';
 
 const cacheImages = (images: any) =>
   images.map((image: any) => {
