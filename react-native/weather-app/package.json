@@ -1,11 +1,14 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "homepage": "https://baesumin.github.io/weatherWeb/",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "deploy": "gh-pages -d web-build",
+    "predeploy": "expo build:web"
   },
   "dependencies": {
     "@types/expo__vector-icons": "^9.0.1",
@@ -23,6 +26,7 @@
     "@babel/core": "^7.9.0",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
+    "gh-pages": "^3.2.3",
     "typescript": "~4.0.0"
   },
   "private": true

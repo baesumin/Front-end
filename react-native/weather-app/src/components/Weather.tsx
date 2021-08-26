@@ -29,7 +29,7 @@ const weatherOptions = {
     iconName: 'weather-hail',
     gradient: ['#89F7FE', '#66A6FF'],
     title: 'Drizzle',
-    subtitle: 'Is like rain, but gay 🏳️‍🌈'
+    subtitle: 'Is like rain.'
   },
   Rain: {
     iconName: 'weather-rainy',
@@ -41,7 +41,7 @@ const weatherOptions = {
     iconName: 'weather-snowy',
     gradient: ['#7DE2FC', '#B9B6E5'],
     title: 'Cold as balls',
-    subtitle: 'Do you want to build a snowman? Fuck no.'
+    subtitle: 'Do you want to build a snowman? no.'
   },
   Atmosphere: {
     iconName: 'weather-hail',
@@ -51,13 +51,13 @@ const weatherOptions = {
     iconName: 'weather-sunny',
     gradient: ['#FF7300', '#FEF253'],
     title: 'Sunny as fuck',
-    subtitle: 'Go get your ass burnt'
+    subtitle: 'Go outside!'
   },
   Clouds: {
     iconName: 'weather-cloudy',
     gradient: ['#D7D2CC', '#304352'],
     title: 'Clouds',
-    subtitle: 'I know, fucking boring'
+    subtitle: 'I know, boring'
   },
   Mist: {
     iconName: 'weather-hail',
@@ -69,7 +69,7 @@ const weatherOptions = {
     iconName: 'weather-hail',
     gradient: ['#4DA0B0', '#D39D38'],
     title: 'Dusty',
-    subtitle: 'Thanks a lot China 🖕🏻'
+    subtitle: 'hails coming'
   },
   Haze: {
     iconName: 'weather-hail',
