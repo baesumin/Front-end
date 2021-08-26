@@ -164,9 +164,7 @@ function Login() {
               </SubTok>
             </div>
             <StartButton>
-              <a href="https://toktokmobile.slack.com/?redir=%2Fgantry%2Fclient%3Fselected_team_id%3DT020J8SURD3">
-                실행
-              </a>
+              <a href="#">실행</a>
             </StartButton>
           </TokTokWorkPlace>
         </WorkPlaceContainer>
