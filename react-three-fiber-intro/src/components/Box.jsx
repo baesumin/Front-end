@@ -6,7 +6,7 @@ import * as THREE from 'three';
 const Box = (props) => {
   const [ref, api] = useBox(() => ({ mass: 1, ...props }));
   //const ref = useRef();
-  const texture = useLoader(THREE.TextureLoader, '/wood.jpg');
+  const texture = useLoader(THREE.TextureLoader, process.env.PUBLIC_URL + '/wood.jpg');
 
   // useFrame((state) => {
   //   ref.current.rotation.y += 0.01;
