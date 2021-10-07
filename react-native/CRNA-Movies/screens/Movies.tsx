@@ -17,16 +17,10 @@ import Slide from '../components/Slide';
 import Poster from '../components/Poster';
 import HMedia from '../components/HMedia';
 import VMedia from '../components/VMedia';
-
-const API_KEY = '1c4686fb63dc7e0e6d4c59ec8c5233dd';
-
-const Container = styled.ScrollView``;
-
-const Loader = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+import { useInfiniteQuery, useQuery, useQueryClient } from 'react-query';
+import { moviesApi, MovieResponse, Movie } from '../api';
+import Loader from '../components/Loader';
+import HList from '../components/HList';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -45,56 +39,54 @@ const ListContainer = styled.View`
 const ComingSoonTitle = styled(ListTitle)`
   margin-bottom: 30px;
 `;
+const VSeparator = styled.View`
+  width: 20px;
+`;
+const HSeparator = styled.View`
+  height: 20px;
+`;
 
 const Movies = () => {
   const [refreshing, setRefreshing] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [nowPlaying, setNowPlaying] = useState([]);
-  const [upcoming, setUpcoming] = useState([]);
-  const [trending, setTrending] = useState([]);
-  const getTrending = async () => {
-    const { results } = await (
-      await fetch(
-        `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=en-US&page=1&region=KR`
-      )
-    ).json();
-    setTrending(results);
-  };
-  const getUpcoming = async () => {
-    const { results } = await (
-      await fetch(
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1&region=KR`
-      )
-    ).json();
-    setUpcoming(results);
-  };
-  const getNowPlaying = async () => {
-    const { results } = await (
-      await fetch(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1&region=KR`
-      )
-    ).json();
-    setNowPlaying(results);
-  };
-  const getData = async () => {
-    await Promise.all([getTrending(), getUpcoming(), getNowPlaying()]);
-    setLoading(false);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  const queryClient = useQueryClient();
+  const { isLoading: nowPlayingLoading, data: nowPlayingData } = useQuery<MovieResponse>(
+    ['movies', 'nowPlaying'],
+    moviesApi.nowPlaying
+  );
+  const {
+    isLoading: upcomingLoading,
+    data: upcomingData,
+    hasNextPage,
+    fetchNextPage
+  } = useInfiniteQuery<MovieResponse>(['movies', 'upcoming'], moviesApi.upcoming, {
+    getNextPageParam: (currentPage) => {
+      const nextPage = currentPage.page + 1;
+      return nextPage > currentPage.total_pages ? null : nextPage;
+    }
+  });
+  const { isLoading: trendingLoading, data: trendingData } = useQuery<MovieResponse>(
+    ['movies', 'trending'],
+    moviesApi.trending
+  );
+
   const onRefresh = async () => {
     setRefreshing(true);
-    await getData();
+    await queryClient.refetchQueries(['movies']);
     setRefreshing(false);
   };
 
+  const loading = nowPlayingLoading || upcomingLoading || trendingLoading;
+  const loadMore = () => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  };
+
   return loading ? (
-    <Loader>
-      <ActivityIndicator size="small" color="white" />
-    </Loader>
-  ) : (
+    <Loader />
+  ) : upcomingData ? (
     <FlatList
+      onEndReached={loadMore}
       onRefresh={onRefresh}
       refreshing={refreshing}
       ListHeaderComponent={() => (
@@ -112,51 +104,38 @@ const Movies = () => {
               height: SCREEN_HEIGHT / 4
             }}
           >
-            {nowPlaying.map((movie) => (
+            {nowPlayingData?.results.map((movie) => (
               <Slide
                 key={movie.id}
-                backdropPath={movie.backdrop_path}
+                backdropPath={movie.backdrop_path || ''}
+                posterPath={movie.poster_path || ''}
                 originalTitle={movie.original_title}
                 voteAverage={movie.vote_average}
                 overview={movie.overview}
-                posterPath={movie.poster_path}
+                fullData={movie}
               />
             ))}
           </Swiper>
-          <ListContainer>
-            <ListTitle>Trending Movies</ListTitle>
-            <TrendingScroll
-              data={trending}
-              horizontal
-              keyExtractor={(item) => item.id + ''}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ paddingHorizontal: 30 }}
-              ItemSeparatorComponent={() => <View style={{ width: 30 }} />}
-              renderItem={({ item }) => (
-                <VMedia
-                  posterPath={item.poster_path}
-                  originalTitle={item.original_title}
-                  voteAverage={item.vote_average}
-                />
-              )}
-            />
-          </ListContainer>
+          {trendingData ? (
+            <HList title="Trending Movie" data={trendingData.results} />
+          ) : null}
           <ComingSoonTitle>Coming soon</ComingSoonTitle>
         </>
       )}
-      data={upcoming}
-      keyExtractor={(item) => item.id + ''}
-      ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
+      data={upcomingData.pages.map((page) => page.results).flat()}
+      keyExtractor={(item: Movie) => item.id + ''}
+      ItemSeparatorComponent={HSeparator}
       renderItem={({ item }) => (
         <HMedia
-          posterPath={item.poster_path}
+          posterPath={item.poster_path || ''}
           originalTitle={item.original_title}
           overview={item.overview}
           releaseDate={item.release_date}
+          fullData={item}
         />
       )}
     />
-  );
+  ) : null;
 };
 
 export default Movies;
