@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import colors from '../colors';
 import { Ionicons } from '@expo/vector-icons';
+import { useDB } from '../context';
 
 const View = styled.View`
   flex: 1;
@@ -32,6 +33,9 @@ const BtnText = styled.Text`
 `;
 
 const Home = ({ navigation: { navigate } }) => {
+  const realm = useDB();
+  const [feelings, setFeelings] = useState(realm.objects('Feeling'));
+  console.log(feelings);
   return (
     <View>
       <Title>Home</Title>
