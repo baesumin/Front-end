@@ -9,6 +9,8 @@
   "dependencies": {
     "@react-native-firebase/app": "^12.9.0",
     "@react-native-firebase/auth": "^12.9.0",
+    "@react-navigation/native": "^6.0.5",
+    "@react-navigation/native-stack": "^6.2.3",
     "expo": "~42.0.1",
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
@@ -18,6 +20,7 @@
     "react-native": "~0.63.4",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-reanimated": "~2.2.0",
+    "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
     "react-native-unimodules": "0.14.10",
     "react-native-web": "~0.13.12"
