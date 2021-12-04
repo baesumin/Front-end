@@ -11,7 +11,7 @@ const Wrapper = styled.View`
 const Loader = () => {
   return (
     <Wrapper>
-      <ActivityIndicator color="white" />
+      <ActivityIndicator color="black" />
     </Wrapper>
   );
 };

@@ -3,13 +3,15 @@ import React, { useEffect, useLayoutEffect, useRef } from 'react';
 
 export const Camera = (props) => {
   const ref = useRef();
-  const { set, size } = useThree();
+  const { size } = useThree();
+  const set = useThree((state) => state.set);
 
   useLayoutEffect(() => {
     if (ref.current) {
       ref.current.aspect = size.width / size.height;
       ref.current.updateProjectionMatrix();
     }
+    console.log(ref.current);
   }, [size, props]);
 
   useEffect(() => {

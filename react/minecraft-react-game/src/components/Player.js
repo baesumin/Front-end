@@ -18,16 +18,22 @@ export const Player = (props) => {
   }));
 
   const velocity = useRef([0, 0, 0]);
+  const curPosition = useRef([0, 0, 0]);
+
   useEffect(() => {
     api.velocity.subscribe((v) => (velocity.current = v));
+    api.position.subscribe((p) => (curPosition.current = p));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [api.velocity]);
 
   useFrame(() => {
-    camera.position.copy(ref.current.position);
+    camera.position.copy(
+      new Vector3(curPosition.current[0], curPosition.current[1], curPosition.current[2])
+    );
     const direction = new Vector3();
 
-    const frontVector = new Vector3(0, 0, Number(moveBackward) - Number(moveForward));
-    const sideVector = new Vector3(Number(moveLeft) - Number(moveRight), 0, 0);
+    const frontVector = new Vector3(0, 0, (moveBackward ? 1 : 0) - (moveForward ? 1 : 0));
+    const sideVector = new Vector3((moveLeft ? 1 : 0) - (moveRight ? 1 : 0), 0, 0);
 
     direction
       .subVectors(frontVector, sideVector)
@@ -45,7 +51,9 @@ export const Player = (props) => {
   return (
     <>
       <PointerLockControls />
-      <mesh ref={ref} />
+      <mesh ref={ref}>
+        <boxBufferGeometry />
+      </mesh>
     </>
   );
 };

@@ -22,7 +22,7 @@ export const usePlayerControls = () => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      console.log(e.code);
+      //console.log(e.code);
       setMovement((m) => ({
         ...m,
         [moveFieldByKey(e.code)]: true

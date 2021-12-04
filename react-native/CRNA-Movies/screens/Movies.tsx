@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import Swiper from 'react-native-swiper';
+// import Swiper from 'react-native-swiper';
 import {
   ActivityIndicator,
   Dimensions,
@@ -81,6 +81,8 @@ const Movies = () => {
       fetchNextPage();
     }
   };
+  console.log(upcomingData);
+  
 
   return loading ? (
     <Loader />
@@ -91,7 +93,7 @@ const Movies = () => {
       refreshing={refreshing}
       ListHeaderComponent={() => (
         <>
-          <Swiper
+          {/* <Swiper
             horizontal
             loop
             autoplay
@@ -115,7 +117,7 @@ const Movies = () => {
                 fullData={movie}
               />
             ))}
-          </Swiper>
+          </Swiper> */}
           {trendingData ? (
             <HList title="Trending Movie" data={trendingData.results} />
           ) : null}
