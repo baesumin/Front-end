@@ -1,26 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import AnimatePresenceExample from './components/AnimatePresence';
+import AnimationExample from './components/Animation';
+import DragExample from './components/Drag';
+import GesturesExample from './components/Gestures';
+import PathExample from './components/Path';
+import ScrollExample from './components/Scroll';
+import VariantsExample from './components/Variants';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <AnimatePresenceExample />;
 }
 
 export default App;
