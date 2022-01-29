@@ -4,10 +4,11 @@ import DragExample from './components/Drag';
 import GesturesExample from './components/Gestures';
 import PathExample from './components/Path';
 import ScrollExample from './components/Scroll';
+import SharedLayoutExample from './components/SharedLayout';
 import VariantsExample from './components/Variants';
 
 function App() {
-  return <AnimatePresenceExample />;
+  return <SharedLayoutExample />;
 }
 
 export default App;
