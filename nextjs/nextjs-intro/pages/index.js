@@ -1,15 +1,16 @@
-import NavBar from '../components/NavBar';
+import { useState } from 'react';
+import Seo from '../components/Seo';
+
+const API_KEY = '1c4686fb63dc7e0e6d4c59ec8c5233dd';
 
 export default function Home() {
+  const [movies, setMovies] = useState([]);
   return (
     <div>
-      <NavBar />
+      <Seo title="Home" />
       <h1 className="active">Hello</h1>
-      <style jsx>{`
-        a {
-          color: white;
-        }
-      `}</style>
     </div>
   );
 }
+
+export async function getServerSideProps() {}
