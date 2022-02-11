@@ -18,7 +18,7 @@
  #### 웹/앱 개발
 ```
 	1. React - React Native
-	2. TypeScript - Angular - Ionic
+	2. TypeScript - React - NextJS
 ```
 <br/>
 
