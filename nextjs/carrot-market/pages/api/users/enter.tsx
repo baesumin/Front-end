@@ -1,7 +1,12 @@
+import mail from '@sendgrid/mail';
+import twilio from 'twilio';
 import client from '@libs/server/client';
 import withHandler, { ResponseType } from '@libs/server/withHandler';
 import { prisma } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
+
+mail.setApiKey(process.env.SENDGRID_KEY!);
+const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
   const { phone, email } = req.body;
@@ -24,6 +29,23 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
       }
     }
   });
+  if (phone) {
+    // const message = await twilioClient.messages.create({
+    //   messagingServiceSid: process.env.TWILIO_MSID,
+    //   to: process.env.MY_PHONE!,
+    //   body: `You login token is ${payload}.`
+    // });
+    // console.log(message);
+  } else if (email) {
+    // const email = await mail.send({
+    //   from: 'qotnals12345@naver.com',
+    //   to: 'qotnals12345@naver.com',
+    //   subject: 'verification email',
+    //   text: `your token is ${payload}`,
+    //   html: `<string>your token is ${payload}</string>`
+    // });
+    // console.log(email);
+  }
   return res.json({
     ok: true
   });
