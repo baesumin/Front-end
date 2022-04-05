@@ -18,6 +18,9 @@ import {useAppDispatch} from './src/store';
 import Config from 'react-native-config';
 import orderSlice from './src/slices/order';
 import usePermissions from './src/hooks/usePermissions';
+import SplashScreen from 'react-native-splash-screen';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -25,7 +28,6 @@ export type LoggedInParamList = {
   Delivery: undefined;
   Complete: {orderId: string};
 };
-
 export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
@@ -37,41 +39,10 @@ const Stack = createNativeStackNavigator();
 function AppInner() {
   const dispatch = useAppDispatch();
   const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
+
   const [socket, disconnect] = useSocket();
 
   usePermissions();
-
-  useEffect(() => {
-    axios.interceptors.response.use(
-      response => {
-        return response;
-      },
-      async error => {
-        const {
-          config,
-          response: {status},
-        } = error;
-        if (status === 419) {
-          if (error.response.data.code === 'expired') {
-            const originalRequest = config;
-            const refreshToken = await EncryptedStorage.getItem('refreshToken');
-            // token refresh 요청
-            const {data} = await axios.post(
-              `${Config.API_URL}/refreshToken`, // token refresh api
-              {},
-              {headers: {authorization: `Bearer ${refreshToken}`}},
-            );
-            // 새로운 토큰 저장
-            dispatch(userSlice.actions.setAccessToken(data.data.accessToken));
-            originalRequest.headers.authorization = `Bearer ${data.data.accessToken}`;
-            // 419로 요청 실패했던 요청 새로운 토큰으로 재요청
-            return axios(originalRequest);
-          }
-        }
-        return Promise.reject(error);
-      },
-    );
-  }, [dispatch]);
 
   // 앱 실행 시 토큰 있으면 로그인하는 코드
   useEffect(() => {
@@ -79,6 +50,7 @@ function AppInner() {
       try {
         const token = await EncryptedStorage.getItem('refreshToken');
         if (!token) {
+          SplashScreen.hide();
           return;
         }
         const response = await axios.post(
@@ -103,7 +75,7 @@ function AppInner() {
           Alert.alert('알림', '다시 로그인 해주세요.');
         }
       } finally {
-        // TODO: 스플래시 스크린 없애기
+        SplashScreen.hide();
       }
     };
     getTokenAndRefresh();
@@ -169,17 +141,28 @@ function AppInner() {
       <Tab.Screen
         name="Orders"
         component={Orders}
-        options={{title: '오더 목록'}}
+        options={{
+          title: '오더 목록',
+          tabBarIcon: () => <FontAwesome5 name="list" size={20} />,
+        }}
       />
       <Tab.Screen
         name="Delivery"
         component={Delivery}
-        options={{title: '내 오더'}}
+        options={{
+          headerShown: false,
+          title: '지도',
+          tabBarIcon: () => <FontAwesome5 name="map" size={20} />,
+        }}
       />
       <Tab.Screen
         name="Settings"
         component={Settings}
-        options={{title: '내 정보'}}
+        options={{
+          title: '내 정보',
+          tabBarIcon: () => <FontAwesome name="gear" size={20} />,
+          unmountOnBlur: true,
+        }}
       />
     </Tab.Navigator>
   ) : (
