@@ -10,7 +10,11 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "build:tailwind": "tailwindcss --input input.css --output tailwind.css --no-autoprefixer && tailwind-rn",
-    "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\""
+    "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\"",
+    "codepush:android": "appcenter codepush release-react -a baesumin/food-delivery-app-android -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
+    "codepush:ios": "appcenter codepush release-react -a baesumin/food-delivery-app-ios -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
+    "bundle:android": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/index.android.bundle --dev false --entry-file index.js --platform android --sourcemap-output build/CodePush/index.android.bundle.map",
+    "bundle:ios": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/main.jsbundle --dev false --entry-file index.js --platform ios --sourcemap-output build/CodePush/main.jsbundle.map"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.3",
@@ -23,10 +27,14 @@
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.1",
     "@reduxjs/toolkit": "^1.8.1",
+    "appcenter": "4.4.3",
+    "appcenter-analytics": "4.4.3",
+    "appcenter-crashes": "4.4.3",
     "axios": "^0.24.0",
     "patch-package": "^6.4.7",
     "react": "17.0.2",
     "react-native": "0.68.0",
+    "react-native-code-push": "^7.0.4",
     "react-native-config": "^1.4.5",
     "react-native-encrypted-storage": "^4.0.2",
     "react-native-fast-image": "^8.5.11",

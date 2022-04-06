@@ -1,3 +1,4 @@
+import messaging from '@react-native-firebase/messaging';
 import SignIn from './src/pages/SignIn';
 import SignUp from './src/pages/SignUp';
 import Orders from './src/pages/Orders';
@@ -118,6 +119,8 @@ function AppInner() {
           if (error.response.data.code === 'expired') {
             const originalRequest = config;
             const refreshToken = await EncryptedStorage.getItem('refreshToken');
+            console.log('419refresh: ' + refreshToken);
+
             // token refresh 요청
             const {data} = await axios.post(
               `${Config.API_URL}/refreshToken`, // token refresh api
@@ -136,6 +139,24 @@ function AppInner() {
     );
   }, [dispatch]);
 
+  // 토큰 설정
+  useEffect(() => {
+    async function getToken() {
+      try {
+        if (!messaging().isDeviceRegisteredForRemoteMessages) {
+          await messaging().registerDeviceForRemoteMessages();
+        }
+        const token = await messaging().getToken();
+        console.log('phone token', token);
+        dispatch(userSlice.actions.setPhoneToken(token));
+        return axios.post(`${Config.API_URL}/phonetoken`, {token});
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getToken();
+  }, [dispatch]);
+
   return isLoggedIn ? (
     <Tab.Navigator>
       <Tab.Screen
@@ -143,7 +164,10 @@ function AppInner() {
         component={Orders}
         options={{
           title: '오더 목록',
-          tabBarIcon: () => <FontAwesome5 name="list" size={20} />,
+          tabBarIcon: ({color}) => (
+            <FontAwesome5 name="list" size={20} style={{color}} />
+          ),
+          tabBarActiveTintColor: 'blue',
         }}
       />
       <Tab.Screen
@@ -152,7 +176,10 @@ function AppInner() {
         options={{
           headerShown: false,
           title: '지도',
-          tabBarIcon: () => <FontAwesome5 name="map" size={20} />,
+          tabBarIcon: ({color}) => (
+            <FontAwesome5 name="map" size={20} style={{color}} />
+          ),
+          tabBarActiveTintColor: 'blue',
         }}
       />
       <Tab.Screen
@@ -160,7 +187,10 @@ function AppInner() {
         component={Settings}
         options={{
           title: '내 정보',
-          tabBarIcon: () => <FontAwesome name="gear" size={20} />,
+          tabBarIcon: ({color}) => (
+            <FontAwesome name="gear" size={20} style={{color}} />
+          ),
+          tabBarActiveTintColor: 'blue',
           unmountOnBlur: true,
         }}
       />
