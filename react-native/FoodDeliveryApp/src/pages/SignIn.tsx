@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -80,6 +81,13 @@ function SignIn({navigation}: SignInScreenProps) {
   return (
     <DismissKeyboardView>
       <View style={styles.inputWrapper}>
+        {/* <Text>코드푸시 텍스트</Text>
+        <Image
+          source={{
+            uri: 'https://cdn.pixabay.com/photo/2020/09/09/02/12/smearing-5556288_960_720.jpg',
+          }}
+          style={{width: 50, height: 50}}
+        /> */}
         <Text style={styles.label}>이메일</Text>
         <TextInput
           style={styles.textInput}

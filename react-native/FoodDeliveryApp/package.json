@@ -1,6 +1,6 @@
 {
   "name": "fooddeliveryapp",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "postinstall": "patch-package",
@@ -14,7 +14,9 @@
     "codepush:android": "appcenter codepush release-react -a baesumin/food-delivery-app-android -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
     "codepush:ios": "appcenter codepush release-react -a baesumin/food-delivery-app-ios -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
     "bundle:android": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/index.android.bundle --dev false --entry-file index.js --platform android --sourcemap-output build/CodePush/index.android.bundle.map",
-    "bundle:ios": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/main.jsbundle --dev false --entry-file index.js --platform ios --sourcemap-output build/CodePush/main.jsbundle.map"
+    "bundle:ios": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/main.jsbundle --dev false --entry-file index.js --platform ios --sourcemap-output build/CodePush/main.jsbundle.map",
+    "appcenter-android-key": "appcenter codepush deployment list -a baesumin/food-delivery-app-android -k",
+    "appcenter-ios-key": "appcenter codepush deployment list -a baesumin/food-delivery-app-ios -k"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.3",
