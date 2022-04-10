@@ -8,7 +8,7 @@ import SharedLayoutExample from './components/SharedLayout';
 import VariantsExample from './components/Variants';
 
 function App() {
-  return <SharedLayoutExample />;
+  return <ScrollExample />;
 }
 
 export default App;
