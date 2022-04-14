@@ -80,7 +80,7 @@ function SignIn({navigation}: SignInScreenProps) {
   const canGoNext = email && password;
   return (
     <DismissKeyboardView>
-      <View style={styles.inputWrapper}>
+      <View style={styles.Wrapper}>
         {/* <Text>코드푸시 텍스트</Text>
         <Image
           source={{
