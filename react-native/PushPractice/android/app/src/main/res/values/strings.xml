@@ -2,4 +2,8 @@
     <string name="app_name">PushPractice</string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
+    <!-- staging -->
+    <string moduleConfig="true" name="CodePushDeploymentKey">be-87Wi89nbJwconD0W9aBmkyiG8s_OFtaMme</string>
+    <!-- production -->
+    <!-- <string moduleConfig="true" name="CodePushDeploymentKey">SvcGZGBZAofg6R4BhRn0-52kmp2mZf5IhmhUR</string> -->
 </resources>

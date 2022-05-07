@@ -1,13 +1,23 @@
 {
   "name": "pushpractice",
-  "version": "0.0.1",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "appcenter-android-key": "appcenter codepush deployment list -a baesumin/Test -k",
+    "appcenter-ios-key": "appcenter codepush deployment list -a baesumin/Test_ios -k",
+    "codepush:android_staging": "appcenter codepush release-react -a baesumin/Test -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
+    "codepush:ios_staging": "appcenter codepush release-react -a baesumin/Test_ios -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
+    "codepush:android_production": "appcenter codepush release-react -a baesumin/Test -d Production --sourcemap-output --output-dir ./build -m -t 1.0",
+    "codepush:ios_production": "appcenter codepush release-react -a baesumin/Test_ios -d Production --sourcemap-output --output-dir ./build -m -t 1.0",
+    "bundle:android": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/index.android.bundle --dev false --entry-file index.js --platform android --sourcemap-output build/CodePush/index.android.bundle.map",
+    "bundle:ios": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/main.jsbundle --dev false --entry-file index.js --platform ios --sourcemap-output build/CodePush/main.jsbundle.map",
+    "build:android": "npm ci && cd android && ./gradlew bundleRelease && cd .. && open android/app/build/outputs/bundle/release",
+    "apk:android": "npm ci && cd android && ./gradlew assembleRelease && cd .. && open android/app/build/outputs/apk/release"
   },
   "dependencies": {
     "@react-native-firebase/analytics": "^14.9.1",
