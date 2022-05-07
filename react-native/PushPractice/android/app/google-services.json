@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "834700444575",
+    "project_id": "pushpractice-7d900",
+    "storage_bucket": "pushpractice-7d900.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834700444575:android:1397e50afb092998c673aa",
+        "android_client_info": {
+          "package_name": "com.pushpractice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834700444575-g3fpvso29kgo7nbpj13r1jr6mks205go.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqj8ozRbyz5-ZIUAWtCViZrMVfmsn0Wbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834700444575-g3fpvso29kgo7nbpj13r1jr6mks205go.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
