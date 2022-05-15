@@ -1,4 +1,5 @@
 import React from 'react';
+import {Linking} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
 
@@ -55,11 +56,16 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
 PushNotification.configure({
   // (optional) 토큰이 생성될 때 실행됨(토큰을 서버에 등록할 때 쓸 수 있음)
   onRegister: function (token) {
-    console.log('TOKEN:', token);
+    // console.log('TOKEN:', token);
   },
   // (required) 리모트 노티를 수신하거나, 열었거나 로컬 노티를 열었을 때 실행
   onNotification: function (notification) {
     console.log('NOTIFICATION:', notification);
+    if (notification.userInteraction === true) {
+      const {link = null} = notification?.data || {}; // <---- 1
+      link && Linking.openURL(link);
+    }
+
     if (notification.channelId === 'riders') {
       // if (notification.message || notification.data.message) {
       //   store.dispatch(
@@ -108,17 +114,17 @@ PushNotification.configure({
    */
   requestPermissions: true,
 });
-PushNotification.createChannel(
-  {
-    channelId: 'riders', // (required)
-    channelName: '앱 전반', // (required)
-    channelDescription: '앱 실행하는 알림', // (optional) default: undefined.
-    soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
-    importance: 4, // (optional) default: 4. Int value of the Android notification importance
-    vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
-  },
-  created => console.log(`createChannel riders returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
-);
+// PushNotification.createChannel(
+//   {
+//     channelId: 'riders', // (required)
+//     channelName: '앱 전반', // (required)
+//     channelDescription: '앱 실행하는 알림', // (optional) default: undefined.
+//     soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
+//     importance: 4, // (optional) default: 4. Int value of the Android notification importance
+//     vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+//   },
+//   created => console.log(`createChannel riders returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+// );
 
 const PushProvider = ({children}) => {
   return <>{children}</>;
