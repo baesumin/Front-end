@@ -19,6 +19,9 @@ target 'PushPractice' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseMessaging'
+
   target 'PushPracticeTests' do
     inherit! :complete
     # Pods for testing

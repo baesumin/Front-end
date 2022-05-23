@@ -20,6 +20,7 @@
     "apk:android": "npm ci && cd android && ./gradlew assembleRelease && cd .. && open android/app/build/outputs/apk/release"
   },
   "dependencies": {
+    "@react-native-community/push-notification-ios": "^1.10.1",
     "@react-native-firebase/analytics": "^14.9.1",
     "@react-native-firebase/app": "^14.9.1",
     "@react-native-firebase/messaging": "^14.9.1",
@@ -35,7 +36,8 @@
     "react-native-push-notification": "^8.1.1",
     "react-native-safe-area-context": "^4.2.5",
     "react-native-screens": "^3.13.1",
-    "react-native-splash-screen": "^3.3.0"
+    "react-native-splash-screen": "^3.3.0",
+    "react-native-ttm-plugin": "file:react-native-ttm-plugin"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
