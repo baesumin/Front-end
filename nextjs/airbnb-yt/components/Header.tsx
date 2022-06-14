@@ -76,7 +76,7 @@ function Header({ placeholder }: any) {
         <p className="hidden cursor-pointer md:inline">Become a host</p>
         <GlobeAltIcon className="h-6 cursor-pointer" />
 
-        <div className="flex space-x-2 rounded-full border-2 p-2 ">
+        <div className="-2 flex space-x-2 rounded-full p-2 ">
           <MenuIcon className="h-6" />
           <UserCircleIcon className="h-6" />
         </div>
