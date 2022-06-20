@@ -1,4 +1,7 @@
-html, body, ul, li {
+html,
+body,
+ul,
+li {
   margin: 0;
   padding: 0;
 }
@@ -16,7 +19,6 @@ body {
   margin-top: 24px;
   margin-bottom: 24px;
 }
-
 
 .App ul li {
   list-style: none;
@@ -162,6 +164,4 @@ body {
   text-align: right;
   padding-right: 16px;
   margin-bottom: 16px;
-}
-
 }
