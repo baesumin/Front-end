@@ -1,6 +1,5 @@
 import { request } from './api.js';
 import ProductList from './ProductList.js';
-import { routeChange } from './router.js';
 
 function ProductListPage({ $target }) {
   this.state = {};
@@ -11,49 +10,18 @@ function ProductListPage({ $target }) {
   this.setState = (nextState) => {
     this.state = nextState;
   };
-
   const fetchProducts = async () => {
     // const products = await request('/products');
     this.setState(products);
   };
   fetchProducts();
 
-  const productList = new ProductList({
-    $target: $page,
-    iniitalState: this.state
-  }).render();
-
-  $page.addEventListener('click', (e) => {
-    console.log(e);
-    const $li = e.target.closest('li');
-    const { productId } = $li.dataset;
-
-    if (productId) {
-      routeChange(`/products/${productId}`);
-    }
-  });
-
   this.render = () => {
     $target.appendChild($page);
-    $page.innerHTML = `
-      <ul>
-        ${this.state
-          .map((product) => {
-            return `
-              <li class="Product" data-product-id=${product.id}>
-                <a href="/products/${product.id}">
-                  <img src="${product.imageUrl}"/>
-                  <div class="Product__info">
-                    <div>${product.name}</div>
-                    <div>${product.price.toLocaleString()}원~</div>
-                  </div>
-                </a>
-              </li>
-          `;
-          })
-          .join('')}
-      </ul>
-    `;
+    new ProductList({
+      $target: $page,
+      initialState: this.state
+    });
   };
 }
 
