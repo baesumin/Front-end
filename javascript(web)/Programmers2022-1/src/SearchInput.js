@@ -1,23 +1,24 @@
 export default function SearchInput({ $target, initialState, onChange }) {
   this.state = initialState;
-  const $element = document.createElement('form');
-  $element.className = 'SearchInput';
-  $target.appendChild($element);
+  this.$element = document.createElement('form');
+  this.$element.className = 'SearchInput';
+  $target.appendChild(this.$element);
 
   this.render = () => {
-    $element.innerHTML = `
+    this.$element.innerHTML = `
       <input
         class="SearchInput__input"
         type="text"
         placeholder="프로그램 언어를 입력하세요."
-        value=${this.state}
+        value="${this.state}"
+        autofocus
       >
     `;
   };
 
   this.render();
 
-  $element.addEventListener('keyup', (e) => {
+  this.$element.addEventListener('keyup', (e) => {
     const actionIgnoreKeys = ['Enter', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
 
     if (!actionIgnoreKeys.includes(e.key)) {
@@ -25,7 +26,7 @@ export default function SearchInput({ $target, initialState, onChange }) {
     }
   });
 
-  $element.addEventListener('submit', (e) => {
+  this.$element.addEventListener('submit', (e) => {
     e.preventDefault();
   });
 }

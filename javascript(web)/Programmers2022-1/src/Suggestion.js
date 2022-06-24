@@ -12,8 +12,21 @@ export default function Suggestion({ $target, initialState, onSelect }) {
     this.render();
   };
 
+  this.renderMatchedItem = (keyword, item) => {
+    if (!item.includes(keyword)) {
+      return item;
+    }
+    // 정규표현식을 이용한 방법
+    const matchedText = item.match(new RegExp(keyword, 'gi'))[0];
+    return item.replace(
+      new RegExp(matchedText, 'gi'),
+      `<span class="Suggestion__item--matched">${matchedText}</span>`
+    );
+  };
+
   this.render = () => {
-    const { items = [], selectedIndex } = this.state;
+    const { items = [], selectedIndex, keyword } = this.state;
+    console.log(keyword);
     if (items.length > 0) {
       $element.style.display = 'block';
       $element.innerHTML = `
@@ -23,7 +36,7 @@ export default function Suggestion({ $target, initialState, onSelect }) {
             (item, index) => `
           <li class="${
             index === selectedIndex ? 'Suggestion__item--selected' : ''
-          }" data-index="${index}">${item}</li>
+          }" data-index="${index}">${this.renderMatchedItem(keyword, item)}</li>
           </li>
         `
           )
