@@ -1,35 +1,37 @@
-import { MouseEvent } from "react";
+import { FC, MouseEvent } from "react";
 import styled from "@emotion/styled";
 import { css, SerializedStyles } from "@emotion/react";
+
+import { AppTheme } from "@/styles/themes";
+import { boxShadow, transition, borderRadius } from "@/components/styles";
 
 export type Color = "primary" | "secondary" | "danger" | "warning";
 
 export type Props = {
+  /** Text in the button */
   children: string;
+  /** Button color */
   color?: Color;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  /** Click handler */
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const getColors = (color?: Color): SerializedStyles => {
+export const getColors = (theme: AppTheme, color?: Color): SerializedStyles => {
   switch (color) {
-    case "primary":
-      return css`
-        background-color: #6d5dfc;
-        color: #e4ebf5e6;
-      `;
     case "secondary":
       return css`
-        color: #5e5c64e6;
+        color: ${theme.font.regular};
       `;
+    case "primary":
     case "danger":
       return css`
-        background-color: #dc3545e6;
-        color: #e4ebf5e6;
+        background: ${theme.components[color]};
+        color: ${theme.font.button};
       `;
     case "warning":
       return css`
-        background-color: #ffca2ce6;
-        color: #5e5c64e6;
+        background: ${theme.components[color]};
+        color: ${theme.font.warning};
       `;
     default:
       return css``;
@@ -39,25 +41,46 @@ export const getColors = (color?: Color): SerializedStyles => {
 export const Button = styled.button<Props>`
   all: unset;
   display: flex;
-  justify-content: center;
+  justify-self: center;
   align-items: center;
+  justify-content: center;
   user-select: none;
   cursor: pointer;
   font-size: 1.6rem;
   width: 15rem;
   height: 4rem;
-  border-radius: 1rem;
-  transition: all 0.4s ease;
-  ${({ color }) => getColors(color)}
-  box-shadow: 0.5vmin 0.5vmin 1vmin #c8d0e7, -0.5vmin -0.5vmin 1vmin #ffffff;
+  ${borderRadius};
+  ${({ theme, color }) => getColors(theme, color)};
   &:hover {
     opacity: 0.9;
   }
+  ${transition()}
+  ${({ theme }) =>
+    boxShadow(theme.components.shadow1, theme.components.shadow2)}
   &:active {
-    box-shadow: 0.5vmin 0.5vmin 1vmin #c8d0e7 inset,
-      -0.5vmin -0.5vmin 1vmin #ffffff inset;
+    ${({ theme }) =>
+      boxShadow(theme.components.shadow1, theme.components.shadow2, true)}
   }
 `;
+
 Button.defaultProps = {
   color: "primary",
 };
+
+type DefinedButton = Omit<Props, "color">;
+
+export const PrimaryButton: FC<DefinedButton> = (props) => (
+  <Button color="primary" {...props} />
+);
+
+export const SecondaryButton: FC<DefinedButton> = (props) => (
+  <Button color="secondary" {...props} />
+);
+
+export const DangerButton: FC<DefinedButton> = (props) => (
+  <Button color="danger" {...props} />
+);
+
+export const WarningButton: FC<DefinedButton> = (props) => (
+  <Button color="warning" {...props} />
+);
