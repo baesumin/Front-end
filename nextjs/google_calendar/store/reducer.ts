@@ -1,9 +1,13 @@
 import { HYDRATE } from "next-redux-wrapper";
 import { combineReducers, CombinedState, AnyAction } from "redux";
+import calendarSlice, { ICalendarState } from "./slices/calendar";
 import counterSlice, { ICounterState } from "./slices/counter";
+import headerSlice, { IHeaderState } from "./slices/header";
 
 interface RootStates {
   counter: ICounterState;
+  header: IHeaderState;
+  calendar: ICalendarState;
 }
 
 const rootReducer = (
@@ -19,6 +23,8 @@ const rootReducer = (
     default: {
       const combinedReducer = combineReducers({
         counter: counterSlice.reducer,
+        header: headerSlice.reducer,
+        calendar: calendarSlice.reducer,
       });
       return combinedReducer(state, action);
     }

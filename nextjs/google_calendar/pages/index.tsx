@@ -1,53 +1,48 @@
-import type { GetStaticProps, NextPage } from "next";
-import { dehydrate, QueryClient, useQuery, useQueryClient } from "react-query";
-import { exampleApi } from "../libs/apis";
-import { useAppDispatch, useAppSelector } from "../store";
-import counterSlice from "../store/slices/counter";
+import type { NextPage } from "next";
+import { Calendar, Header, SideBar } from "../components";
+import { useAppSelector } from "../store";
+import { Transition } from "react-transition-group";
+
+const duration = 200;
+
+const defaultStyle = {
+  transition: `width ${duration}ms ease-in-out`,
+};
+
+const transitionStyles = {
+  entering: { width: "265px" },
+  entered: { width: "265px" },
+  exiting: { width: "10px" },
+  exited: { width: "10px" },
+};
 
 const Home: NextPage = () => {
-  const queryClient = useQueryClient();
-  const dispatch = useAppDispatch();
-  const { value } = useAppSelector((state) => state.counter);
-  const { data } = useQuery("posts", exampleApi.getData);
-
-  const increaseCount = () => {
-    dispatch(counterSlice.actions.increase);
-  };
-
-  const increaseCountByAmount = () => {
-    dispatch(counterSlice.actions.increaseByAmount(Math.random() * 100));
-  };
-
-  const decreaseCount = () => {
-    dispatch(counterSlice.actions.decrease());
-  };
-
+  const { isSideOpen } = useAppSelector((state) => state.header);
   return (
     <div>
-      <div>{value}</div>
-      <button onClick={increaseCount}>+1</button>
-      <button onClick={increaseCountByAmount}>+increase</button>
-      <button onClick={decreaseCount}>-decrease</button>
-      <button
-        className="bg-slate-300 active:bg-slate-600"
-        onClick={() => queryClient.refetchQueries("posts")}
-      >
-        데이터 패칭
-      </button>
+      {/* 헤더 */}
+      <Header />
+      <div className="flex">
+        {/* 사이드바 */}
+        {/* {isSideOpen ? <SideBar /> : null} */}
+        <Transition in={isSideOpen} timeout={500}>
+          {(state) => (
+            <div
+              style={{
+                ...defaultStyle,
+                ...transitionStyles[state],
+              }}
+            >
+              <SideBar />
+            </div>
+          )}
+        </Transition>
+
+        {/* 캘린더 */}
+        <Calendar />
+      </div>
     </div>
   );
 };
 
 export default Home;
-
-export const getStaticProps: GetStaticProps = async () => {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery("posts", exampleApi.getData);
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-};
