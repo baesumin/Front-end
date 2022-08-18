@@ -14,7 +14,7 @@ import CalendarModal from './CalendarModal'
 
 const RenderCalendar = ({ currentMonth, selectedDate, onDateClick }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [curData, setCurData] = useState([])
+  const [curData, setCurData] = useState<[]>([])
   const rows: any[] = []
   const monthStart = startOfMonth(parseISO(currentMonth))
   const monthEnd = endOfMonth(monthStart)
