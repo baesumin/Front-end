@@ -9,7 +9,7 @@ const defaultStyle = {
   transition: `width ${duration}ms ease-in-out`,
 };
 
-const transitionStyles = {
+const transitionStyles: any = {
   entering: { width: "265px" },
   entered: { width: "265px" },
   exiting: { width: "10px" },
