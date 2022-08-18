@@ -41,8 +41,8 @@ const CalendarItem = ({
   return (
     <div
       onClick={onClick}
-      key={day + '' + i}
-      className="border-b-[1px] border-r-[1px] flex flex-1 flex-col items-center pt-2"
+      // key={day + '' + i}
+      className="border-b-[1px] border-r-[1px] flex flex-col items-center pt-2 overflow-hidden"
     >
       {isFirst ? <p className="text-xs mb-1 text-gray-500">{date[i]}</p> : null}
       <p
