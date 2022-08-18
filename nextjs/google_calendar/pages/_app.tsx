@@ -1,9 +1,9 @@
-import "../styles/globals.css";
-import { wrapper } from "../store";
-import type { AppProps } from "next/app";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import React from "react";
+import '../styles/globals.css'
+import { wrapper } from '../store'
+import type { AppProps } from 'next/app'
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import React from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(
@@ -14,8 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             refetchOnWindowFocus: false,
           },
         },
-      })
-  );
+      }),
+  )
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
     </QueryClientProvider>
-  );
+  )
 }
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(MyApp)

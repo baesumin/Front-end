@@ -1,23 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
-const counterSliceType = "slice/header";
+const counterSliceType = 'slice/header'
 
 export interface IHeaderState {
-  isSideOpen: boolean;
+  isSideOpen: boolean
 }
 
 const initialState: IHeaderState = {
   isSideOpen: true,
-};
+}
 
 const headerSlice = createSlice({
   initialState,
   name: counterSliceType,
   reducers: {
     setMenuClick: (state) => {
-      state.isSideOpen = !state.isSideOpen;
+      state.isSideOpen = !state.isSideOpen
     },
   },
-});
+})
 
-export default headerSlice;
+export default headerSlice
