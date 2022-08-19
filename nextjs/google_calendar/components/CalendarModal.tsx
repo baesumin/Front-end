@@ -1,14 +1,8 @@
 import { useState } from 'react'
 
-const CalendarModal = ({
-  innerRef,
-  curData,
-  setCurData,
-  setIsModalOpen,
-}: any) => {
+const CalendarModal = ({ innerRef, setIsModalOpen }: any) => {
   const [text, setText] = useState('')
   const onButtonClick = () => {
-    setCurData([...curData, text])
     setIsModalOpen(false)
   }
   return (
