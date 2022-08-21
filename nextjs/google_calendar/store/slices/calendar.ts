@@ -125,16 +125,16 @@ const calendarSlice = createSlice({
     setCalendarData: (state, action) => {
       const { monthIndex, dayIndex, content } = action.payload
       // console.log(monthIndex, dayIndex, content)
-      // state.calendarData[monthIndex - 1].push({
-      //   arr: [
-      //     { isContinue: false, content: content, index: Math.random() * 10000 },
-      //   ],
-      //   dayIndex: dayIndex,
-      // })
-      state.calendarData[monthIndex - 1] = [
-        ...state.calendarData[monthIndex - 1],
-        { dayIndex: dayIndex, arr: [] },
-      ]
+      state.calendarData[monthIndex - 1].push({
+        arr: [
+          { isContinue: false, content: content, index: Math.random() * 10000 },
+        ],
+        dayIndex: dayIndex,
+      })
+      // state.calendarData[monthIndex - 1] = [
+      //   ...state.calendarData[monthIndex - 1],
+      //   { dayIndex: dayIndex, arr: [] },
+      // ]
 
       // current(state).calendarData[monthIndex - 1].map((item, index) => {
       //   if (item.dayIndex === dayIndex) {
