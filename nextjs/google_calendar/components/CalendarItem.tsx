@@ -1,4 +1,4 @@
-import { format, isSameDay, isSameMonth, startOfMonth } from 'date-fns'
+import { format, isSameDay, isSameMonth, isToday, startOfMonth } from 'date-fns'
 import { cls } from '../libs/utils'
 
 interface Prop {
@@ -44,9 +44,17 @@ const CalendarItem = ({
           !isSameMonth(day, monthStart) ? 'text-gray-500' : '',
         )}
       >
-        {isSameDay(startOfMonth(day), day)
-          ? format(day, 'M월 d일')
-          : format(day, 'd')}
+        {isSameDay(startOfMonth(day), day) ? (
+          format(day, 'M월 d일')
+        ) : (
+          <span
+            className={
+              isToday(day) ? 'bg-blue-500 rounded-full text-white p-1' : ''
+            }
+          >
+            {format(day, 'd')}
+          </span>
+        )}
       </p>
       <div className="w-full h-full space-y-1 flex flex-col ">
         {data?.map((item: any, index: number) => {

@@ -53,7 +53,7 @@ const initialState: ICalendarState = {
         index: 6,
         arr: [
           {
-            content: '8월 1일~2일 일정',
+            content: '8월 6일~7일 일정',
             isContinue: true,
             endIndex: 7,
           },
@@ -69,9 +69,38 @@ const initialState: ICalendarState = {
           },
         ],
       },
+      {
+        index: 16,
+        arr: [
+          {
+            content: '8월-10월 반복',
+            isContinue: false,
+          },
+        ],
+      },
     ],
-    [],
-    [],
+    [
+      {
+        index: 16,
+        arr: [
+          {
+            content: '8월-10월 반복',
+            isContinue: false,
+          },
+        ],
+      },
+    ],
+    [
+      {
+        index: 16,
+        arr: [
+          {
+            content: '8월-10월 반복',
+            isContinue: false,
+          },
+        ],
+      },
+    ],
     [],
     [],
   ],
