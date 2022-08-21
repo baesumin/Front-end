@@ -17,6 +17,7 @@ import CalendarModal from './CalendarModal'
 const RenderCalendar = ({ currentMonth, selectedDate, onDateClick }: any) => {
   const { calendarData } = useAppSelector((state) => state.calendar)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [currendItem, setCurrentItem] = useState(-1)
   const monthStart = startOfMonth(parseISO(currentMonth))
   const monthEnd = endOfMonth(monthStart)
   const startDate = startOfWeek(monthStart)
@@ -28,7 +29,6 @@ const RenderCalendar = ({ currentMonth, selectedDate, onDateClick }: any) => {
     setIsModalOpen((prev) => !prev)
   }
   const ref = useOutsideClick(onItemClick)
-  // console.log(calendarData[parseInt(format(monthStart, 'M')) - 1])
 
   return (
     <>
@@ -37,6 +37,7 @@ const RenderCalendar = ({ currentMonth, selectedDate, onDateClick }: any) => {
           return (
             <CalendarItem
               onItemClick={onItemClick}
+              setCurrentItem={setCurrentItem}
               day={addDays(day, index)}
               monthStart={monthStart}
               key={index}
@@ -48,7 +49,11 @@ const RenderCalendar = ({ currentMonth, selectedDate, onDateClick }: any) => {
       </div>
 
       {isModalOpen ? (
-        <CalendarModal setIsModalOpen={setIsModalOpen} innerRef={ref} />
+        <CalendarModal
+          setIsModalOpen={setIsModalOpen}
+          innerRef={ref}
+          currendItem={currendItem}
+        />
       ) : null}
     </>
   )

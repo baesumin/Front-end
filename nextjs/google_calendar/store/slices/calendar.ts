@@ -1,15 +1,16 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
 
 const counterSliceType = 'slice/calendar'
 
 export interface ICalendarState {
   currentMonth: string
   calendarData: {
-    index: number
+    dayIndex: number
     arr: {
       content: string
       isContinue: boolean
       endIndex?: number
+      index: number
     }[]
   }[][]
 }
@@ -26,23 +27,26 @@ const initialState: ICalendarState = {
     [],
     [
       {
-        index: 1,
+        dayIndex: 1,
         arr: [
           {
+            index: 1,
             content: '8월 1일~2일 일정',
             isContinue: true,
             endIndex: 2,
           },
           {
+            index: 2,
             content: '8월 1일 개인 일정',
             isContinue: false,
           },
         ],
       },
       {
-        index: 2,
+        dayIndex: 2,
         arr: [
           {
+            index: 1,
             content: '8월 1일~2일 일정',
             isContinue: true,
             endIndex: 2,
@@ -50,9 +54,10 @@ const initialState: ICalendarState = {
         ],
       },
       {
-        index: 6,
+        dayIndex: 6,
         arr: [
           {
+            index: 1,
             content: '8월 6일~7일 일정',
             isContinue: true,
             endIndex: 7,
@@ -60,9 +65,10 @@ const initialState: ICalendarState = {
         ],
       },
       {
-        index: 7,
+        dayIndex: 7,
         arr: [
           {
+            index: 1,
             content: '8월 1일~2일 일정',
             isContinue: true,
             endIndex: 7,
@@ -70,9 +76,10 @@ const initialState: ICalendarState = {
         ],
       },
       {
-        index: 16,
+        dayIndex: 16,
         arr: [
           {
+            index: 1,
             content: '8월-10월 반복',
             isContinue: false,
           },
@@ -81,9 +88,10 @@ const initialState: ICalendarState = {
     ],
     [
       {
-        index: 16,
+        dayIndex: 16,
         arr: [
           {
+            index: 1,
             content: '8월-10월 반복',
             isContinue: false,
           },
@@ -92,9 +100,10 @@ const initialState: ICalendarState = {
     ],
     [
       {
-        index: 16,
+        dayIndex: 16,
         arr: [
           {
+            index: 1,
             content: '8월-10월 반복',
             isContinue: false,
           },
@@ -115,7 +124,29 @@ const calendarSlice = createSlice({
     },
     setCalendarData: (state, action) => {
       const { monthIndex, dayIndex, content } = action.payload
-      // state.calendarData[monthIndex].push({ index: dayIndex, content: content })
+      // console.log(monthIndex, dayIndex, content)
+      // state.calendarData[monthIndex - 1].push({
+      //   arr: [
+      //     { isContinue: false, content: content, index: Math.random() * 10000 },
+      //   ],
+      //   dayIndex: dayIndex,
+      // })
+      state.calendarData[monthIndex - 1] = [
+        ...state.calendarData[monthIndex - 1],
+        { dayIndex: dayIndex, arr: [] },
+      ]
+
+      // current(state).calendarData[monthIndex - 1].map((item, index) => {
+      //   if (item.dayIndex === dayIndex) {
+      //     console.log(item)
+      //     // item.arr.push({
+      //     //   content: content,
+      //     //   isContinue: false,
+      //     //   index: Math.random() * 10000,
+      //     // })
+      //   }
+      // })
+      // console.log(current(state))
     },
   },
 })

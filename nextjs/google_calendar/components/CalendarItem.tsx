@@ -6,9 +6,10 @@ interface Prop {
   monthStart: Date
   onItemClick: () => void
   itemIndex: number
+  setCurrentItem: any
   data: {
     [x: string]: any
-    index: number
+    dayIndex: number
     arr: {
       content: string
       isContinue: boolean
@@ -25,9 +26,11 @@ const CalendarItem = ({
   onItemClick,
   itemIndex,
   data,
+  setCurrentItem,
 }: Prop) => {
   const onClick = () => {
     onItemClick()
+    setCurrentItem(day)
   }
 
   return (
@@ -57,9 +60,9 @@ const CalendarItem = ({
         )}
       </p>
       <div className="w-full h-full space-y-1 flex flex-col ">
-        {data?.map((item: any, index: number) => {
+        {data?.map((item: any) => {
           if (
-            parseInt(format(day, 'd')) === item.index &&
+            parseInt(format(day, 'd')) === item.dayIndex &&
             isSameMonth(day, monthStart)
           ) {
             return item.arr.map((item2: any, index2: number) => {
