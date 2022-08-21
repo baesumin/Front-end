@@ -27,7 +27,7 @@ const CalendarItem = ({
   itemIndex,
   data,
   setCurrentItem,
-}: Prop) => {
+}: any) => {
   const onClick = () => {
     onItemClick()
     setCurrentItem(day)
