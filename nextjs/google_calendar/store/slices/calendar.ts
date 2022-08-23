@@ -122,31 +122,43 @@ const calendarSlice = createSlice({
     setCurrentMonth: (state, action: PayloadAction<string>) => {
       state.currentMonth = action.payload
     },
-    setCalendarData: (state, action) => {
+    setCalendarData: (state, action): any => {
       const { monthIndex, dayIndex, content } = action.payload
-      // console.log(monthIndex, dayIndex, content)
       state.calendarData[monthIndex - 1].push({
-        arr: [
-          { isContinue: false, content: content, index: Math.random() * 10000 },
-        ],
         dayIndex: dayIndex,
+        arr: [
+          {
+            isContinue: false,
+            content: content,
+            index: Math.random() * 10000,
+          },
+        ],
       })
-      // state.calendarData[monthIndex - 1] = [
-      //   ...state.calendarData[monthIndex - 1],
-      //   { dayIndex: dayIndex, arr: [] },
-      // ]
+      // return {
+      //   ...state,
+      //   calendarData: [
+      //     ...state.calendarData,
+      //     state.calendarData[monthIndex - 1].filter((item) => {
+      //       if (item.dayIndex === dayIndex) {
+      //         console.log(item)
 
-      // current(state).calendarData[monthIndex - 1].map((item, index) => {
-      //   if (item.dayIndex === dayIndex) {
-      //     console.log(item)
-      //     // item.arr.push({
-      //     //   content: content,
-      //     //   isContinue: false,
-      //     //   index: Math.random() * 10000,
-      //     // })
-      //   }
-      // })
-      // console.log(current(state))
+      //         return {
+      //           dayIndex: dayIndex,
+      //           arr: [
+      //             ...item.arr,
+      //             {
+      //               isContinue: false,
+      //               content: content,
+      //               index: Math.random() * 10000,
+      //             },
+      //           ],
+      //         }
+      //       } else {
+      //         return item
+      //       }
+      //     }),
+      //   ],
+      // }
     },
   },
 })

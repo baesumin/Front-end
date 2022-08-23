@@ -98,30 +98,6 @@ const CalendarItem = ({
             })
           }
         })}
-        {/* {data?.index === parseInt(format(day, 'd'))
-          ? data?.arr?.map((item: any, index: number) => {
-              if (item?.isContinue) {
-                if (item?.endIndex === itemIndex + 1) {
-                  return (
-                    <div
-                      key={index}
-                      className=" cursor-pointer ml-[-1px] indent-3 bg-[#7986CB] h-[20px] w-full mr-2 rounded-r-[4px] flex items-center text-xs text-white"
-                    ></div>
-                  )
-                } else {
-                  return (
-                    <div
-                      key={index}
-                      className="cursor-pointer indent-3 bg-[#7986CB] h-[20px] w-full rounded-l-[4px] flex items-center text-xs text-white"
-                    >
-                      {item?.content}
-                    </div>
-                  )
-                }
-              } else {
-              }
-            })
-          : null} */}
       </div>
     </div>
   )
