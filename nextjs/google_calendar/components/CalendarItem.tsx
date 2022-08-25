@@ -32,8 +32,8 @@ const CalendarItem = ({
     onItemClick()
     setCurrentItem(day)
   }
-  console.log(day)
-  console.log(isToday(day))
+  // console.log(day)
+  // console.log(isToday(day))
 
   return (
     <div
