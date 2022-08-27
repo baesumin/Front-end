@@ -4,7 +4,7 @@ export default function SearchInput({ $target, initialState, onChange }) {
   this.$element.className = 'SearchInput';
   $target.appendChild(this.$element);
 
-  this.render = () => {
+  const render = () => {
     this.$element.innerHTML = `
       <input
         class="SearchInput__input"
@@ -16,7 +16,7 @@ export default function SearchInput({ $target, initialState, onChange }) {
     `;
   };
 
-  this.render();
+  render();
 
   this.$element.addEventListener('keyup', (e) => {
     const actionIgnoreKeys = ['Enter', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
