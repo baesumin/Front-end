@@ -1,6 +1,6 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import CalendarPicker from 'react-native-calendar-picker';
+// import CalendarPicker from 'react-native-calendar-picker';
 import {useState} from 'react';
 
 const CalendarScreen = () => {
@@ -12,7 +12,7 @@ const CalendarScreen = () => {
   };
   return (
     <View>
-      <CalendarPicker
+      {/* <CalendarPicker
         onDateChange={onDateChange}
         weekdays={['일', '월', '화', '수', '목', '금', '토']}
         months={[
@@ -37,7 +37,7 @@ const CalendarScreen = () => {
         }}
         nextTitle={'>'}
         nextTitleStyle={{color: 'black', backgroundColor: 'pink', fontSize: 24}}
-      />
+      /> */}
     </View>
   );
 };

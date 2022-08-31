@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, Linking} from 'react-native';
 // import SplashScreen from 'react-native-splash-screen';
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 
-import CodePush from 'react-native-code-push';
+// import CodePush from 'react-native-code-push';
 import RootNavigator from './src/navigation/RootNavigator';
 
 // const codePushOptions = {
@@ -83,4 +83,3 @@ const App = () => {
 
 // export default CodePush(codePushOptions)(App);
 export default App;
-

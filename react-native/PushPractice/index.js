@@ -73,9 +73,9 @@ const Root = () => (
   <NavigationContainer
     linking={linking}
     fallback={<ActivityIndicator color="blue" size="large" />}>
-    <PushProvider>
+    {/* <PushProvider> */}
       <App />
-    </PushProvider>
+    {/* </PushProvider> */}
   </NavigationContainer>
 );
 

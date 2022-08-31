@@ -35,11 +35,11 @@
     "react-native-calendar-picker": "^7.1.2",
     "react-native-code-push": "^7.0.4",
     "react-native-image-crop-picker": "^0.38.0",
+    "react-native-pell-rich-editor": "^1.8.8",
     "react-native-push-notification": "^8.1.1",
     "react-native-safe-area-context": "^4.2.5",
     "react-native-screens": "^3.13.1",
-    "react-native-splash-screen": "^3.3.0",
-    "react-native-ttm-plugin": "file:react-native-ttm-plugin"
+    "react-native-splash-screen": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
