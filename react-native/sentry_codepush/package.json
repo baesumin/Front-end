@@ -1,17 +1,27 @@
 {
   "name": "sentry_codepush",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "codepush:android": "appcenter codepush release-react -a baesumin/sentry_codepush -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
+    "codepush:ios": "appcenter codepush release-react -a zerohch0/food-delivery-app-ios -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
+    "bundle:android": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/index.android.bundle --dev false --entry-file index.js --platform android --sourcemap-output build/CodePush/index.android.bundle.map",
+    "bundle:ios": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/main.jsbundle --dev false --entry-file index.js --platform ios --sourcemap-output build/CodePush/main.jsbundle.map"
   },
   "dependencies": {
+    "@sentry/react-native": "^4.4.0",
+    "appcenter": "4.4.5",
+    "appcenter-analytics": "4.4.5",
+    "appcenter-crashes": "4.4.5",
     "react": "18.1.0",
-    "react-native": "0.70.1"
+    "react-native": "0.70.1",
+    "react-native-code-push": "^7.0.5",
+    "react-native-dotenv": "^3.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
