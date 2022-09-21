@@ -3,6 +3,7 @@ import {Button, Image, SafeAreaView, Text} from 'react-native';
 import {DSN} from 'react-native-dotenv';
 import * as Sentry from '@sentry/react-native';
 import CodePush from 'react-native-code-push';
+import SampleText from './SampleText';
 
 Sentry.init({
   dsn: DSN,
@@ -97,6 +98,7 @@ const App = () => {
       <Text style={{color: 'black', alignSelf: 'center'}}>
         스테이징 먼저 테스트후 프로덕션빌드 테스트
       </Text>
+      <SampleText />
     </SafeAreaView>
   );
 };

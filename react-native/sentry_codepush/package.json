@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "codepush": "appcenter codepush promote -s Staging -d Production",
     "codepush:promotion": "appcenter codepush release-react -a baesumin/sentry_codepush -s Staging -d Production",
+    "codepush:android": "appcenter codepush release-react -a baesumin/sentry_codepush -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
     "codepush:ios": "appcenter codepush release-react -a zerohch0/food-delivery-app-ios -d Production --sourcemap-output --output-dir ./build -m -t 1.0",
     "bundle:android": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/index.android.bundle --dev false --entry-file index.js --platform android --sourcemap-output build/CodePush/index.android.bundle.map",
     "bundle:ios": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/main.jsbundle --dev false --entry-file index.js --platform ios --sourcemap-output build/CodePush/main.jsbundle.map"
