@@ -1,0 +1,17 @@
+com/exampleforexpo/MainActivity.java
+ com.exampleforexpo.MainActivity
+ com.exampleforexpo.MainActivity$1
+com/exampleforexpo/BuildConfig.java
+ com.exampleforexpo.BuildConfig
+com/exampleforexpo/ReactNativeFlipper.java
+ com.exampleforexpo.ReactNativeFlipper
+ com.exampleforexpo.ReactNativeFlipper$1
+ com.exampleforexpo.ReactNativeFlipper$2
+ com.exampleforexpo.ReactNativeFlipper$2$1
+com/exampleforexpo/generated/BasePackageList.java
+ com.exampleforexpo.generated.BasePackageList
+com/exampleforexpo/MainApplication.java
+ com.exampleforexpo.MainApplication
+ com.exampleforexpo.MainApplication$1
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList

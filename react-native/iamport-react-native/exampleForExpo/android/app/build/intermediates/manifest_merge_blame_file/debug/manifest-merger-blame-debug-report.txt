@@ -1,0 +1,177 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.exampleforexpo"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="30" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:5:3-75
+11-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:5:20-73
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:3:3-64
+12-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:3:20-62
+13    <uses-permission android:name="android.permission.VIBRATE" /> <!-- These require runtime permissions on M -->
+13-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:6:3-63
+13-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:6:20-61
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:8:3-77
+14-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:8:20-75
+15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+15-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:9:3-78
+15-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:9:20-76
+16    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+16-->[com.facebook.flipper:flipper:0.54.0] C:\Users\qotna\.gradle\caches\transforms-3\7ced98fae9ea2b5aa64e54aefef0d400\transformed\jetified-flipper-0.54.0\AndroidManifest.xml:16:5-76
+16-->[com.facebook.flipper:flipper:0.54.0] C:\Users\qotna\.gradle\caches\transforms-3\7ced98fae9ea2b5aa64e54aefef0d400\transformed\jetified-flipper-0.54.0\AndroidManifest.xml:16:22-73
+17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+17-->[:expo-updates] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-79
+17-->[:expo-updates] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-76
+18
+19    <queries>
+19-->[:expo-file-system] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:5-22:15
+20
+21        <!-- Query open documents -->
+22        <intent>
+22-->[:expo-file-system] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:9-21:18
+23            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+23-->[:expo-file-system] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-79
+23-->[:expo-file-system] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:21-76
+24        </intent>
+25    </queries>
+26
+27    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+27-->[com.android.installreferrer:installreferrer:1.0] C:\Users\qotna\.gradle\caches\transforms-3\b1c67b803621da9ed0f05ce65767162a\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:5-110
+27-->[com.android.installreferrer:installreferrer:1.0] C:\Users\qotna\.gradle\caches\transforms-3\b1c67b803621da9ed0f05ce65767162a\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:22-107
+28
+29    <application
+29-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:11:3-42:17
+30        android:name="com.exampleforexpo.MainApplication"
+30-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:12:5-36
+31        android:allowBackup="false"
+31-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:16:5-32
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.3.0] C:\Users\qotna\.gradle\caches\transforms-3\fe3cf0882eb40046447bd9893532f7c5\transformed\core-1.3.0\AndroidManifest.xml:24:18-86
+33        android:debuggable="true"
+34        android:icon="@mipmap/ic_launcher"
+34-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:14:5-39
+35        android:label="@string/app_name"
+35-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:13:5-37
+36        android:roundIcon="@mipmap/ic_launcher_round"
+36-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:15:5-50
+37        android:theme="@style/AppTheme"
+37-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:17:5-36
+38        android:usesCleartextTraffic="true" >
+38-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:18:5-40
+39        <meta-data
+39-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:20:5-103
+40            android:name="expo.modules.updates.EXPO_UPDATE_URL"
+40-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:20:16-67
+41            android:value="YOUR-APP-URL-HERE" />
+41-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:20:68-101
+42        <meta-data
+42-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:21:5-112
+43            android:name="expo.modules.updates.EXPO_SDK_VERSION"
+43-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:21:16-68
+44            android:value="YOUR-APP-SDK-VERSION-HERE" />
+44-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:21:69-110
+45
+46        <activity
+46-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:22:5-40:16
+47            android:name="com.exampleforexpo.MainActivity"
+47-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:23:7-35
+48            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+48-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:25:7-84
+49            android:label="@string/app_name"
+49-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:24:7-39
+50            android:launchMode="singleTask"
+50-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:26:7-38
+51            android:theme="@style/Theme.App.SplashScreen"
+51-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:28:7-52
+52            android:windowSoftInputMode="adjustResize" >
+52-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:27:7-49
+53            <intent-filter>
+53-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:30:7-33:23
+54                <action android:name="android.intent.action.MAIN" />
+54-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:31:9-60
+54-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:31:17-58
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:32:9-68
+56-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:32:19-66
+57            </intent-filter>
+58            <intent-filter>
+58-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:34:7-39:23
+59                <action android:name="android.intent.action.VIEW" />
+59-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:35:9-61
+59-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:35:17-58
+60
+61                <category android:name="android.intent.category.DEFAULT" />
+61-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:36:9-68
+61-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:36:19-65
+62                <category android:name="android.intent.category.BROWSABLE" />
+62-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:37:9-70
+62-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:37:19-67
+63
+64                <data android:scheme="exampleforexpo" />
+64-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:38:9-49
+64-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:38:15-46
+65            </intent-filter>
+66        </activity>
+67        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+67-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:41:5-81
+67-->C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\android\app\src\main\AndroidManifest.xml:41:15-79
+68
+69        <meta-data
+69-->[:unimodules-react-native-adapter] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-14:91
+70            android:name="org.unimodules.core.AppLoader#react-native-headless"
+70-->[:unimodules-react-native-adapter] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-79
+71            android:value="org.unimodules.adapters.react.apploader.RNHeadlessAppLoader" />
+71-->[:unimodules-react-native-adapter] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-88
+72
+73        <provider
+73-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-20:20
+74            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
+74-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-83
+75            android:authorities="com.exampleforexpo.fileprovider"
+75-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-64
+76            android:exported="false"
+76-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-37
+77            android:grantUriPermissions="true" >
+77-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-47
+78            <meta-data
+78-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-19:63
+79                android:name="android.support.FILE_PROVIDER_PATHS"
+79-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-67
+80                android:resource="@xml/file_provider_paths" />
+80-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-60
+81        </provider>
+82        <provider
+82-->[:expo-file-system] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:9-34:20
+83            android:name="expo.modules.filesystem.FileSystemFileProvider"
+83-->[:expo-file-system] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:13-74
+84            android:authorities="com.exampleforexpo.FileSystemFileProvider"
+84-->[:expo-file-system] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:13-74
+85            android:exported="false"
+85-->[:expo-file-system] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:13-37
+86            android:grantUriPermissions="true" >
+86-->[:expo-file-system] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:13-47
+87            <meta-data
+87-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-19:63
+88                android:name="android.support.FILE_PROVIDER_PATHS"
+88-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-67
+89                android:resource="@xml/file_system_provider_paths" />
+89-->[:react-native-webview] C:\Users\qotna\Desktop\GitHub\Front-end\react-native\iamport-react-native\exampleForExpo\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-60
+90        </provider>
+91
+92        <service
+92-->[androidx.room:room-runtime:2.1.0] C:\Users\qotna\.gradle\caches\transforms-3\3b5db4b3b22ae452a34a6490900f58b2\transformed\room-runtime-2.1.0\AndroidManifest.xml:25:9-27:40
+93            android:name="androidx.room.MultiInstanceInvalidationService"
+93-->[androidx.room:room-runtime:2.1.0] C:\Users\qotna\.gradle\caches\transforms-3\3b5db4b3b22ae452a34a6490900f58b2\transformed\room-runtime-2.1.0\AndroidManifest.xml:26:13-74
+94            android:exported="false" />
+94-->[androidx.room:room-runtime:2.1.0] C:\Users\qotna\.gradle\caches\transforms-3\3b5db4b3b22ae452a34a6490900f58b2\transformed\room-runtime-2.1.0\AndroidManifest.xml:27:13-37
+95    </application>
+96
+97</manifest>
