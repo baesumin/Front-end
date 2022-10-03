@@ -8,7 +8,7 @@ import {
   METHOD_FOR_CARD,
   METHOD_FOR_PHONE,
   METHOD_FOR_VBANK,
-  METHOD_FOR_TRANS,
+  METHOD_FOR_TRANS
 } from './constants';
 
 function getQuotas(pg) {
@@ -18,24 +18,24 @@ function getQuotas(pg) {
       return QUOTAS.concat([
         {
           value: 2,
-          label: '2개월',
+          label: '2개월'
         },
         {
           value: 3,
-          label: '3개월',
+          label: '3개월'
         },
         {
           value: 4,
-          label: '4개월',
+          label: '4개월'
         },
         {
           value: 5,
-          label: '5개월',
+          label: '5개월'
         },
         {
           value: 6,
-          label: '6개월',
-        },
+          label: '6개월'
+        }
       ]);
     }
     default:
@@ -83,7 +83,7 @@ function getMethods(pg) {
 }
 
 function getUserCode(pg, tierCode, type = 'payment') {
-  return 'imp21890895'
+  return 'imp21890895';
   if (tierCode) {
     return 'imp91623210';
   }
