@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Client } from '@notionhq/client'
 
 const notion = new Client({
-  auth: 'secret_lsDnEZrjeRRkxe11dYCd7tTuMmtQKuDN9DYM9X3L8LF',
+  auth: process.env.NEXT_PUBLIC_NOTION_SECRET,
 })
 
 const databaseId = '583e454132274e8686ad4e015e13da7c'
