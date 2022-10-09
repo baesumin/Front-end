@@ -6,7 +6,12 @@ const nextConfig = {
     emotion: true,
   },
   images: {
-    domains: ['picsum.photos', 'source.unsplash.com', 'example.com'],
+    domains: [
+      'picsum.photos',
+      'source.unsplash.com',
+      'example.com',
+      'lh3.googleusercontent.com',
+    ],
   },
 }
 
