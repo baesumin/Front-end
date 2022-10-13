@@ -20,7 +20,7 @@ const codePushOptions = {
   // ON_APP_START은 앱이 실행되는(켜지는) 순간을 의미
 
   // installMode: CodePush.InstallMode.IMMEDIATE,
-  installMode: CodePush.InstallMode.IMMEDIATE는,
+  installMode: CodePush.InstallMode.IMMEDIATE,
   // mandatoryInstallMode: CodePush.InstallMode.IMMEDIATE,
   mandatoryInstallMode: CodePush.InstallMode.IMMEDIATE,
   // 업데이트를 어떻게 설치할 것인지 (IMMEDIATE는 강제설치를 의미)
