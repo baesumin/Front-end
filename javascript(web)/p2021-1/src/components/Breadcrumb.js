@@ -1,11 +1,10 @@
-export default function Breadcrumb({ $target, initialState }) {
+export default function Breadcrumb({ $app, initialState }) {
+  let state = initialState;
   const $element = document.createElement('nav');
   $element.className = 'Breadcrumb';
-  $target.appendChild($element);
+  $app.appendChild($element);
 
-  const state = initialState;
-
-  const setState = (nextState) => {
+  this.setState = (nextState) => {
     state = nextState;
     render();
   };

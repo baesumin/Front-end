@@ -22,6 +22,6 @@ const request = async (url, options = {}) => {
   }
 };
 
-export const fetchFileOrDirectory = async (nodeId) => request(nodeId);
+export const fetchFileOrDirectory = async (nodeId) => request(nodeId ? `/${nodeId}` : '');
 
 // export const fetchLanguages = async (keyword) => request(`/languages?keyword=${keyword}`);
