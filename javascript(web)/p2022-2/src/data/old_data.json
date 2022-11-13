@@ -1,0 +1,52 @@
+[
+  {
+    "name": "나희도",
+    "email": "heedo@grepp.co",
+    "role": "프론트엔드"
+  },
+  {
+    "name": "백이진",
+    "email": "kevin@grepp.co",
+    "role": "백엔드"
+  },
+  {
+    "name": "서달미",
+    "email": "dalmi@grepp.co",
+    "role": "프론트엔드"
+  },
+  {
+    "name": "남도산",
+    "email": "buzz@grepp.co",
+    "role": "풀스택"
+  },
+  {
+    "name": "한지평",
+    "email": "edwin@grepp.co",
+    "role": "백엔드"
+  },
+  {
+    "name": "우영우",
+    "email": "whaleluv@grepp.co",
+    "role": "프론트엔드"
+  },
+  {
+    "name": "이준호",
+    "email": "junho@grepp.co",
+    "role": "백엔드"
+  },
+  {
+    "name": "김유미",
+    "email": "yumi@grepp.co",
+    "role": "백엔드"
+  },
+  {
+    "name": "구웅",
+    "email": "tom@grepp.co",
+    "role": "풀스택"
+  },
+  {
+    "name": "유바비",
+    "email": "barbieyoo@grepp.co",
+    "role": "프론트엔드"
+  }
+]
