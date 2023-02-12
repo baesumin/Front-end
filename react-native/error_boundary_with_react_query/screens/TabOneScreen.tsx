@@ -1,13 +1,19 @@
 import { StyleSheet, ScrollView } from 'react-native';
 import Loading from '../components/Loading';
 import PostList from '../components/PostList';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import React, { Suspense } from 'react';
 import { ApiErrorBoundary } from '../components/ApiErrorBoundary';
+import { Button } from 'react-native';
+import { useAddPostMutation } from '../hooks/queries/useAddPostMutation';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
-  console.log('tabone');
+  const { mutate: addPost } = useAddPostMutation();
+
+  const onPress = async () => {
+    addPost({ title: 'hahaasd13', author: 'bsmasd13' });
+  };
 
   return (
     <View style={styles.container}>
@@ -18,7 +24,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
         </Suspense>
         {/* </ApiErrorBoundary> */}
       </View>
-
+      <Button title="추가" onPress={onPress} />
       <View style={{ height: 50 }} />
       <View style={{ backgroundColor: 'lightgrey', height: 300, width: 300 }}></View>
     </View>

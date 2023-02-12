@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { checkIsAxiosError, checkIsNetworkError } from './checkErrorType';
 
 const api = axios.create({
@@ -7,8 +7,8 @@ const api = axios.create({
 
 api.interceptors.response.use(onFulfilled, onRejected);
 
-function onFulfilled(response: any) {
-  return response;
+function onFulfilled(response: AxiosResponse) {
+  return response.data;
 }
 
 function onRejected(error: Error) {

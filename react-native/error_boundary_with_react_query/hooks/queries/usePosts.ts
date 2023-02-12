@@ -16,11 +16,10 @@ export function usePosts(
   return useQuery(
     [queryKeys.POSTS_DATA],
     async () => {
-      await delay(2000);
+      // await delay(2000);
       return api.get<PostsProps>('/posts');
     },
     {
-      select: (data) => data.data,
       ...options
     }
   );
