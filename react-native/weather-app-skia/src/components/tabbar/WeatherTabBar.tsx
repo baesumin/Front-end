@@ -4,23 +4,49 @@ import ArcComponent from "./elements/ArcComponent";
 import useApplicationDimensions from "../../hooks/useApplicationDimensions";
 import TabbarItems from "./elements/TabbarItems";
 import { BlurView } from "expo-blur";
+import { useForecastSheetPosition } from "../../context/ForecastSheetContext";
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 
 const WeatherTabBar = () => {
   const TabbarHeight = 88;
   const { width, height } = useApplicationDimensions();
+  const animatedPosition = useForecastSheetPosition();
+
+  const animatedViewStyles = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateY: interpolate(
+            animatedPosition.value,
+            [0, 1],
+            [0, TabbarHeight + 20]
+          ),
+        },
+      ],
+    };
+  });
   return (
-    <BlurView
-      intensity={50}
-      tint="dark"
-      style={{
-        height: TabbarHeight,
-        ...StyleSheet.absoluteFillObject,
-        top: height - TabbarHeight,
-      }}
+    <Animated.View
+      style={[
+        { ...StyleSheet.absoluteFillObject, top: height - TabbarHeight },
+        animatedViewStyles,
+      ]}
     >
-      <ArcComponent height={TabbarHeight} width={width} />
-      <TabbarItems />
-    </BlurView>
+      <BlurView
+        intensity={50}
+        tint="dark"
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          height: TabbarHeight,
+        }}
+      >
+        <ArcComponent height={TabbarHeight} width={width} />
+        <TabbarItems />
+      </BlurView>
+    </Animated.View>
   );
 };
 
